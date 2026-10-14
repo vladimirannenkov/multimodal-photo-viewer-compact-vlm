@@ -72,20 +72,11 @@ imagehub serve                           # http://127.0.0.1:8765
 
 ## Docker
 
-Образ основан на `python:3.12-slim`. В него входят системные библиотеки, PyTorch нужного варианта CUDA и пакет `imagehub`. Веса и данные в образ не входят и подключаются томами, поэтому образ можно пересобирать, не скачивая модели заново.
-
-На хосте нужны драйвер NVIDIA и NVIDIA Container Toolkit (в Docker Desktop для Windows с WSL2 GPU доступен из коробки).
+Образ только для CPU, видеокарта и CUDA не нужны. Он основан на `python:3.12-slim` и включает системные библиотеки, PyTorch для процессора и пакет `imagehub`. Веса и данные в образ не входят и подключаются томами, поэтому образ можно пересобирать, не скачивая модели заново. На CPU обработка заметно медленнее, чем на GPU: для большой библиотеки используйте установку без Docker с видеокартой.
 
 ```bash
-# GPU, CUDA 12.8 (Blackwell)
-CUDA_VARIANT=cu128 docker compose up --build
-# GPU, старые драйверы
-CUDA_VARIANT=cu126 docker compose up --build
-# без видеокарты
-CUDA_VARIANT=cpu docker compose --profile cpu up --build imagehub-cpu
-
-# скачать веса один раз в ./weights
-docker compose run --rm imagehub models --download
+docker compose up --build                                 # сборка и запуск
+docker compose run --rm imagehub models --download       # скачать веса один раз в ./weights
 ```
 
 Тома (пути на хосте меняются переменными окружения):

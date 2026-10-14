@@ -1,36 +1,12 @@
-# GPU:   CUDA_VARIANT=cu128 docker compose up --build        (cu126 для старых драйверов)
-# CPU:   CUDA_VARIANT=cpu docker compose --profile cpu up --build imagehub-cpu
+# Запуск (CPU):  docker compose up --build
 # Скачать веса один раз:  docker compose run --rm imagehub models --download
 services:
   imagehub:
     build:
       context: .
-      args:
-        CUDA_VARIANT: ${CUDA_VARIANT:-cu128}
-    image: imagehub:${CUDA_VARIANT:-cu128}
+    image: imagehub:cpu
     ports: ["8765:8765"]
     volumes:
       - ${IMAGEHUB_DATA:-./data}:/data
       - ${IMAGEHUB_WEIGHTS:-./weights}:/weights
       - ${IMAGEHUB_PHOTOS:-./photos}:/photos:ro   # папки с изображениями для импорта: путь внутри контейнера /photos
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-  imagehub-cpu:
-    profiles: ["cpu"]
-    build:
-      context: .
-      args:
-        CUDA_VARIANT: cpu
-    image: imagehub:cpu
-    environment:
-      IMAGEHUB_DEVICE: cpu
-    ports: ["8765:8765"]
-    volumes:
-      - ${IMAGEHUB_DATA:-./data}:/data
-      - ${IMAGEHUB_WEIGHTS:-./weights}:/weights
-      - ${IMAGEHUB_PHOTOS:-./photos}:/photos:ro
