@@ -1,7 +1,7 @@
 """Фоновая обработка изображений волнами: каждая модель загружается один раз на пачку изображений.
 
-Стадии: embed (SigLIP2: вектор, тип, событие) -> textdet (CPU) -> ocr (макет + GLM-OCR/PaddleOCR-VL) -> fix (Qwen3-1.7B)
--> scene (Florence-2) -> faces (InsightFace) -> chart (Qwen3-VL) -> textemb (e5) + FTS."""
+Стадии: embed (SigLIP2: вектор, тип, событие) -> textdet (CPU) -> ocr (макет + GLM-OCR/PaddleOCR-VL) 
+-> scene (Florence-2) -> faces (InsightFace) -> fix, translate, chart (одна Qwen3-VL-2B) -> textemb (e5) + FTS."""
 import json
 import logging
 import threading
@@ -120,7 +120,7 @@ class Pipeline:
             if tg:
                 texts.append(", ".join(tg)); slots.append((r["id"], "t"))
         with manager.gpu():
-            manager.ensure("fix")
+            manager.ensure("vqa")
             tr = textfix.translate_ru(texts, device=self.device)
         res = {}
         for (i, k), t in zip(slots, tr):
@@ -152,7 +152,7 @@ class Pipeline:
         if not items:
             return
         for name, fn in (("embed", self.st_embed), ("textdet", self.st_textdet), ("scene", self.st_scene), ("ocr", self.st_ocr),
-                         ("fix", self.st_fix), ("translate", self.st_translate), ("faces", self.st_faces), ("chart", self.st_chart),
+                         ("faces", self.st_faces), ("fix", self.st_fix), ("translate", self.st_translate), ("chart", self.st_chart),
                          ("textemb", self.st_textemb)):
             self.state["stage"] = name
             t0 = time.time()
@@ -267,7 +267,7 @@ class Pipeline:
         fixed = []
         for k in range(0, len(targets), 16):
             with manager.gpu():
-                manager.ensure("fix")
+                manager.ensure("vqa")
                 fixed += textfix.correct_texts([b["text"] for _, b in targets[k:k + 16]], device=self.device)[0]
         touched = set()
         for (it, b), f in zip(targets, fixed):
@@ -298,7 +298,7 @@ class Pipeline:
         res = {}
         for k in range(0, len(texts), 16):
             with manager.gpu():
-                manager.ensure("fix")
+                manager.ensure("vqa")
                 tr = textfix.translate_ru(texts[k:k + 16], device=self.device)
             for (it, kind), r in zip(slots[k:k + 16], tr):
                 res.setdefault(it["id"], {})[kind] = r

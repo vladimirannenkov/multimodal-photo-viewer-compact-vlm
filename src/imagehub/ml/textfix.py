@@ -1,14 +1,11 @@
-"""Правка опечаток OCR (Qwen3-1.7B): пакетная, формулы защищены метками, ответ ограничен по длине, выдумки отбрасываются."""
+"""Правка опечаток OCR и перевод описаний на русский: текстовые запросы к той же Qwen3-VL-2B, что отвечает в чате (отдельной языковой модели нет).
+Пакетная генерация, формулы защищены метками, ответ ограничен по длине, выдумки отбрасываются."""
 import difflib
 import re
 import time
 
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from . import vlm, vqa
 
-from .weights import WEIGHTS
-
-PATH = str(WEIGHTS / "qwen3_fix")
 MATH = re.compile(r"\$\$.+?\$\$|\$[^$\n]+\$", re.S)
 NL = chr(10)
 SYS = ("Исправь опечатки, ошибки распознавания текста, слитные и разорванные слова. Текст на русском или английском. "
@@ -20,16 +17,14 @@ SHOTS = [
     ("Качество обучения оценивается функцией потерь [M1] навалидационной выборке.",
      "Качество обучения оценивается функцией потерь [M1] на валидационной выборке."),
 ]
-_cache = {}
 
 
-def _load(device):
-    if "m" not in _cache:
-        tok = AutoTokenizer.from_pretrained(PATH)
-        tok.padding_side = "left"
-        _cache["tok"] = tok
-        _cache["m"] = AutoModelForCausalLM.from_pretrained(PATH, dtype=torch.bfloat16, device_map=device, low_cpu_mem_usage=True).eval()
-    return _cache["tok"], _cache["m"]
+def _chat(texts, system, shots, device, limit):
+    """Текстовые запросы пакетом к Qwen3-VL (без изображений). Возвращает ответы в том же порядке."""
+    hist = [{"role": "system", "content": [{"type": "text", "text": system}]}]
+    for u, a in shots:
+        hist += [{"role": "user", "content": [{"type": "text", "text": u}]}, {"role": "assistant", "content": [{"type": "text", "text": a}]}]
+    return vlm.generate(vqa.path(), [None] * len(texts), texts, device, max_new_tokens=limit, repetition_penalty=1.0, history=hist)
 
 
 def _script_switch(orig, fixed):
@@ -39,9 +34,7 @@ def _script_switch(orig, fixed):
 
 
 def free():
-    _cache.clear()
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
+    """Своих весов нет: модель общая с чатом (vlm.free)."""
 
 
 def _protect(text):
@@ -60,9 +53,8 @@ def _restore(text, maths):
     return text
 
 
-def correct_texts(texts, device="cuda", batch=8, min_sim=0.85):
+def correct_texts(texts, device="cuda", batch=16, min_sim=0.85):
     """-> (исправленные тексты в том же порядке, статистика). Блок остаётся прежним, если правка подозрительна."""
-    tok, model = _load(device)
     prot = [_protect(t) for t in texts]
     order = sorted(range(len(texts)), key=lambda i: len(prot[i][0]))  # близкие по длине в одном пакете
     out = list(texts)
@@ -70,19 +62,9 @@ def correct_texts(texts, device="cuda", batch=8, min_sim=0.85):
     t0 = time.time()
     for s in range(0, len(order), batch):
         idx = order[s:s + batch]
-        chats = []
-        for i in idx:
-            msgs = [{"role": "system", "content": SYS}]
-            for u, a in SHOTS:
-                msgs += [{"role": "user", "content": u}, {"role": "assistant", "content": a}]
-            msgs.append({"role": "user", "content": prot[i][0]})
-            chats.append(tok.apply_chat_template(msgs, add_generation_prompt=True, tokenize=False, enable_thinking=False))
-        enc = tok(chats, return_tensors="pt", padding=True).to(device)
-        limit = min(600, int(1.3 * max(len(tok(prot[i][0]).input_ids) for i in idx)) + 16)  # ответ не длиннее исходного текста
-        with torch.no_grad():
-            gen = model.generate(**enc, max_new_tokens=limit, do_sample=False, use_cache=True)
-        for i, g in zip(idx, gen):
-            fixed = tok.decode(g[enc["input_ids"].shape[1]:], skip_special_tokens=True).strip()
+        limit = min(700, int(max(len(prot[i][0]) for i in idx) / 2) + 24)  # ответ не длиннее исходного текста (около 2,5 символа на токен)
+        gen = _chat([prot[i][0] for i in idx], SYS, SHOTS, device, limit)
+        for i, fixed in zip(idx, gen):
             fixed = re.sub(r"^```\w*|```$", "", fixed).strip()
             orig, maths = prot[i]
             ok = (fixed and all(f"[M{k}]" in fixed for k in range(1, len(maths) + 1))
@@ -108,26 +90,15 @@ TR_SHOTS = [("a dog, a person, a bicycle", "собака, человек, вел
             ("A cat is sleeping on a sofa next to a window.", "Кошка спит на диване рядом с окном.")]
 
 
-def translate_ru(texts, device="cuda", batch=8, max_new=220):
-    """Перевод описаний и тегов на русский (Qwen3-1.7B). Для поиска на любом из двух языков."""
-    tok, model = _load(device)
+def translate_ru(texts, device="cuda", batch=16, max_new=260):
+    """Перевод описаний и тегов на русский (Qwen3-VL-2B). Для поиска на любом из двух языков."""
     out = [""] * len(texts)
     order = sorted(range(len(texts)), key=lambda i: len(texts[i]))
     for s in range(0, len(order), batch):
         idx = order[s:s + batch]
-        chats = []
-        for i in idx:
-            msgs = [{"role": "system", "content": TR_SYS}]
-            for u, a in TR_SHOTS:
-                msgs += [{"role": "user", "content": u}, {"role": "assistant", "content": a}]
-            msgs.append({"role": "user", "content": texts[i]})
-            chats.append(tok.apply_chat_template(msgs, add_generation_prompt=True, tokenize=False, enable_thinking=False))
-        enc = tok(chats, return_tensors="pt", padding=True).to(device)
-        limit = min(max_new, int(2.2 * max(len(tok(texts[i]).input_ids) for i in idx)) + 16)
-        with torch.no_grad():
-            gen = model.generate(**enc, max_new_tokens=limit, do_sample=False, use_cache=True)
-        for i, g in zip(idx, gen):
-            r = tok.decode(g[enc["input_ids"].shape[1]:], skip_special_tokens=True).strip()
+        limit = min(max_new, int(max(len(texts[i]) for i in idx) / 1.6) + 24)
+        gen = _chat([texts[i] for i in idx], TR_SYS, TR_SHOTS, device, limit)
+        for i, r in zip(idx, gen):
             cyr = sum("Ѐ" <= c <= "ӿ" for c in r)
             out[i] = r if cyr >= 0.3 * max(1, sum(c.isalpha() for c in r)) else ""  # не перевёл: не сохраняем
     return out

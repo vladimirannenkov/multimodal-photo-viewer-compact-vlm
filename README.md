@@ -114,9 +114,8 @@ docker compose run --rm imagehub models --download       # скачать вес
 | Макет страницы (CPU) | DocLayout-YOLO, ONNX | 75 МБ |
 | OCR: текст и формулы | GLM-OCR 0.9B | 2,7 ГБ |
 | OCR: таблицы | PaddleOCR-VL 0.9B | 1,9 ГБ |
-| Правка опечаток, перевод описаний | Qwen3-1.7B | 3,4 ГБ |
 | Описание, объекты, регионы | Florence-2-large | 1,5 ГБ |
-| Чат, разбор графиков | Qwen3-VL-2B-Instruct | 4,3 ГБ |
+| Чат, разбор графиков, правка опечаток OCR, перевод описаний | Qwen3-VL-2B-Instruct | 4,3 ГБ |
 | Эмбеддинги описаний и запросов | multilingual-e5-small | 0,5 ГБ |
 | Лица (CPU) | InsightFace buffalo_l (SCRFD и ArcFace) | ~330 МБ |
 

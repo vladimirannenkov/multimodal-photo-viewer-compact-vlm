@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     port: int = 8765
     workers: int = 2  # процессы подготовки (декодирование, миниатюры, хеш)
     autostart_pipeline: bool = True
-    ocr_fix: bool = True  # правка опечаток OCR (Qwen3-1.7B)
+    ocr_fix: bool = True  # правка опечаток OCR (Qwen3-VL-2B)
     thumb_side: int = 320
 
     @property
