@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Темы ImageHub</title>
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/themes.css">
+<style>
+  body { display: block; overflow: auto; padding: 28px 16px 48px; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  .gal { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 18px; }
+  .tcard { border-radius: var(--r-lg); border: 1px solid var(--border); background: var(--bg); color: var(--text); padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow-1); }
+  .tcard .mock { display: grid; grid-template-columns: 56px 1fr; gap: 8px; height: 112px; }
+  .tcard .side { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 6px; display: flex; flex-direction: column; gap: 5px; }
+  .tcard .side i { height: 8px; border-radius: 4px; background: var(--surface-3); } .tcard .side i:first-child { background: var(--accent-soft); }
+  .tcard .main { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 8px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+  .tcard .main i { border-radius: 5px; background: var(--surface-3); } .tcard .main i:nth-child(2) { background: var(--accent); }
+  .tcard h3 { font-size: var(--fs-lg); } .tcard a.btn { text-decoration: none; }
+  .links { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted); word-break: break-all; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Темы оформления</h1>
+  <p class="muted">Нажмите на карточку, чтобы открыть приложение в этой теме. Выбор запоминается в браузере. Переключать темы можно и кнопкой с луной в верхней панели.</p>
+  <div class="gal" id="gal"></div>
+</div>
+<script type="module">
+  import { THEMES } from '/static/js/themes.js'
+  const gal = document.getElementById('gal')
+  for (const [k, name] of THEMES) {
+    const url = `${location.origin}/?theme=${k}`
+    const c = document.createElement('div')
+    c.className = 'tcard'; c.dataset.theme = k === 'light' || k === 'dark' ? '' : k
+    if (k === 'dark') c.style.cssText = '--bg:#0e1016;--surface:#161922;--surface-2:#1d212c;--surface-3:#262b39;--border:#2a2f3e;--text:#e8eaf3;--muted:#9aa2bb;--accent:#8a8af2;--accent-soft:#272a4a'
+    c.innerHTML = `<h3>${name}</h3><div class="mock"><div class="side"><i></i><i></i><i></i><i></i></div><div class="main"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="row"><a class="btn primary" href="${url}">Открыть в теме «${name}»</a></div><div class="links">${url}</div>`
+    gal.append(c)
+  }
+</script>
+</body>
+</html>

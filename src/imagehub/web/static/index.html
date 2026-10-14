@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ImageHub</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235b5bd6'/%3E%3Ccircle cx='12' cy='12' r='4' fill='white'/%3E%3Cpath d='M4 26l9-9 5 5 4-4 6 8z' fill='white' opacity='.9'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/themes.css">
+<script>try { const u = new URLSearchParams(location.search).get('theme'); if (u) localStorage.setItem('theme', u); const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t } catch (e) {}</script>
+</head>
+<body>
+<header id="top">
+  <button class="btn icon ghost" id="btnLeft" title="Левая панель" aria-label="Левая панель"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <div class="brand"><i></i>ImageHub</div>
+  <form id="searchForm" autocomplete="off">
+    <svg class="lens" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input type="search" id="q" placeholder="Поиск по описанию, тексту, объектам. Ctrl+V вставит картинку-образец">
+    <div id="searchImg" hidden><img alt=""><button type="button" class="btn icon ghost sm" id="clearImg" title="Убрать картинку">✕</button></div>
+    <div id="weightBox" hidden><span>картинка</span><input type="range" id="weight" min="0" max="1" step="0.05" value="0.5"><span>текст</span></div>
+    <button type="button" class="btn icon ghost" id="btnPickImg" title="Искать по картинке"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg></button>
+    <input type="file" id="searchFile" accept="image/*" hidden>
+  </form>
+  <div class="spacer"></div>
+  <div id="queueChip" title="Очередь обработки"><span class="dot"></span><span class="t" id="queueText">готово</span><button class="btn icon ghost sm" id="btnPause" title="Пауза">⏸</button></div>
+  <button class="btn primary" id="btnImport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>Импорт</button>
+  <button class="btn icon ghost" id="btnTheme" title="Тема"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></button>
+  <button class="btn icon ghost" id="btnRight" title="Правая панель" aria-label="Правая панель"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></svg></button>
+</header>
+
+<aside id="left"></aside>
+
+<main id="center">
+  <div id="toolbar">
+    <span class="title" id="title">Все изображения</span><span class="muted small" id="count"></span>
+    <div class="spacer"></div>
+    <select id="sort" style="width:auto" title="Сортировка">
+      <option value="date">По дате</option><option value="added">По добавлению</option><option value="size">По размеру файла</option>
+      <option value="resolution">По разрешению</option><option value="name">По имени</option><option value="kind">По типу</option><option value="rating">По рейтингу</option>
+    </select>
+    <button class="btn icon" id="btnDesc" title="Порядок">↓</button>
+    <select id="filterText" style="width:auto" title="Фильтр по тексту"><option value="">Любые</option><option value="1">С текстом</option><option value="0">Без текста</option></select>
+    <input type="range" id="zoom" min="110" max="340" value="190" style="width:96px" title="Размер миниатюр">
+    <button class="btn" id="btnTools" title="Дубликаты, сводка">Инструменты</button>
+  </div>
+  <div id="banner" hidden></div>
+  <div id="expCard" hidden></div>
+  <div id="gridWrap"><div id="grid"></div><div id="empty" hidden></div></div>
+  <div id="selbar"></div>
+</main>
+
+<aside id="right">
+  <div id="preview"></div>
+  <div class="tabs" id="tabs"></div>
+  <div id="panel"></div>
+</aside>
+
+<div id="viewer" hidden></div>
+<div id="dropVeil" hidden>Отпустите, чтобы добавить изображения</div>
+<div id="toasts"></div>
+<div id="dialogs"></div>
+
+<script src="/static/vendor/markdown-it.min.js"></script>
+<script src="/static/vendor/katex/katex.min.js"></script>
+<script src="/static/vendor/katex/auto-render.min.js"></script>
+<script type="module" src="/static/js/main.js"></script>
+</body>
+</html>
