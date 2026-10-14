@@ -1,0 +1,55 @@
+# id -> adapter (модуль в adapters/), repo (HF), group (для --only)
+siglip2:
+  adapter: siglip2
+  repo: google/siglip2-base-patch16-256
+  group: embed
+text_det:
+  adapter: text_det
+  repo: null            # rapidocr ставит ONNX-веса сам
+  group: ocr
+paddleocr_vl:
+  adapter: ocr_vlm
+  repo: PaddlePaddle/PaddleOCR-VL
+  trust_remote_code: false   # встроенный класс transformers 5.x, удалённый код несовместим
+  prompts: {text: "OCR:", formula: "Formula Recognition:", table: "Table Recognition:"}
+  group: ocr
+glm_ocr:
+  adapter: ocr_vlm
+  repo: zai-org/GLM-OCR
+  prompts: {text: "Text Recognition:", formula: "Formula Recognition:", table: "Table Recognition:"}
+  group: ocr
+glm_ocr_fixed:
+  adapter: ocr_vlm
+  repo: zai-org/GLM-OCR
+  weights: glm_ocr
+  prompts: {text: "Text Recognition:", formula: "Formula Recognition:", table: "Table Recognition:"}
+  group: ocr
+qwen3_fix:
+  adapter: text_fix
+  repo: Qwen/Qwen3-1.7B
+  group: ocr
+florence2:
+  adapter: florence2
+  repo: florence-community/Florence-2-large
+  group: vlm
+qwen3vl:
+  adapter: qwen3vl
+  repo: Qwen/Qwen3-VL-2B-Instruct
+  group: vlm
+faces_insight:
+  adapter: faces_insight
+  repo: null            # insightface скачает buffalo_l в ~/.insightface
+  group: faces
+text_embed:
+  adapter: text_embed
+  repo: intfloat/multilingual-e5-small
+  group: embed
+docparse:
+  adapter: docparse_ocr
+  repo: null
+  group: ocr
+scene_event:
+  adapter: scene_event
+  repo: Qwen/Qwen3-1.7B
+  weights: qwen3_fix
+  group: vlm

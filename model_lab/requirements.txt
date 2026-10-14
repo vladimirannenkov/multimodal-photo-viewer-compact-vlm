@@ -1,0 +1,16 @@
+# Torch ставится отдельно (RTX 5060 = Blackwell, нужен CUDA 12.8+):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+transformers>=4.57
+accelerate
+huggingface_hub
+pillow
+numpy
+pyyaml
+sentencepiece
+einops
+timm
+opencv-python
+onnxruntime-gpu
+rapidocr-onnxruntime
+insightface
+sentence-transformers
