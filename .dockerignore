@@ -1,0 +1,8 @@
+.venv
+model_lab
+data
+data_test
+weights
+**/__pycache__
+tests/ui/out*
+*.log

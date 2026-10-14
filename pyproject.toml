@@ -1,0 +1,88 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "imagehub"
+version = "0.1.0"
+description = "Локальный сервис для работы с изображениями: OCR, описание сцен, лица, поиск, эксперименты"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "python-multipart",
+    "pydantic-settings>=2.2",
+    "pillow>=10.4",
+    "pillow-heif",
+    "numpy>=1.26",
+    "xxhash",
+    "watchdog",
+    "markdown-it-py",
+    "pyyaml",
+    "transformers>=5.0",
+    "accelerate",
+    "huggingface_hub",
+    "sentencepiece",
+    "einops",
+    "timm",
+    "opencv-python-headless",
+    "rapidocr-onnxruntime",
+    "insightface",
+    "sentence-transformers",
+    "onnxruntime>=1.20",
+]
+
+[project.optional-dependencies]
+# Torch ставится одним из extras под нужную видеокарту (см. [tool.uv.sources] и Dockerfile, ARG CUDA_VARIANT).
+# Blackwell (RTX 50xx) требует cu128 и новее.
+cpu = ["torch>=2.7", "torchvision"]
+cu126 = ["torch>=2.7", "torchvision"]
+cu128 = ["torch>=2.7", "torchvision"]
+dev = ["pytest", "httpx", "ruff"]
+
+[project.scripts]
+imagehub = "imagehub.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+imagehub = ["web/static/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 130
+src = ["src"]
+
+[tool.uv]
+conflicts = [[{ extra = "cpu" }, { extra = "cu126" }, { extra = "cu128" }]]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu126", extra = "cu126" },
+    { index = "pytorch-cu128", extra = "cu128" },
+]
+torchvision = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu126", extra = "cu126" },
+    { index = "pytorch-cu128", extra = "cu128" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
