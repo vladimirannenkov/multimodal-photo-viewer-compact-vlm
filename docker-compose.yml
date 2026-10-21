@@ -1,12 +1,73 @@
-# Запуск (CPU):  docker compose up --build
-# Скачать веса один раз:  docker compose run --rm imagehub models --download
+# Запуск одной командой:  docker compose up --build
+# Откройте http://localhost:8765. При первом запуске скачиваются модели (около 4 ГБ), это занимает несколько минут.
+#
+# Сервисы:
+#   ollama          сервер языковых моделей (OpenAI-совместимый API на :11434/v1)
+#   ollama-pull     однократно загружает в Ollama Qwen3-VL-2B и GLM-OCR
+#   weights         однократно скачивает небольшие модели, которых нет в Ollama (SigLIP2, Florence-2, макет, лица)
+#   imagehub        приложение и веб-интерфейс
+#
+# Другой сервер моделей (llama-server, vLLM в Colab, OpenRouter): задайте IMAGEHUB_LLM_BASE_URL, IMAGEHUB_LLM_API_KEY,
+# IMAGEHUB_LLM_MODEL в файле .env и запустите без Ollama:  docker compose up --build imagehub --no-deps
+name: imagehub
+
+x-models: &models
+  LLM_MODEL: ${IMAGEHUB_LLM_MODEL:-qwen3-vl:2b-instruct}
+  OCR_MODEL: ${IMAGEHUB_OCR_MODEL:-glm-ocr}
+
 services:
-  imagehub:
-    build:
-      context: .
-    image: imagehub:cpu
-    ports: ["8765:8765"]
+  ollama:
+    image: ollama/ollama:latest
     volumes:
-      - ${IMAGEHUB_DATA:-./data}:/data
-      - ${IMAGEHUB_WEIGHTS:-./weights}:/weights
-      - ${IMAGEHUB_PHOTOS:-./photos}:/photos:ro   # папки с изображениями для импорта: путь внутри контейнера /photos
+      - ollama:/root/.ollama
+    environment:
+      OLLAMA_NUM_PARALLEL: "2"        # столько запросов обрабатывается одновременно (IMAGEHUB_LLM_CONCURRENCY)
+      OLLAMA_KEEP_ALIVE: "10m"
+    ports: ["11434:11434"]
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  ollama-pull:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama: {condition: service_healthy}
+    environment:
+      <<: *models
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["/bin/sh", "-c", "ollama pull \"$$LLM_MODEL\" && if [ -n \"$$OCR_MODEL\" ]; then ollama pull \"$$OCR_MODEL\"; fi"]
+    restart: "no"
+
+  weights:
+    build: .
+    image: imagehub:cpu
+    volumes:
+      - weights:/weights
+    command: ["models", "--download", "--only", "siglip2,florence2,ppocr_v5_det,ppocr_eslav_rec,doclayout_yolo"]
+    restart: "no"
+
+  imagehub:
+    build: .
+    image: imagehub:cpu
+    depends_on:
+      ollama-pull: {condition: service_completed_successfully}
+      weights: {condition: service_completed_successfully}
+    ports: ["8765:8765"]
+    environment:
+      IMAGEHUB_LLM_BASE_URL: ${IMAGEHUB_LLM_BASE_URL:-http://ollama:11434/v1}
+      IMAGEHUB_LLM_API_KEY: ${IMAGEHUB_LLM_API_KEY:-ollama}
+      IMAGEHUB_LLM_MODEL: ${IMAGEHUB_LLM_MODEL:-qwen3-vl:2b-instruct}
+      IMAGEHUB_OCR_MODEL: ${IMAGEHUB_OCR_MODEL:-glm-ocr}
+      IMAGEHUB_EMBED_MODEL: ${IMAGEHUB_EMBED_MODEL:-}
+      IMAGEHUB_LOG_LEVEL: ${IMAGEHUB_LOG_LEVEL:-INFO}
+    volumes:
+      - data:/data
+      - weights:/weights
+      - ${IMAGEHUB_PHOTOS:-./photos}:/photos:ro   # папка с изображениями для импорта: путь внутри контейнера /photos
+
+volumes:
+  ollama:
+  weights:
+  data:
