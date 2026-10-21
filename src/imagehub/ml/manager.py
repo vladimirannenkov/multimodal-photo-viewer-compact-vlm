@@ -57,9 +57,8 @@ def trim_memory():
         pass
     try:
         import ctypes
-        import os
 
-        if os.name == "nt":
+        if sys.platform == "win32":
             k = ctypes.windll.kernel32
             k.GetCurrentProcess.restype = ctypes.c_void_p
             ctypes.windll.psapi.EmptyWorkingSet(ctypes.c_void_p(k.GetCurrentProcess()))
