@@ -2,15 +2,17 @@
 
 Поиск по изображению: косинус к эмбеддингам. Изображение + текст: взвешенная сумма векторов в пространстве SigLIP2,
 чем больше вес текста, тем сильнее он влияет на результат."""
+
 import re
 import threading
+from typing import Any
 
 import numpy as np
 
 from . import db, queries
 
 _lock = threading.Lock()
-_idx = {"img": None, "txt": None, "ver": None}
+_idx: dict[str, Any] = {"img": None, "txt": None, "ver": None}
 RRF_K = 60
 
 
@@ -67,7 +69,9 @@ def _query_vec(sg, text):
     """Короткие запросы («bed») SigLIP понимает лучше в виде фразы: усредняем несколько шаблонов."""
     prompts = [text]
     if len(text.split()) <= 4:
-        prompts += [f"a photo of {text}", f"a photo of a {text}", f"This is a photo of {text}."] if text.isascii() else [f"фото: {text}"]
+        prompts += (
+            [f"a photo of {text}", f"a photo of a {text}", f"This is a photo of {text}."] if text.isascii() else [f"фото: {text}"]
+        )
     v = sg.text(prompts).mean(axis=0)
     return v / (np.linalg.norm(v) + 1e-9)
 
@@ -75,6 +79,7 @@ def _query_vec(sg, text):
 def search(text: str = "", image_vec=None, text_weight: float = 0.5, filters: dict | None = None, limit: int = 200, device="cpu"):
     """-> [(image_id, score)] по убыванию. text и/или image_vec (эмбеддинг SigLIP2 картинки-запроса)."""
     from .ml import siglip, textembed
+
     allowed = queries.candidate_ids(filters or {}) if filters else None
     text = (text or "").strip()
     sg = siglip.get("cpu") if (text or image_vec is not None) else None
@@ -126,12 +131,16 @@ def duplicates(threshold=0.97):
     if len(ids) > 1:
         alive = {r["id"] for r in db.q("SELECT id FROM images WHERE deleted=0")}
         for a in range(0, len(ids), 512):
-            sims = mat[a:a + 512] @ mat.T
+            sims = mat[a : a + 512] @ mat.T
             for ra, row in enumerate(sims):
                 ia = int(ids[a + ra])
                 if ia in seen or ia not in alive:
                     continue
-                js = [j for j in np.where(row >= threshold)[0].tolist() if int(ids[j]) != ia and int(ids[j]) in alive and int(ids[j]) not in seen]
+                js = [
+                    j
+                    for j in np.where(row >= threshold)[0].tolist()
+                    if int(ids[j]) != ia and int(ids[j]) in alive and int(ids[j]) not in seen
+                ]
                 if js:
                     grp = [ia] + [int(ids[j]) for j in js]
                     groups.append({"type": "similar", "ids": grp})

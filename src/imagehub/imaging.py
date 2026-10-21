@@ -1,13 +1,16 @@
 """Работа с файлами изображений: открытие (в т.ч. webp/gif/tif/heic, многокадровые), миниатюры, хеш, EXIF."""
+
 import os
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 import xxhash
 from PIL import Image, ImageOps
 
 try:
     import pillow_heif
+
     pillow_heif.register_heif_opener()
 except Exception:  # heic необязателен
     pass
@@ -29,12 +32,12 @@ def file_hash(path, chunk=1 << 20) -> str:
 
 def open_rgb(path, frame=0, max_side=None) -> Image.Image:
     """Открывает кадр изображения как RGB с учётом EXIF-ориентации. Прозрачность кладётся на белый фон."""
-    im = Image.open(path)
+    src = Image.open(path)
     try:
-        im.seek(frame)
+        src.seek(frame)
     except EOFError:
-        im.seek(0)
-    im = ImageOps.exif_transpose(im)
+        src.seek(0)
+    im: Image.Image = ImageOps.exif_transpose(src)
     if im.mode in ("RGBA", "LA", "P"):
         im = im.convert("RGBA")
         bg = Image.new("RGB", im.size, (255, 255, 255))
@@ -43,7 +46,7 @@ def open_rgb(path, frame=0, max_side=None) -> Image.Image:
     else:
         im = im.convert("RGB")
     if max_side and max(im.size) > max_side:
-        im.thumbnail((max_side, max_side), Image.LANCZOS)
+        im.thumbnail((max_side, max_side), Image.Resampling.LANCZOS)
     return im
 
 
@@ -61,7 +64,7 @@ def exif_date(im: Image.Image):
 
 def prepare(path: str, thumb_path: str, side: int) -> dict:
     """Выполняется в пуле процессов: хеш, размеры, формат, кадры, дата съёмки, миниатюра."""
-    out = {"path": path}
+    out: dict[str, Any] = {"path": path}
     try:
         out["hash"] = file_hash(path)
         with Image.open(path) as im:

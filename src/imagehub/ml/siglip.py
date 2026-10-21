@@ -1,4 +1,5 @@
 """SigLIP2 base: эмбеддинги изображений для поиска, тип изображения и событие (zero-shot), текстовый энкодер для запросов."""
+
 import gc
 import threading
 
@@ -9,7 +10,14 @@ from transformers import AutoModel, AutoProcessor
 from .weights import WEIGHTS
 
 KINDS = {  # тип -> промпты (берётся максимум по промптам)
-    "photo": ["a photo of food on a plate", "a photo of people", "a photo of a landscape", "a photo of an object", "a photo of an animal", "a photo of a city street"],
+    "photo": [
+        "a photo of food on a plate",
+        "a photo of people",
+        "a photo of a landscape",
+        "a photo of an object",
+        "a photo of an animal",
+        "a photo of a city street",
+    ],
     "screenshot": ["a screenshot of an app", "a screenshot of a website", "a screenshot of a chat or messenger"],
     "document": ["a scanned document with text", "a page of a book or article", "a photo of a printed page"],
     "receipt": ["a photo of a shop receipt", "a restaurant bill"],
@@ -65,7 +73,7 @@ class Siglip:
     def images(self, imgs, batch=16):
         out = []
         for i in range(0, len(imgs), batch):
-            pin = self.proc(images=imgs[i:i + batch], return_tensors="pt").to(self.device, self.dtype)
+            pin = self.proc(images=imgs[i : i + batch], return_tensors="pt").to(self.device, self.dtype)
             f = _feat(self.model.get_image_features(**pin)).float()
             out.append((f / f.norm(dim=-1, keepdim=True)).cpu().numpy())
         return np.concatenate(out) if out else np.zeros((0, 768), np.float32)
@@ -90,8 +98,14 @@ class Siglip:
             pk = _softmax(100 * np.array([sims[a:b].max() for a, b in (idx[n] for n in names)]))
             pe = _softmax(100 * (et @ f))
             top = np.argsort(-pe)[:3]
-            res.append({"kind": names[int(pk.argmax())], "kind_scores": {n: round(float(p), 3) for n, p in zip(names, pk)},
-                        "event": ev[int(top[0])], "event_top3": [(ev[int(j)], round(float(pe[j]), 3)) for j in top]})
+            res.append(
+                {
+                    "kind": names[int(pk.argmax())],
+                    "kind_scores": {n: round(float(p), 3) for n, p in zip(names, pk)},
+                    "event": ev[int(top[0])],
+                    "event_top3": [(ev[int(j)], round(float(pe[j]), 3)) for j in top],
+                }
+            )
         return res
 
 

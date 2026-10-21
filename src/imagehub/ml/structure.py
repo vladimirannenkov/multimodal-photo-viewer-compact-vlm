@@ -2,6 +2,7 @@
 
 Вход: текст страницы от OCR (строки и пустые строки между разделами сохранены).
 Выход: Markdown: разделы, жёсткие переносы строк, пары «поле: значение» жирным, таблица позиций из числовых строк."""
+
 import re
 
 NUM = re.compile(r"^[\(\-+]?\d[\d.,]*%?\)?$")
@@ -58,7 +59,12 @@ def structure_section(lines):
             continue
         # таблица позиций: заголовок (необязательно) + подряд идущие числовые строки (+ строки описания)
         merged = None  # заголовок, перенесённый на вторую строку одним словом («Item Qty (RM) (RM)» + «Amount»)
-        if i + 2 < n and len(lines[i + 1].split()) == 1 and is_numeric_row(lines[i + 2].strip())                 and is_header_row(ln + " " + lines[i + 1].strip()):
+        if (
+            i + 2 < n
+            and len(lines[i + 1].split()) == 1
+            and is_numeric_row(lines[i + 2].strip())
+            and is_header_row(ln + " " + lines[i + 1].strip())
+        ):
             merged = (ln + " " + lines[i + 1].strip()).split()
         if merged or is_numeric_row(ln) or (is_header_row(ln) and i + 1 < n and is_numeric_row(lines[i + 1].strip())):
             header = None
@@ -107,9 +113,13 @@ def _drop_blanks_in_tables(lines):
             while j < n and not lines[j].strip():
                 j += 1
             prev_in_table = is_numeric_row(lines[i].strip()) or (
-                len(out) >= 2 and out[-2].strip() and is_numeric_row(out[-2].strip()))
-            if j < n and prev_in_table and (is_numeric_row(lines[j].strip()) or
-                                            (j + 1 < n and is_numeric_row(lines[j + 1].strip()))):
+                len(out) >= 2 and out[-2].strip() and is_numeric_row(out[-2].strip())
+            )
+            if (
+                j < n
+                and prev_in_table
+                and (is_numeric_row(lines[j].strip()) or (j + 1 < n and is_numeric_row(lines[j + 1].strip())))
+            ):
                 i = j
                 continue
         i += 1
@@ -153,12 +163,17 @@ def layout_unreliable(blocks, size):
         return True
     ov = 0
     for i, a in enumerate(blocks):
-        for b in blocks[i + 1:]:
+        for b in blocks[i + 1 :]:
             ix = max(0, min(a["box"][2], b["box"][2]) - max(a["box"][0], b["box"][0]))
             iy = max(0, min(a["box"][3], b["box"][3]) - max(a["box"][1], b["box"][1]))
             inter = ix * iy
-            small = min((a["box"][2] - a["box"][0]) * (a["box"][3] - a["box"][1]),
-                        (b["box"][2] - b["box"][0]) * (b["box"][3] - b["box"][1])) or 1
+            small = (
+                min(
+                    (a["box"][2] - a["box"][0]) * (a["box"][3] - a["box"][1]),
+                    (b["box"][2] - b["box"][0]) * (b["box"][3] - b["box"][1]),
+                )
+                or 1
+            )
             if inter / small > 0.5:
                 ov += 1
     return ov >= 2
@@ -168,6 +183,7 @@ def split_bands(im, lines_per_band=10, ink_thr=160):
     """Режет длинную страницу на горизонтальные полосы по пустым промежуткам между строками.
     -> [(y1, y2, sep)], sep: разделитель перед полосой (пустой для первой, один или два перевода строки по ширине промежутка)."""
     import numpy as np
+
     g = np.asarray(im.convert("L"))
     h, w = g.shape
     thr = min(ink_thr + 40, g.mean() - 0.35 * g.std())  # адаптивный порог: бледные строки тоже считаются текстом
@@ -185,7 +201,6 @@ def split_bands(im, lines_per_band=10, ink_thr=160):
         return [(0, h, "")]
     gaps = [runs[i + 1][0] - runs[i][1] for i in range(len(runs) - 1)]
     med = sorted(gaps)[len(gaps) // 2] or 1
-    bands, first = [], 0
     k = max(2, round(len(runs) / lines_per_band))
     target = len(runs) / k
     cuts = []

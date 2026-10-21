@@ -2,6 +2,7 @@
 
 Режимы: быстрый (папка с прежним mtime пропускается целиком, файлы не проверяются) и глубокий (stat каждого файла).
 Хеш и миниатюры считаются только для новых и изменённых файлов, пулом процессов."""
+
 import os
 import threading
 import time
@@ -74,8 +75,10 @@ def scan_folder(folder_id: int, deep: bool = False, progress=None) -> dict:
     t0 = time.time()
     seen, changed_dirs = [], []
     _walk(root, deep, seen, changed_dirs)
-    existing = {r["path"]: (r["size"], r["mtime"], r["id"], r["deleted"]) for r in db.q(
-        "SELECT id, path, size, mtime, deleted FROM images WHERE folder_id=?", (folder_id,))}
+    existing = {
+        r["path"]: (r["size"], r["mtime"], r["id"], r["deleted"])
+        for r in db.q("SELECT id, path, size, mtime, deleted FROM images WHERE folder_id=?", (folder_id,))
+    }
     todo, restored = [], 0
     for p, size, mt in seen:
         old = existing.get(p)
@@ -97,8 +100,16 @@ def scan_folder(folder_id: int, deep: bool = False, progress=None) -> dict:
     for d, dm in changed_dirs:
         db.ex("INSERT OR REPLACE INTO dirs(path, mtime) VALUES(?,?)", (d, dm))
     db.ex("UPDATE folders SET last_scan=? WHERE id=?", (time.time(), folder_id))
-    return {"folder": root, "seen": len(seen), "new": len([1 for _, o in todo if o is None]), "updated": len([1 for _, o in todo if o]),
-            "removed": removed, "restored": restored, "ids": new_ids, "sec": round(time.time() - t0, 2)}
+    return {
+        "folder": root,
+        "seen": len(seen),
+        "new": len([1 for _, o in todo if o is None]),
+        "updated": len([1 for _, o in todo if o]),
+        "removed": removed,
+        "restored": restored,
+        "ids": new_ids,
+        "sec": round(time.time() - t0, 2),
+    }
 
 
 def _ingest(todo, folder_id, progress=None, clipboard=False):
@@ -112,11 +123,15 @@ def _ingest(todo, folder_id, progress=None, clipboard=False):
         if iid is None:
             iid = db.ex(
                 "INSERT OR IGNORE INTO images(path, folder_id, name, size, mtime, added_at, from_clipboard, status) VALUES(?,?,?,?,?,?,?, 'new')",
-                (p, folder_id, os.path.basename(p), st.st_size, st.st_mtime, time.time(), int(clipboard))).lastrowid
+                (p, folder_id, os.path.basename(p), st.st_size, st.st_mtime, time.time(), int(clipboard)),
+            ).lastrowid
             if not iid:
                 iid = db.q1("SELECT id FROM images WHERE path=?", (p,))["id"]
         else:
-            db.ex("UPDATE images SET size=?, mtime=?, status='new', stages='{}', deleted=0 WHERE id=?", (st.st_size, st.st_mtime, iid))
+            db.ex(
+                "UPDATE images SET size=?, mtime=?, status='new', stages='{}', deleted=0 WHERE id=?",
+                (st.st_size, st.st_mtime, iid),
+            )
         ids[p] = iid
     futs = {p: pool().submit(prepare, p, str(thumb_path(i)), s.thumb_side) for p, i in ids.items()}
     done = 0
@@ -126,8 +141,10 @@ def _ingest(todo, folder_id, progress=None, clipboard=False):
         if "error" in r:
             db.ex("UPDATE images SET status='error', error=? WHERE id=?", (r["error"], iid))
         else:
-            db.ex("UPDATE images SET hash=?, width=?, height=?, format=?, frames=?, taken_at=? WHERE id=?",
-                  (r["hash"], r["width"], r["height"], r["format"], r["frames"], r["taken_at"], iid))
+            db.ex(
+                "UPDATE images SET hash=?, width=?, height=?, format=?, frames=?, taken_at=? WHERE id=?",
+                (r["hash"], r["width"], r["height"], r["format"], r["frames"], r["taken_at"], iid),
+            )
         done += 1
         if progress:
             progress(done, len(futs))

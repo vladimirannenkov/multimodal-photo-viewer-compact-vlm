@@ -1,4 +1,5 @@
 """Общие помощники API."""
+
 import mimetypes
 from pathlib import Path
 
@@ -34,6 +35,7 @@ def viewable_path(r) -> tuple[str, str]:
 
 def new_derived_path(stem: str, ext: str) -> Path:
     import time
+
     d = get_settings().derived_dir
     d.mkdir(parents=True, exist_ok=True)
     return d / f"{stem}_{int(time.time() * 1000)}.{ext}"
@@ -41,9 +43,11 @@ def new_derived_path(stem: str, ext: str) -> Path:
 
 def register_derived(path: Path) -> int:
     from .. import scanner
+
     f = scanner.add_folder(str(path.parent), watched=False)
     ids = scanner.import_files([str(path)], folder_id=f)
     from ..pipeline import get_pipeline
+
     get_pipeline().kick()
     return ids[0]
 

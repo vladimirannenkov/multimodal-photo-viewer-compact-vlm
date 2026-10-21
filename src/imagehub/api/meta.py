@@ -1,4 +1,5 @@
 """Категории (теги, у изображения их несколько), коллекции, эксперименты."""
+
 import json
 import time
 
@@ -18,8 +19,11 @@ def _cat(name: str, auto=0) -> int:
 # ---------- категории ----------
 @router.get("/categories")
 def categories():
-    return [dict(r) for r in db.q("""SELECT c.id, c.name, c.auto, COUNT(ic.image_id) n FROM categories c
-                                     LEFT JOIN image_categories ic ON ic.category_id=c.id GROUP BY c.id ORDER BY n DESC, c.name""")]
+    return [
+        dict(r)
+        for r in db.q("""SELECT c.id, c.name, c.auto, COUNT(ic.image_id) n FROM categories c
+                                     LEFT JOIN image_categories ic ON ic.category_id=c.id GROUP BY c.id ORDER BY n DESC, c.name""")
+    ]
 
 
 @router.post("/categories/assign")
@@ -27,7 +31,10 @@ def assign(body: dict = Body(...)):
     ids, add, remove = body.get("ids", []), body.get("add", []), body.get("remove", [])
     for n in add:
         cid = _cat(n)
-        db.exmany("INSERT OR REPLACE INTO image_categories(image_id, category_id, score, source) VALUES(?,?,1,'user')", [(i, cid) for i in ids])
+        db.exmany(
+            "INSERT OR REPLACE INTO image_categories(image_id, category_id, score, source) VALUES(?,?,1,'user')",
+            [(i, cid) for i in ids],
+        )
     for n in remove:
         r = db.q1("SELECT id FROM categories WHERE name=?", (n,))
         if r:
@@ -95,15 +102,20 @@ def delete_collection(cid: int):
 # ---------- эксперименты ----------
 @router.get("/experiments")
 def experiments():
-    return [dict(r) for r in db.q("""SELECT e.*, (SELECT COUNT(*) FROM images i WHERE i.experiment_id=e.id AND i.deleted=0) n
-                                     FROM experiments e ORDER BY created_at DESC""")]
+    return [
+        dict(r)
+        for r in db.q("""SELECT e.*, (SELECT COUNT(*) FROM images i WHERE i.experiment_id=e.id AND i.deleted=0) n
+                                     FROM experiments e ORDER BY created_at DESC""")
+    ]
 
 
 @router.post("/experiments")
 def create_experiment(body: dict = Body(...)):
     """Новые эксперименты создаёт только пользователь. Новые графики после этого попадают в самый свежий эксперимент."""
     name = (body.get("name") or "").strip() or "Эксперимент " + time.strftime("%Y-%m-%d %H:%M")
-    eid = db.ex("INSERT INTO experiments(name, created_at, auto, note) VALUES(?,?,0,?)", (name, time.time(), body.get("note", ""))).lastrowid
+    eid = db.ex(
+        "INSERT INTO experiments(name, created_at, auto, note) VALUES(?,?,0,?)", (name, time.time(), body.get("note", ""))
+    ).lastrowid
     return {"id": eid}
 
 
@@ -132,7 +144,10 @@ def experiment_assign(eid: int, body: dict = Body(...)):
 @router.get("/experiments/{eid}/summary")
 def experiment_summary(eid: int):
     """Сводка по графикам эксперимента: серии, максимумы и плато (вычислены кодом по извлечённым точкам)."""
-    rows = db.q("SELECT id, name, chart, summary FROM images WHERE experiment_id=? AND deleted=0 ORDER BY COALESCE(taken_at, mtime)", (eid,))
+    rows = db.q(
+        "SELECT id, name, chart, summary FROM images WHERE experiment_id=? AND deleted=0 ORDER BY COALESCE(taken_at, mtime)",
+        (eid,),
+    )
     charts, best = [], None
     for r in rows:
         c = json.loads(r["chart"]) if r["chart"] else None
@@ -140,7 +155,16 @@ def experiment_summary(eid: int):
             charts.append({"id": r["id"], "name": r["name"], "title": None, "series": []})
             continue
         series = c.get("stats", {}).get("series", [])
-        charts.append({"id": r["id"], "name": r["name"], "title": c.get("title"), "x": c.get("x_axis"), "y": c.get("y_axis"), "series": series})
+        charts.append(
+            {
+                "id": r["id"],
+                "name": r["name"],
+                "title": c.get("title"),
+                "x": c.get("x_axis"),
+                "y": c.get("y_axis"),
+                "series": series,
+            }
+        )
         for s in series:
             if best is None or s["max"] > best["max"]:
                 best = {**s, "image_id": r["id"], "title": c.get("title")}

@@ -1,4 +1,5 @@
 """Быстрый детектор «есть связный текст» + язык (письменность). PP-OCRv5, ONNX, CPU, инвариантен к повороту на 90°."""
+
 import numpy as np
 import onnxruntime as ort
 from PIL import Image
@@ -83,5 +84,12 @@ def detect(img: Image.Image) -> dict:
     text = " ".join(sample)
     sc = script_counts(text)
     mc = sum(conf) / len(conf) if conf else 0.0
-    return {"has_text": best["lines"] >= 3 and len(text) >= 15 and mc >= 0.5, "lines": best["lines"], "rotation": best["rotation"],
-            "language": language_label(sc), "scripts": sc, "conf": round(mc, 2), "sample": text[:300]}
+    return {
+        "has_text": best["lines"] >= 3 and len(text) >= 15 and mc >= 0.5,
+        "lines": best["lines"],
+        "rotation": best["rotation"],
+        "language": language_label(sc),
+        "scripts": sc,
+        "conf": round(mc, 2),
+        "sample": text[:300],
+    }

@@ -1,4 +1,5 @@
 """Люди и лица: глобальная база, имена из чата, объединение, кадры лиц."""
+
 import io
 import json
 
@@ -11,15 +12,24 @@ from .deps import image_row, pil_open
 router = APIRouter(prefix="/api")
 
 GENERIC = ["прохожий", "студент", "коллега", "родственник", "друг", "незнакомец"]
-BY_EVENT = {"работа": ["коллега", "сотрудник"], "праздник": ["гость", "друг", "родственник"], "спорт": ["спортсмен", "тренер"],
-            "прогулка": ["прохожий", "друг"], "путешествие": ["турист", "прохожий"], "город": ["прохожий"]}
+BY_EVENT = {
+    "работа": ["коллега", "сотрудник"],
+    "праздник": ["гость", "друг", "родственник"],
+    "спорт": ["спортсмен", "тренер"],
+    "прогулка": ["прохожий", "друг"],
+    "путешествие": ["турист", "прохожий"],
+    "город": ["прохожий"],
+}
 
 
 @router.get("/people")
 def list_people():
-    return [dict(r) for r in db.q("""SELECT p.id, COALESCE(p.name, p.auto_name) AS name, p.labeled, p.n,
+    return [
+        dict(r)
+        for r in db.q("""SELECT p.id, COALESCE(p.name, p.auto_name) AS name, p.labeled, p.n,
                                       (SELECT f.id FROM faces f WHERE f.person_id=p.id ORDER BY f.score DESC LIMIT 1) AS face_id
-                                      FROM people p WHERE p.n>0 ORDER BY p.labeled DESC, p.n DESC""")]
+                                      FROM people p WHERE p.n>0 ORDER BY p.labeled DESC, p.n DESC""")
+    ]
 
 
 @router.patch("/people/{pid}")
@@ -57,7 +67,7 @@ def face_crop(face_id: int, pad: float = 0.35, size: int = 160):
 def _suggestions(image_id):
     r = db.q1("SELECT event, kind FROM images WHERE id=?", (image_id,))
     known = [x["name"] for x in db.q("SELECT name FROM people WHERE labeled=1 AND name IS NOT NULL ORDER BY n DESC LIMIT 8")]
-    ctx = BY_EVENT.get(r["event"] if r else None, [])
+    ctx = BY_EVENT.get((r["event"] if r else None) or "", [])
     seen, out = set(), []
     for n in ctx + GENERIC:
         if n not in seen and n not in known:
@@ -74,8 +84,13 @@ def next_face():
         return {"face": None}
     nf["box"] = json.loads(nf["box"])
     im = db.q1("SELECT id, name, width, height FROM images WHERE id=?", (nf["image_id"],))
-    return {"face": nf, "image": dict(im), "suggestions": _suggestions(nf["image_id"]), "candidate": people.candidate_for(nf["person_id"]),
-            "other_images": db.q1("SELECT COUNT(DISTINCT image_id) c FROM faces WHERE person_id=?", (nf["person_id"],))["c"]}
+    return {
+        "face": nf,
+        "image": dict(im),
+        "suggestions": _suggestions(nf["image_id"]),
+        "candidate": people.candidate_for(nf["person_id"]),
+        "other_images": db.q1("SELECT COUNT(DISTINCT image_id) c FROM faces WHERE person_id=?", (nf["person_id"],))["c"],
+    }
 
 
 @router.post("/faces/{face_id}/label")

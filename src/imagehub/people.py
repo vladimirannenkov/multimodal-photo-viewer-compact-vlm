@@ -1,4 +1,5 @@
 """Глобальная база лиц: сопоставление эмбеддинга с известными людьми, новые люди получают имя person_N."""
+
 import json
 
 import numpy as np
@@ -37,8 +38,10 @@ def add_faces(image_id, faces):
         c = mat[j] * n + emb
         c = c / (np.linalg.norm(c) + 1e-9)
         db.ex("UPDATE people SET centroid=?, n=? WHERE id=?", (c.astype(np.float32).tobytes(), n + 1, pid))
-        fid = db.ex("INSERT INTO faces(image_id, box, score, emb, person_id) VALUES(?,?,?,?,?)",
-                    (image_id, json.dumps([round(v, 1) for v in f["box"]]), f["score"], emb.tobytes(), pid)).lastrowid
+        fid = db.ex(
+            "INSERT INTO faces(image_id, box, score, emb, person_id) VALUES(?,?,?,?,?)",
+            (image_id, json.dumps([round(v, 1) for v in f["box"]]), f["score"], emb.tobytes(), pid),
+        ).lastrowid
         out.append({"id": fid, "person_id": pid, "sim": sim})
     return out
 
@@ -83,7 +86,9 @@ def candidate_for(person_id, min_sim=0.28):
         return None
     v = np.frombuffer(me["centroid"], np.float32)
     best, name = 0.0, None
-    for r in db.q("SELECT name, centroid FROM people WHERE labeled=1 AND name IS NOT NULL AND centroid IS NOT NULL AND id<>?", (person_id,)):
+    for r in db.q(
+        "SELECT name, centroid FROM people WHERE labeled=1 AND name IS NOT NULL AND centroid IS NOT NULL AND id<>?", (person_id,)
+    ):
         s = float(np.frombuffer(r["centroid"], np.float32) @ v)
         if s > best:
             best, name = s, r["name"]

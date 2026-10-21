@@ -1,4 +1,5 @@
 """Каталог: список и карточка изображения, файлы и миниатюры, папки, импорт, очередь обработки."""
+
 import json
 import os
 import string
@@ -6,7 +7,7 @@ import time
 from pathlib import Path
 
 from fastapi import APIRouter, Body, File, Form, HTTPException, Query, UploadFile
-from fastapi.responses import FileResponse, Response
+from fastapi.responses import FileResponse
 
 from .. import db, queries, scanner, search
 from ..config import get_settings
@@ -26,12 +27,36 @@ def sidebar():
 
 
 @router.get("/images")
-def images(folder: int | None = None, collection: int | None = None, category: int | None = None, experiment: int | None = None,
-           person: int | None = None, kind: str | None = None, favorite: bool = False, clipboard: bool = False,
-           has_text: str | None = None, date_from: float | None = None, date_to: float | None = None,
-           sort: str = "date", desc: bool = True, offset: int = 0, limit: int = Query(300, le=2000)):
-    f = _filters(folder=folder, collection=collection, category=category, experiment=experiment, person=person, kind=kind,
-                 favorite=favorite, clipboard=clipboard, has_text=has_text, date_from=date_from, date_to=date_to)
+def images(
+    folder: int | None = None,
+    collection: int | None = None,
+    category: int | None = None,
+    experiment: int | None = None,
+    person: int | None = None,
+    kind: str | None = None,
+    favorite: bool = False,
+    clipboard: bool = False,
+    has_text: str | None = None,
+    date_from: float | None = None,
+    date_to: float | None = None,
+    sort: str = "date",
+    desc: bool = True,
+    offset: int = 0,
+    limit: int = Query(300, le=2000),
+):
+    f = _filters(
+        folder=folder,
+        collection=collection,
+        category=category,
+        experiment=experiment,
+        person=person,
+        kind=kind,
+        favorite=favorite,
+        clipboard=clipboard,
+        has_text=has_text,
+        date_from=date_from,
+        date_to=date_to,
+    )
     total, items = queries.list_images(f, sort, desc, offset, limit)
     return {"total": total, "items": items}
 
@@ -89,8 +114,10 @@ def patch(image_id: int, body: dict = Body(...)):
         os.rename(r["path"], new)
         sets += ["name=?", "path=?"]
         args += [body["name"], str(new)]
-        db.ex("INSERT INTO undo_log(ts, action, payload) VALUES(?,?,?)",
-              (time.time(), "rename", json.dumps({"id": image_id, "old": r["path"], "new": str(new)})))
+        db.ex(
+            "INSERT INTO undo_log(ts, action, payload) VALUES(?,?,?)",
+            (time.time(), "rename", json.dumps({"id": image_id, "old": r["path"], "new": str(new)})),
+        )
     if sets:
         db.ex(f"UPDATE images SET {', '.join(sets)} WHERE id=?", args + [image_id])
         db.fts_update(image_id)
@@ -109,7 +136,10 @@ def delete(body: dict = Body(...)):
             except OSError:
                 pass
         db.ex("UPDATE images SET deleted=1 WHERE id=?", (i,))
-    db.ex("INSERT INTO undo_log(ts, action, payload) VALUES(?,?,?)", (time.time(), "delete", json.dumps({"ids": ids, "file": remove_file})))
+    db.ex(
+        "INSERT INTO undo_log(ts, action, payload) VALUES(?,?,?)",
+        (time.time(), "delete", json.dumps({"ids": ids, "file": remove_file})),
+    )
     return {"deleted": len(ids)}
 
 
@@ -129,6 +159,7 @@ def import_folder(body: dict = Body(...)):
     fid = scanner.add_folder(path, watched=body.get("watched", True))
     res = scanner.scan_folder(fid, deep=True)
     from .. import watcher
+
     watcher.start()
     get_pipeline().kick()
     res.pop("ids", None)
@@ -151,7 +182,7 @@ async def upload(files: list[UploadFile] = File(...), clipboard: bool = Form(Fal
     saved = []
     for f in files:
         ext = Path(f.filename or "").suffix.lower() or ".png"
-        name = (f"clip_{time.strftime('%Y%m%d_%H%M%S')}_{len(saved)}{ext}" if clipboard or not f.filename else f.filename)
+        name = f"clip_{time.strftime('%Y%m%d_%H%M%S')}_{len(saved)}{ext}" if clipboard or not f.filename else f.filename
         p = dest / name
         n = 1
         while p.exists():
@@ -181,6 +212,7 @@ def remove_folder(folder_id: int):
     db.ex("UPDATE images SET deleted=1 WHERE folder_id=?", (folder_id,))
     db.ex("DELETE FROM folders WHERE id=?", (folder_id,))
     from .. import watcher
+
     watcher.start()
     return {"ok": True}
 
@@ -235,8 +267,14 @@ def reprocess(body: dict = Body(...)):
 
 # ---------- поиск ----------
 @router.post("/search")
-async def do_search(q: str = Form(""), weight: float = Form(0.5), filters: str = Form("{}"), limit: int = Form(200),
-                    image: UploadFile | None = File(None), similar_to: int | None = Form(None)):
+async def do_search(
+    q: str = Form(""),
+    weight: float = Form(0.5),
+    filters: str = Form("{}"),
+    limit: int = Form(200),
+    image: UploadFile | None = File(None),
+    similar_to: int | None = Form(None),
+):
     f = json.loads(filters or "{}")
     vec = None
     if image is not None:
@@ -245,6 +283,7 @@ async def do_search(q: str = Form(""), weight: float = Form(0.5), filters: str =
         from PIL import Image
 
         from ..ml import siglip
+
         im = Image.open(io.BytesIO(await image.read())).convert("RGB")
         vec = siglip.get("cpu").images([im])[0]
     if similar_to:
@@ -264,6 +303,10 @@ async def do_search(q: str = Form(""), weight: float = Form(0.5), filters: str =
 def duplicates(threshold: float = 0.97):
     groups = search.duplicates(threshold)
     for g in groups:
-        g["items"] = [dict(r) for r in db.q(
-            f"SELECT id, name, width, height, size, path FROM images WHERE id IN ({','.join('?' * len(g['ids']))})", g["ids"])]
+        g["items"] = [
+            dict(r)
+            for r in db.q(
+                f"SELECT id, name, width, height, size, path FROM images WHERE id IN ({','.join('?' * len(g['ids']))})", g["ids"]
+            )
+        ]
     return groups

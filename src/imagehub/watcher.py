@@ -1,4 +1,5 @@
 """Слежение за папками в реальном времени (watchdog) с дребезгом: пачка событий даёт один быстрый скан."""
+
 import threading
 
 from watchdog.events import FileSystemEventHandler

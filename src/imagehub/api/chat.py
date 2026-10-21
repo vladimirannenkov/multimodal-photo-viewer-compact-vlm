@@ -1,8 +1,8 @@
 """Чат с VLM по изображению (Qwen3-VL-2B)."""
-import time
 
 import queue
 import threading
+import time
 
 from fastapi import APIRouter, Body, HTTPException
 from fastapi.responses import StreamingResponse
@@ -92,4 +92,7 @@ def ask_stream(image_id: int, body: dict = Body(...)):
     def gen():
         while (c := q.get()) is not None:
             yield c
-    return StreamingResponse(gen(), media_type="text/plain; charset=utf-8", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+    return StreamingResponse(
+        gen(), media_type="text/plain; charset=utf-8", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+    )

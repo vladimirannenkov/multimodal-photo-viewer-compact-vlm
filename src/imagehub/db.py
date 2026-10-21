@@ -1,4 +1,5 @@
 """SQLite (WAL) + FTS5. Соединение на поток, схема создаётся при первом открытии."""
+
 import json
 import sqlite3
 import threading
@@ -145,7 +146,9 @@ def set_vector(image_id, kind, v):
 def fts_update(image_id):
     """Пересобирает запись полнотекстового индекса изображения ."""
     c = conn()
-    r = c.execute("SELECT name, summary, summary_ru, tags_ru, ocr_raw, ocr_md, tags, caption FROM images WHERE id=?", (image_id,)).fetchone()
+    r = c.execute(
+        "SELECT name, summary, summary_ru, tags_ru, ocr_raw, ocr_md, tags, caption FROM images WHERE id=?", (image_id,)
+    ).fetchone()
     if r is None:
         return
     c.execute("DELETE FROM fts WHERE rowid=?", (image_id,))

@@ -1,4 +1,5 @@
 """Детектор макета страницы (DocLayout-YOLO DocStructBench, ONNX, CPU): блоки текста, таблиц, формул."""
+
 import numpy as np
 import onnxruntime as ort
 from PIL import Image
@@ -6,8 +7,18 @@ from PIL import Image
 from .weights import WEIGHTS
 
 MODEL = str(WEIGHTS / "doclayout_yolo" / "onnx" / "model.onnx")
-NAMES = {0: "title", 1: "text", 2: "abandon", 3: "figure", 4: "figure_caption", 5: "table",
-         6: "table_caption", 7: "table_footnote", 8: "formula", 9: "formula_caption"}
+NAMES = {
+    0: "title",
+    1: "text",
+    2: "abandon",
+    3: "figure",
+    4: "figure_caption",
+    5: "table",
+    6: "table_caption",
+    7: "table_footnote",
+    8: "formula",
+    9: "formula_caption",
+}
 SIDE = 1024
 _sess = None
 
@@ -31,7 +42,7 @@ def detect(img: Image.Image, conf=0.25):
     nw, nh = round(w * r), round(h * r)
     canvas = Image.new("RGB", (SIDE, SIDE), (114, 114, 114))
     px, py = (SIDE - nw) // 2, (SIDE - nh) // 2
-    canvas.paste(img.resize((nw, nh), Image.BILINEAR), (px, py))
+    canvas.paste(img.resize((nw, nh), Image.Resampling.BILINEAR), (px, py))
     x = np.asarray(canvas, dtype=np.float32).transpose(2, 0, 1)[None] / 255.0
     s = _session()
     out = s.run(None, {s.get_inputs()[0].name: x})[0][0]  # (300, 6): x1 y1 x2 y2 score cls

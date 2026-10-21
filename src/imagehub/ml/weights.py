@@ -1,4 +1,5 @@
 """Пути к весам моделей (каталог из настроек; веса монтируются томом, в образ не входят)."""
+
 from pathlib import Path
 
 from ..config import get_settings

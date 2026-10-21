@@ -1,4 +1,5 @@
 """Инструменты: правка (копией), экспорт и конвертация, склейка N×M, аннотации-примитивы, сводки."""
+
 import io
 import json
 import time
@@ -11,7 +12,6 @@ from fastapi.responses import Response
 from PIL import Image, ImageDraw, ImageOps
 
 from .. import db
-from ..imaging import open_rgb
 from .deps import image_row, new_derived_path, pil_open, register_derived
 
 router = APIRouter(prefix="/api")
@@ -45,7 +45,7 @@ def edit(image_id: int, body: dict = Body(...)):
             x1, y1, x2, y2 = [int(v) for v in op["box"]]
             im = im.crop((max(0, x1), max(0, y1), min(im.width, x2), min(im.height, y2)))
         elif t == "resize":
-            im = im.resize((int(op["width"]), int(op["height"])), Image.LANCZOS)
+            im = im.resize((int(op["width"]), int(op["height"])), Image.Resampling.LANCZOS)
         elif t == "draw":
             _draw(im, op.get("shapes", []))
     fmt = body.get("format", "png")
@@ -56,6 +56,8 @@ def edit(image_id: int, body: dict = Body(...)):
 
 def _hex(c, a=255):
     c = c.lstrip("#")
+    if len(c) == 3:  # краткая запись #f00
+        c = "".join(ch * 2 for ch in c)
     return (int(c[0:2], 16), int(c[2:4], 16), int(c[4:6], 16), a)
 
 
@@ -81,6 +83,7 @@ def _draw(im: Image.Image, shapes):
             (x1, y1), (x2, y2) = s["points"][0], s["points"][-1]
             d.line((x1, y1, x2, y2), fill=col, width=w)
             import math
+
             ang = math.atan2(y2 - y1, x2 - x1)
             L = max(14, w * 4)
             for da in (math.pi - 0.45, math.pi + 0.45):
@@ -94,7 +97,10 @@ def save_annotations(image_id: int, body: dict = Body(...)):
     """Слой аннотаций поверх изображения хранится отдельно; оригинал не затрагивается."""
     image_row(image_id)
     db.ex("DELETE FROM annotations WHERE image_id=?", (image_id,))
-    db.ex("INSERT INTO annotations(image_id, data, updated_at) VALUES(?,?,?)", (image_id, json.dumps(body.get("shapes", [])), time.time()))
+    db.ex(
+        "INSERT INTO annotations(image_id, data, updated_at) VALUES(?,?,?)",
+        (image_id, json.dumps(body.get("shapes", [])), time.time()),
+    )
     return {"ok": True}
 
 
@@ -122,18 +128,24 @@ def export(body: dict = Body(...)):
         r = image_row(i)
         im = pil_open(r)
         if max_side:
-            im.thumbnail((int(max_side), int(max_side)), Image.LANCZOS)
+            im.thumbnail((int(max_side), int(max_side)), Image.Resampling.LANCZOS)
         outs.append((Path(r["name"]).stem + "." + fmt, _save_bytes(im, fmt, body.get("quality", 90))))
     if len(outs) == 1:
         name, data = outs[0]
-        return Response(data, media_type=f"image/{'jpeg' if fmt == 'jpg' else fmt}", headers={"Content-Disposition": f'attachment; filename="{name}"'})
+        return Response(
+            data,
+            media_type=f"image/{'jpeg' if fmt == 'jpg' else fmt}",
+            headers={"Content-Disposition": f'attachment; filename="{name}"'},
+        )
     buf = io.BytesIO()
     used = Counter()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_STORED) as z:
         for name, data in outs:
             used[name] += 1
             z.writestr(name if used[name] == 1 else f"{Path(name).stem}_{used[name]}{Path(name).suffix}", data)
-    return Response(buf.getvalue(), media_type="application/zip", headers={"Content-Disposition": 'attachment; filename="export.zip"'})
+    return Response(
+        buf.getvalue(), media_type="application/zip", headers={"Content-Disposition": 'attachment; filename="export.zip"'}
+    )
 
 
 # ---------- склейка N×M ----------
@@ -146,16 +158,20 @@ def merge(body: dict = Body(...)):
     if not n:
         raise HTTPException(400, "нужны изображения")
     if not rows and not cols:
-        cols = int(n ** 0.5 + 0.999)
+        cols = int(n**0.5 + 0.999)
     cols = cols or -(-n // rows)
     rows = rows or -(-n // cols)
     cell, gap = int(body.get("cell", 512)), int(body.get("gap", 8))
     bg = _hex(body.get("bg", "#ffffff"))[:3]
     fit = body.get("fit", "contain")
     sheet = Image.new("RGB", (cols * cell + (cols + 1) * gap, rows * cell + (rows + 1) * gap), bg)
-    for k, i in enumerate(ids[:rows * cols]):
+    for k, i in enumerate(ids[: rows * cols]):
         im = pil_open(image_row(i))
-        im = ImageOps.fit(im, (cell, cell), Image.LANCZOS) if fit == "cover" else ImageOps.contain(im, (cell, cell), Image.LANCZOS)
+        im = (
+            ImageOps.fit(im, (cell, cell), Image.Resampling.LANCZOS)
+            if fit == "cover"
+            else ImageOps.contain(im, (cell, cell), Image.Resampling.LANCZOS)
+        )
         r_, c_ = divmod(k, cols)
         sheet.paste(im, (gap + c_ * (cell + gap) + (cell - im.width) // 2, gap + r_ * (cell + gap) + (cell - im.height) // 2))
     if body.get("save"):
@@ -184,9 +200,20 @@ def summary(body: dict = Body(...)):
         if r["tags"]:
             tags.update(json.loads(r["tags"]))
     dates = [r["taken_at"] or r["mtime"] for r in rows if r["taken_at"] or r["mtime"]]
-    people = db.q(f"""SELECT COALESCE(p.name, p.auto_name) n, COUNT(DISTINCT f.image_id) c FROM faces f JOIN people p ON p.id=f.person_id
-                      WHERE f.image_id IN (SELECT i.id FROM images i WHERE i.deleted=0 AND {where}) GROUP BY p.id ORDER BY c DESC LIMIT 10""", args)
-    return {"count": len(rows), "bytes": sum(r["size"] or 0 for r in rows), "from": min(dates) if dates else None,
-            "to": max(dates) if dates else None, "kinds": kinds.most_common(), "events": events.most_common(6),
-            "languages": langs.most_common(), "tags": tags.most_common(15), "with_text": sum(1 for r in rows if r["has_text"]),
-            "people": [(p["n"], p["c"]) for p in people]}
+    people = db.q(
+        f"""SELECT COALESCE(p.name, p.auto_name) n, COUNT(DISTINCT f.image_id) c FROM faces f JOIN people p ON p.id=f.person_id
+                      WHERE f.image_id IN (SELECT i.id FROM images i WHERE i.deleted=0 AND {where}) GROUP BY p.id ORDER BY c DESC LIMIT 10""",
+        args,
+    )
+    return {
+        "count": len(rows),
+        "bytes": sum(r["size"] or 0 for r in rows),
+        "from": min(dates) if dates else None,
+        "to": max(dates) if dates else None,
+        "kinds": kinds.most_common(),
+        "events": events.most_common(6),
+        "languages": langs.most_common(),
+        "tags": tags.most_common(15),
+        "with_text": sum(1 for r in rows if r["has_text"]),
+        "people": [(p["n"], p["c"]) for p in people],
+    }
