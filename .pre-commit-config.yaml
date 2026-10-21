@@ -1,3 +1,4 @@
+exclude: ^(src/imagehub/web/static/vendor/|model_lab/|uv.lock)
 # Установка:  uv run pre-commit install   (проверки запускаются при каждом git commit)
 # Запуск вручную:  uv run pre-commit run --all-files
 repos:
