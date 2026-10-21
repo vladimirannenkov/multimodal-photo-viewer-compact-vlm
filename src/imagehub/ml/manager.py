@@ -1,4 +1,6 @@
 """Один замок на GPU: фоновый пайплайн и запросы пользователя (чат) не загружают модели одновременно."""
+
+import sys
 import threading
 import time
 from contextlib import contextmanager
@@ -44,9 +46,11 @@ def ensure(group):
 def trim_memory():
     """Возвращает освобождённую память системе (на Windows рабочий набор процесса не сжимается сам)."""
     import gc
+
     gc.collect()
     try:
         import torch
+
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
     except Exception:
@@ -54,6 +58,7 @@ def trim_memory():
     try:
         import ctypes
         import os
+
         if os.name == "nt":
             k = ctypes.windll.kernel32
             k.GetCurrentProcess.restype = ctypes.c_void_p
@@ -64,9 +69,12 @@ def trim_memory():
 
 def free_heavy():
     global _resident
-    from . import florence, textfix, vlm
+    from . import textfix, vlm
+
     vlm.free()
     textfix.free()
-    florence.free()
+    florence = sys.modules.get("imagehub.ml.florence")  # импортируется (и тянет torch) только если сцена уже обрабатывалась
+    if florence is not None:
+        florence.free()
     _resident = None
     trim_memory()

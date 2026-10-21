@@ -1,31 +1,43 @@
 """Qwen3-VL-2B: вопросы по изображению (чат), JSON графика. Единственная модель для диалога."""
+
 import json
 import re
 
+from .. import llm
+from ..config import get_settings
 from . import vlm
-from .weights import WEIGHTS
 
-CHART_PROMPT = ('Если это график, верни только JSON: {"title": str, "x_axis": str, "y_axis": str, '
-                '"series": [{"name": str, "points": [[x, y], ...]}]}. Не менее 8 точек на серию, значения читай по осям. '
-                'Если это не график, верни {"chart": false}.')
+CHART_PROMPT = (
+    'Если это график, верни только JSON: {"title": str, "x_axis": str, "y_axis": str, '
+    '"series": [{"name": str, "points": [[x, y], ...]}]}. Не менее 8 точек на серию, значения читай по осям. '
+    'Если это не график, верни {"chart": false}.'
+)
 FACE_PROMPT = "Кто может быть этот человек по контексту сцены? Предложи 3 коротких варианта роли (например: студент, прохожий, коллега) через запятую."
 
 
 def path():
-    return str(WEIGHTS / "qwen3vl")
+    """Qwen3-VL-2B работает на сервере моделей (Ollama и др.): идентификатор берётся из настроек."""
+    return llm.API_PREFIX + get_settings().llm_model
 
 
 STYLE = "Отвечай кратко и по существу, на языке вопроса. "
 
 
 def warmup(device):
-    from . import vlm
     vlm.load(path(), device, True)
 
 
 def ask(img, question, device, history=None, max_new_tokens=320):
     hist = [{"role": h["role"], "content": [{"type": "text", "text": h["content"]}]} for h in (history or [])][-8:]
-    return vlm.generate(path(), [img], [(STYLE if not hist else "") + question], device, max_new_tokens=max_new_tokens, history=hist, max_side=1024)[0]
+    return vlm.generate(
+        path(),
+        [img],
+        [(STYLE if not hist else "") + question],
+        device,
+        max_new_tokens=max_new_tokens,
+        history=hist,
+        max_side=1024,
+    )[0]
 
 
 def ask_stream(img, question, device, history=None, max_new_tokens=320):
@@ -51,11 +63,19 @@ def chart_stats(chart):
         if len(pts) < 3:
             continue
         ys = [y for _, y in pts]
-        tail = ys[-max(3, len(ys) // 5):]
+        tail = ys[-max(3, len(ys) // 5) :]
         mean_tail = sum(tail) / len(tail)
         spread = (max(tail) - min(tail)) / (abs(mean_tail) + 1e-9)
-        out.append({"name": s.get("name", ""), "max": max(ys), "max_at": pts[ys.index(max(ys))][0], "min": min(ys),
-                    "final": ys[-1], "plateau": round(mean_tail, 4) if spread < 0.05 else None})
+        out.append(
+            {
+                "name": s.get("name", ""),
+                "max": max(ys),
+                "max_at": pts[ys.index(max(ys))][0],
+                "min": min(ys),
+                "final": ys[-1],
+                "plateau": round(mean_tail, 4) if spread < 0.05 else None,
+            }
+        )
     best = max(out, key=lambda s: s["max"]) if out else None
     return {"series": out, "best_series": best["name"] if best else None}
 
