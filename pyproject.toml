@@ -4,15 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "imagehub"
-version = "0.1.0"
-description = "Локальный сервис для работы с изображениями: OCR, описание сцен, лица, поиск, эксперименты"
+version = "0.2.0"
+description = "ImageHub: мультимодальный просмотр фото на компактных моделях (VLM через OpenAI-совместимый API, Ollama)"
 readme = "README.md"
 requires-python = ">=3.11"
+# Ядро: каталог, поиск, API, веб-интерфейс и клиент сервера моделей. Тяжёлые локальные модели вынесены в extra «ml».
 dependencies = [
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
     "python-multipart",
     "pydantic-settings>=2.2",
+    "httpx>=0.27",
     "pillow>=10.4",
     "pillow-heif",
     "numpy>=1.26",
@@ -20,26 +22,38 @@ dependencies = [
     "watchdog",
     "markdown-it-py",
     "pyyaml",
+]
+
+[project.optional-dependencies]
+# Локальные нейросети, которых нет в Ollama: SigLIP2, Florence-2, макет страницы, детектор текста, лица, эмбеддинги.
+# Torch ставится для CPU (см. [tool.uv.sources]), видеокарта не нужна.
+ml = [
+    "torch>=2.7",
+    "torchvision",
     "transformers>=5.0",
     "accelerate",
     "huggingface_hub",
     "sentencepiece",
     "einops",
     "timm",
+    "sentence-transformers",
     "opencv-python-headless",
+    "onnx",
+    "onnxruntime>=1.20",
     "rapidocr-onnxruntime",
     "insightface",
-    "sentence-transformers",
-    "onnxruntime>=1.20",
 ]
 
-[project.optional-dependencies]
-# Torch ставится одним из extras под нужную видеокарту (см. [tool.uv.sources] и Dockerfile, ARG CUDA_VARIANT).
-# Blackwell (RTX 50xx) требует cu128 и новее.
-cpu = ["torch>=2.7", "torchvision"]
-cu126 = ["torch>=2.7", "torchvision"]
-cu128 = ["torch>=2.7", "torchvision"]
-dev = ["pytest", "httpx", "ruff"]
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "respx>=0.21",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "pre-commit>=3.8",
+    "types-PyYAML",
+]
 
 [project.scripts]
 imagehub = "imagehub.cli:main"
@@ -50,39 +64,94 @@ where = ["src"]
 [tool.setuptools.package-data]
 imagehub = ["web/static/**/*"]
 
+# ---------- pytest ----------
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra --strict-markers --cov=imagehub --cov-report=term-missing:skip-covered --cov-fail-under=70 -m 'not slow'"
+markers = [
+    "slow: интеграционные тесты с настоящей компактной моделью на сервере Ollama (запуск: pytest -m slow --no-cov)",
+]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::ResourceWarning"]
 
+[tool.coverage.run]
+source = ["src/imagehub"]
+branch = true
+# Адаптеры нейросетей требуют весов и тяжёлых библиотек; их проверяют интеграционные тесты (slow) и ручной сценарий.
+omit = [
+    "src/imagehub/ml/florence.py",
+    "src/imagehub/ml/siglip.py",
+    "src/imagehub/ml/faces.py",
+    "src/imagehub/ml/layout.py",
+    "src/imagehub/ml/textdet.py",
+    "src/imagehub/__main__.py",
+]
+
+[tool.coverage.report]
+exclude_also = ["if __name__ == .__main__.:", "raise NotImplementedError", "if TYPE_CHECKING:"]
+
+# ---------- ruff ----------
 [tool.ruff]
 line-length = 130
-src = ["src"]
+src = ["src", "tests"]
+target-version = "py311"
+extend-exclude = ["model_lab", "tests/ui"]
 
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # сортировка импортов
+    "B",        # flake8-bugbear
+    "UP",       # pyupgrade
+    "C4",       # comprehensions
+    "SIM",      # упрощения
+    "T20",      # запрет print в рабочем коде
+    "PT",       # стиль pytest
+    "RUF",
+]
+ignore = [
+    "RUF001", "RUF002", "RUF003",  # кириллица в строках и комментариях
+    "E501",                        # длину строк держит ruff format
+    "SIM105", "SIM108",
+    "B008",                        # Body(...) и Depends в аргументах FastAPI
+    "PT011", "PT018",
+    "B905", "B007", "E731", "E741", "C408", "RUF005", "RUF015", "RUF046", "UP031", "SIM113",  # стиль существующего кода
+    "B023",                        # замыкание вызывается сразу в теле цикла (ml/layout.py)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["T20"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+# ---------- mypy ----------
+[tool.mypy]
+python_version = "3.11"
+files = ["src/imagehub"]
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+check_untyped_defs = true
+no_implicit_optional = true
+disable_error_code = ["var-annotated"]  # пустые литералы в существующем коде; в новых модулях аннотации есть
+
+[[tool.mypy.overrides]]
+# Новый код с полными аннотациями проверяется строго
+module = ["imagehub.llm", "imagehub.logs", "imagehub.cli", "imagehub.config"]
+disallow_untyped_defs = true
+warn_return_any = true
+
+# ---------- uv ----------
 [tool.uv]
-conflicts = [[{ extra = "cpu" }, { extra = "cu126" }, { extra = "cu128" }]]
+default-groups = ["dev"]
 
 [tool.uv.sources]
-torch = [
-    { index = "pytorch-cpu", extra = "cpu" },
-    { index = "pytorch-cu126", extra = "cu126" },
-    { index = "pytorch-cu128", extra = "cu128" },
-]
-torchvision = [
-    { index = "pytorch-cpu", extra = "cpu" },
-    { index = "pytorch-cu126", extra = "cu126" },
-    { index = "pytorch-cu128", extra = "cu128" },
-]
+torch = { index = "pytorch-cpu", extra = "ml" }
+torchvision = { index = "pytorch-cpu", extra = "ml" }
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
-explicit = true
-
-[[tool.uv.index]]
-name = "pytorch-cu126"
-url = "https://download.pytorch.org/whl/cu126"
-explicit = true
-
-[[tool.uv.index]]
-name = "pytorch-cu128"
-url = "https://download.pytorch.org/whl/cu128"
 explicit = true
