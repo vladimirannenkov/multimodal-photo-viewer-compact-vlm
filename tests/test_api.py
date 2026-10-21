@@ -1,4 +1,5 @@
 import io
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -7,9 +8,10 @@ from PIL import Image
 from imagehub import db, scanner
 
 
-@pytest.fixture()
+@pytest.fixture
 def client(env, photos):
     from imagehub.api.app import create_app
+
     with TestClient(create_app()) as c:
         fid = scanner.add_folder(str(photos))
         scanner.scan_folder(fid)
@@ -72,17 +74,21 @@ def test_merge_grid_and_export(client):
 
 def test_edit_creates_copy_without_touching_original(client):
     i = client.get("/api/images?sort=name&desc=false").json()["items"][0]
-    orig = open(i["path"], "rb").read()
-    r = client.post(f"/api/images/{i['id']}/edit", json={"ops": [{"type": "crop", "box": [0, 0, 40, 30]}], "format": "png"}).json()
+    orig = Path(i["path"]).read_bytes()
+    r = client.post(
+        f"/api/images/{i['id']}/edit", json={"ops": [{"type": "crop", "box": [0, 0, 40, 30]}], "format": "png"}
+    ).json()
     new = client.get(f"/api/images/{r['id']}").json()
     assert (new["width"], new["height"]) == (40, 30) and new["path"] != i["path"]
-    assert open(i["path"], "rb").read() == orig
+    assert Path(i["path"]).read_bytes() == orig
 
 
 def test_upload_clipboard_flag(client):
     buf = io.BytesIO()
     Image.new("RGB", (64, 48), "green").save(buf, "PNG")
-    r = client.post("/api/import/upload", data={"clipboard": "true"}, files={"files": ("x.png", buf.getvalue(), "image/png")}).json()
+    r = client.post(
+        "/api/import/upload", data={"clipboard": "true"}, files={"files": ("x.png", buf.getvalue(), "image/png")}
+    ).json()
     assert len(r["ids"]) == 1
     assert client.get("/api/images?clipboard=true").json()["total"] == 1
     assert client.post("/api/clipboard/clear").status_code in (404, 405)  # массового удаления вставок нет
@@ -90,11 +96,15 @@ def test_upload_clipboard_flag(client):
 
 def test_fts_search_both_languages_and_prefix(client):
     ids = ids_of(client)
-    db.ex("UPDATE images SET summary='A red car on a wet street at night', summary_ru='Красная машина на мокрой улице ночью' WHERE id=?", (ids[0],))
+    db.ex(
+        "UPDATE images SET summary='A red car on a wet street at night', summary_ru='Красная машина на мокрой улице ночью' WHERE id=?",
+        (ids[0],),
+    )
     db.ex("UPDATE images SET ocr_md='Счёт за электричество, март' WHERE id=?", (ids[1],))
     for i in ids[:2]:
         db.fts_update(i)
     from imagehub import search
+
     assert list(search.bm25("car street", None)) == [ids[0]]
     assert list(search.bm25("машина улице", None)) == [ids[0]]  # поиск по русскому переводу описания
     assert list(search.bm25("электричество", None)) == [ids[1]]
@@ -108,6 +118,7 @@ def test_summary_and_duplicates(client):
 
 def test_first_experiment_is_created_automatically_once(env):
     from imagehub.pipeline import Pipeline
+
     p = Pipeline()
     row = {"taken_at": None, "mtime": 1_700_000_000.0}
     a = p.ensure_experiment(row)
