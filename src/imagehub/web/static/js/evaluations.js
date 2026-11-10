@@ -45,7 +45,14 @@
     if (typeof s.mean_max_cosine === 'number') quality.push(['Лучшее сходство подписи', s.mean_max_cosine])
     for (const [key,label] of [['date_correct','Дата: точность'],['total_correct','Сумма: точность'],['date_found','Дата: присутствие'],['total_found','Сумма: присутствие']]) { const x = s[key]; if (x && x.eligible) quality.push([label, x.matched / x.eligible]) }
     if (quality.length) graphs.append(chart('Качество на выборке', quality, x => `${number(x*100,1)}%`, 'teal', 'Шкала от 0 до 100%. Сходство — косинус текстовых эмбеддингов; точность полей — доля совпадений.', 1))
-    plots(run.profile, graphs); body.append(graphs); box.append(body); return box
+    plots(run.profile, graphs); body.append(graphs)
+    if (s.description || s.answer) { const result = node('div','panel'); result.append(node('h3','',s.answer ? 'Ответ' : 'Описание'), node('p','',s.answer || s.description)); body.append(result) }
+    if (Array.isArray(run.records) && run.records.length) {
+      const details = node('details','panel'); details.append(node('summary','',`Результаты по изображениям (${run.records.length})`))
+      for (const item of run.records) { const row = node('details','record'); let caption = item.filename || item.id || `Строка ${item.row_idx}`; if (item.error) caption += ' · ошибка'; else if (typeof item.cosine_mean === 'number') caption += ` · сходство ${number(item.cosine_mean,3)}`; else if (item.date_correct != null || item.total_correct != null) caption += ` · дата ${item.date_correct ? '✓' : '✗'}, сумма ${item.total_correct ? '✓' : '✗'}`; row.append(node('summary','',caption)); if (item.error) row.append(node('p','failure',item.error)); if (item.caption) row.append(node('p','',item.caption)); if (item.references) row.append(node('p','muted',`Эталоны: ${item.references.join(' · ')}`)); if (item.expected_date || item.expected_total) row.append(node('p','',`Дата: ${item.predicted_date || 'не найдена'} (эталон ${item.expected_date || 'нет'}); сумма: ${item.predicted_total || 'не найдена'} (эталон ${item.expected_total || 'нет'})`)); if (item.ocr) row.append(node('pre','ocr',item.ocr)); details.append(row) }
+      body.append(details)
+    }
+    box.append(body); return box
   }
   async function refresh() {
     $('#error').textContent = ''; $('#refresh').disabled = true
