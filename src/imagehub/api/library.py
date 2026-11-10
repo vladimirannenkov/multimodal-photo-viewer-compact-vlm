@@ -9,7 +9,7 @@ from pathlib import Path
 from fastapi import APIRouter, Body, File, Form, HTTPException, Query, UploadFile
 from fastapi.responses import FileResponse
 
-from .. import db, queries, scanner, search
+from .. import db, external_results, queries, scanner, search
 from ..config import get_settings
 from ..pipeline import get_pipeline
 from .deps import image_row, viewable_path
@@ -44,6 +44,7 @@ def images(
     offset: int = 0,
     limit: int = Query(300, le=2000),
 ):
+    external_results.sync_sources()
     f = _filters(
         folder=folder,
         collection=collection,
@@ -241,6 +242,7 @@ def browse(path: str = ""):
 # ---------- очередь ----------
 @router.get("/queue")
 def queue():
+    external_results.sync_sources()
     return get_pipeline().status()
 
 

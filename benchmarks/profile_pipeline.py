@@ -13,6 +13,7 @@ def main():
     ap.add_argument("folder")
     ap.add_argument("--data-dir", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--publish-to-library", metavar="DATA_DIR", help="Register completed results for the library")
     args = ap.parse_args()
     from imagehub.config import get_settings
 
@@ -23,6 +24,20 @@ def main():
     get_settings.cache_clear()
     from imagehub import db, profiling, scanner
     from imagehub.pipeline import WAVE, Pipeline
+
+    if args.publish_to_library:
+        library = Path(args.publish_to_library).resolve()
+        source = Path(args.data_dir).resolve() / "imagehub.sqlite"
+        if not source.is_relative_to(library) or source == library / "imagehub.sqlite":
+            ap.error("the isolated data directory must be inside the library data directory and use a separate database")
+        library.mkdir(parents=True, exist_ok=True)
+        registry = library / "evaluation-sources.json"
+        data = json.loads(registry.read_text(encoding="utf-8")) if registry.exists() else {"sources": []}
+        if str(source) not in data["sources"]:
+            data["sources"].append(str(source))
+        temporary = registry.with_suffix(".tmp")
+        temporary.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        temporary.replace(registry)
 
     start = time.perf_counter()
     folder_id = scanner.add_folder(str(Path(args.folder).resolve()), watched=False)
