@@ -29,6 +29,7 @@ def clear(image_id: int):
 @router.post("/images/{image_id}/chat")
 def ask(image_id: int, body: dict = Body(...)):
     baseline = profiling.snapshot()
+    data_dir = get_settings().data_dir
     msg = (body.get("message") or "").strip()
     if not msg:
         raise HTTPException(400, "пустой вопрос")
@@ -46,7 +47,7 @@ def ask(image_id: int, body: dict = Body(...)):
     db.ex("INSERT INTO chat(image_id, role, content, ts) VALUES(?,?,?,?)", (image_id, "user", msg, time.time()))
     db.ex("INSERT INTO chat(image_id, role, content, ts) VALUES(?,?,?,?)", (image_id, "assistant", answer, time.time()))
     try:
-        profiling.save_snapshot("chat", {"images": 1, "image_id": image_id}, per_event=True, baseline=baseline)
+        profiling.save_snapshot("chat", {"images": 1, "image_id": image_id}, per_event=True, baseline=baseline, data_dir=data_dir)
     except OSError:
         pass
     return {"answer": answer, "sec": round(time.time() - t0, 1)}
@@ -73,6 +74,7 @@ def ask_stream(image_id: int, body: dict = Body(...)):
     if r["ocr_md"] and len(r["ocr_md"]) > 20 and not hist:
         hint = chr(10) * 2 + "Распознанный текст на изображении (может содержать ошибки):" + chr(10) + r["ocr_md"][:1500]
     img = pil_open(r)
+    data_dir = get_settings().data_dir
     q: queue.Queue = queue.Queue()
 
     def worker():
@@ -93,7 +95,9 @@ def ask_stream(image_id: int, body: dict = Body(...)):
                 db.ex("INSERT INTO chat(image_id, role, content, ts) VALUES(?,?,?,?)", (image_id, "user", msg, time.time()))
                 db.ex("INSERT INTO chat(image_id, role, content, ts) VALUES(?,?,?,?)", (image_id, "assistant", ans, time.time()))
                 try:
-                    profiling.save_snapshot("chat", {"images": 1, "image_id": image_id}, per_event=True, baseline=baseline)
+                    profiling.save_snapshot(
+                        "chat", {"images": 1, "image_id": image_id}, per_event=True, baseline=baseline, data_dir=data_dir
+                    )
                 except OSError:
                     pass
             q.put(None)

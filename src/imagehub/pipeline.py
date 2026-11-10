@@ -230,6 +230,7 @@ class Pipeline:
                 {"images_in_wave": len(ids), "image_ids": ids, "status": "updated"},
                 per_event=True,
                 baseline=baseline,
+                data_dir=self.s.data_dir,
             )
         except OSError:
             log.exception("could not persist pipeline profile")

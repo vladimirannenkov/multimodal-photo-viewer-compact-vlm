@@ -129,11 +129,11 @@ def snapshot():
         return {k: dict(v) for k, v in _stats.items()}
 
 
-def save_snapshot(kind, summary, *, per_event=False, baseline=None):
+def save_snapshot(kind, summary, *, per_event=False, baseline=None, data_dir=None):
     """Persist metrics: a running process gets one file, individual requests get their own."""
     from .config import get_settings
 
-    folder = get_settings().data_dir / "evaluations"
+    folder = (data_dir or get_settings().data_dir) / "evaluations"
     folder.mkdir(parents=True, exist_ok=True)
     suffix = uuid.uuid4().hex if per_event else _session
     path = folder / f"{kind}_{suffix}.json"

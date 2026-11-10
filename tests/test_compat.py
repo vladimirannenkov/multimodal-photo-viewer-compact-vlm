@@ -145,6 +145,9 @@ def test_saved_profile_contains_call_delta(env):
     assert data["profile"]["delta-test"]["calls"] == 1
     assert data["profile"]["delta-test"]["cpu_seconds"] >= 0
     assert not data["summary"]["cumulative_profile"]
+    other = env / "isolated"
+    saved = profiling.save_snapshot("isolated", {}, data_dir=other)
+    assert saved.parent == other / "evaluations"
 
 
 def test_cpu_setting_forces_local_device_and_cpu_server(env, monkeypatch):
