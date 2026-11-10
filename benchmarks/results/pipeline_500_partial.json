@@ -1,0 +1,228 @@
+{
+  "summary": {
+    "kind": "pipeline-profile",
+    "status": "running",
+    "device": "cuda",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "llm_model": "qwen3-vl:2b-instruct",
+    "ocr_model": "glm-ocr",
+    "images": 500,
+    "processed": 272,
+    "images_with_errors": 0,
+    "scan_seconds": 7.206081399999675,
+    "elapsed_seconds": 22511.61751950001
+  },
+  "profile": {
+    "image.decode": {
+      "calls": 272,
+      "errors": 0,
+      "seconds": 1.7092223000072408,
+      "max_observed_rss_bytes": 554852352,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 2461696,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "image.preprocess": {
+      "calls": 272,
+      "errors": 0,
+      "seconds": 0.3273031999997329,
+      "max_observed_rss_bytes": 555610112,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 2379776,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "SigLIP.images": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 3.930464400051278,
+      "max_observed_rss_bytes": 1760989184,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 889192448,
+      "max_rss_increase_bytes": 555376640,
+      "max_cuda_allocated_increase_bytes": 9568256
+    },
+    "SigLIP.text": {
+      "calls": 2,
+      "errors": 0,
+      "seconds": 0.039875800008303486,
+      "max_observed_rss_bytes": 1774661632,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 889192448,
+      "max_rss_increase_bytes": 13258752,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "stage.embed": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 22.307468300059554,
+      "max_observed_rss_bytes": 1774764032,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 889192448,
+      "max_rss_increase_bytes": 1219153920,
+      "max_cuda_allocated_increase_bytes": 760039936
+    },
+    "PP-OCR.detect": {
+      "calls": 272,
+      "errors": 0,
+      "seconds": 1198.4028419998795,
+      "max_observed_rss_bytes": 2005393408,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 889192448,
+      "max_rss_increase_bytes": 190685184,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "stage.textdet": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 613.9252775999776,
+      "max_observed_rss_bytes": 1923616768,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 889192448,
+      "max_rss_increase_bytes": 148852736,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "Florence-2.describe": {
+      "calls": 34,
+      "errors": 0,
+      "seconds": 8448.250274200065,
+      "max_observed_rss_bytes": 4264353792,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 5913968640,
+      "max_rss_increase_bytes": 4233433088,
+      "max_cuda_allocated_increase_bytes": 1553813504
+    },
+    "stage.scene": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 18013.42246979999,
+      "max_observed_rss_bytes": 4265570304,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 5913968640,
+      "max_rss_increase_bytes": 3571318784,
+      "max_cuda_allocated_increase_bytes": 1553813504
+    },
+    "DocLayout.detect": {
+      "calls": 14,
+      "errors": 0,
+      "seconds": 62.66442980001739,
+      "max_observed_rss_bytes": 155791360,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 149757952,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "VLM.generate:api:glm-ocr": {
+      "calls": 9,
+      "errors": 0,
+      "seconds": 116.17892639999627,
+      "max_observed_rss_bytes": 180744192,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 28569600,
+      "max_cuda_allocated_increase_bytes": 0,
+      "ollama_max_observed_size_bytes": 1983266159,
+      "ollama_max_observed_size_vram_bytes": 1983266159
+    },
+    "stage.ocr": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 207.22699850001663,
+      "max_observed_rss_bytes": 4265598976,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 5913968640,
+      "max_rss_increase_bytes": 126976,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "InsightFace.detect": {
+      "calls": 265,
+      "errors": 0,
+      "seconds": 2879.437602699996,
+      "max_observed_rss_bytes": 3956436992,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 5913968640,
+      "max_rss_increase_bytes": 549335040,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "stage.faces": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 2893.6370831000095,
+      "max_observed_rss_bytes": 3612336128,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 5913968640,
+      "max_rss_increase_bytes": 635006976,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "stage.fix": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 0.016290599989588372,
+      "max_observed_rss_bytes": 3395862528,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 5913968640,
+      "max_rss_increase_bytes": 69632,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "VLM.generate:api:qwen3-vl:2b-instruct": {
+      "calls": 35,
+      "errors": 0,
+      "seconds": 598.5139199000114,
+      "max_observed_rss_bytes": 61325312,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 46923776,
+      "max_cuda_allocated_increase_bytes": 0,
+      "ollama_max_observed_size_bytes": 2001668668,
+      "ollama_max_observed_size_vram_bytes": 2001668668
+    },
+    "stage.translate": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 675.089693100017,
+      "max_observed_rss_bytes": 3395862528,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 5913968640,
+      "max_rss_increase_bytes": 0,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "stage.chart": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 2.3101235999929486,
+      "max_observed_rss_bytes": 62939136,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 6705152,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "textembed.passages": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 48.25100050000765,
+      "max_observed_rss_bytes": 1326895104,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 1265672192,
+      "max_cuda_allocated_increase_bytes": 0
+    },
+    "stage.textemb": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 48.63551699997333,
+      "max_observed_rss_bytes": 1327177728,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 1267130368,
+      "max_cuda_allocated_increase_bytes": 0
+    }
+  },
+  "memory": {
+    "rss_bytes": 19611648,
+    "cuda_allocated_bytes": 760039936,
+    "cuda_reserved_bytes": 773849088
+  },
+  "ollama_loaded_models": [],
+  "errors": []
+}
