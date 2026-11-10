@@ -71,7 +71,7 @@ imagehub = ["web/static/**/*"]
 # ---------- pytest ----------
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 addopts = "-ra --strict-markers --cov=imagehub --cov-report=term-missing:skip-covered --cov-fail-under=70 -m 'not slow'"
 markers = [
     "slow: интеграционные тесты с настоящей компактной моделью на сервере Ollama (запуск: pytest -m slow --no-cov)",

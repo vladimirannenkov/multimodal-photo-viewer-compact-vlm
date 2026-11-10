@@ -58,7 +58,7 @@ def ensure() -> str:
                 env=env,
                 stdout=log,
                 stderr=log,
-                creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0) if sys.platform == "win32" else 0,
             )
         for _ in range(100):
             if _process.poll() is not None:
