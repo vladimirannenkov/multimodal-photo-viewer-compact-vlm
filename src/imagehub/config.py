@@ -1,5 +1,6 @@
 """Настройки сервиса. Переопределяются переменными окружения IMAGEHUB_*."""
 
+import os
 from functools import lru_cache
 from pathlib import Path
 
@@ -57,7 +58,7 @@ class Settings(BaseSettings):
         return self.data_dir / "derived"  # копии после обрезки, склейки, аннотаций
 
     def cpu_only(self) -> bool:
-        return (self.data_dir / "cpu-only.flag").exists()
+        return os.environ.get("IMAGEHUB_FORCE_CPU_ONLY") == "1" or (self.data_dir / "cpu-only.flag").exists()
 
     def resolve_device(self) -> str:
         if self.cpu_only():

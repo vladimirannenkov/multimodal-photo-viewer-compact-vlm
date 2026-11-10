@@ -166,3 +166,5 @@ def test_cpu_setting_forces_local_device_and_cpu_server(env, monkeypatch):
     assert get_settings().cpu_only()
     assert llm.effective_base_url() == "http://127.0.0.1:11435/v1"
     assert compat.set_compute_settings(compat.ComputeRequest(cpu_only=False))["cpu_only"] is False
+    monkeypatch.setenv("IMAGEHUB_FORCE_CPU_ONLY", "1")
+    assert get_settings().cpu_only() and get_settings().resolve_device() == "cpu"

@@ -116,8 +116,11 @@ def main():
         ap.error("count must be 1..100 and offset nonnegative")
     os.environ.setdefault("IMAGEHUB_OCR_MODEL", "")
     from imagehub import profiling
+    from imagehub.config import get_settings
     from imagehub.ml import docparse, florence, siglip
 
+    if get_settings().cpu_only():
+        args.device = "cpu"
     started = time.perf_counter()
     records = []
     out = Path(args.out)

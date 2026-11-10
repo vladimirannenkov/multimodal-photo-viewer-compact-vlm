@@ -14,8 +14,13 @@ def main():
     ap.add_argument("--data-dir", required=True)
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
+    from imagehub.config import get_settings
+
+    if get_settings().cpu_only():
+        os.environ["IMAGEHUB_FORCE_CPU_ONLY"] = "1"
     os.environ["IMAGEHUB_DATA_DIR"] = str(Path(args.data_dir).resolve())
     os.environ["IMAGEHUB_AUTOSTART_PIPELINE"] = "false"
+    get_settings.cache_clear()
     from imagehub import db, profiling, scanner
     from imagehub.pipeline import WAVE, Pipeline
 
