@@ -10,7 +10,7 @@ from transformers import AutoProcessor, Florence2ForConditionalGeneration
 from ..profiling import tracked
 from .weights import WEIGHTS
 
-TASKS = ["<MORE_DETAILED_CAPTION>", "<OD>", "<DENSE_REGION_CAPTION>"]
+TASKS = ["<DETAILED_CAPTION>", "<OD>", "<DENSE_REGION_CAPTION>"]
 BATCH = 8
 _M = {}
 
@@ -62,7 +62,9 @@ def describe(imgs, device, tasks=TASKS):
         od, dr = it.get("<OD>", {}), it.get("<DENSE_REGION_CAPTION>", {})
         out.append(
             {
-                "caption": it.get("<MORE_DETAILED_CAPTION>", "").strip(),
+                "caption": (
+                    it.get("<DETAILED_CAPTION>") or it.get("<MORE_DETAILED_CAPTION>") or it.get("<CAPTION>") or ""
+                ).strip(),
                 "objects": [
                     {"label": l, "box": [round(v, 1) for v in b]} for l, b in zip(od.get("labels", []), od.get("bboxes", []))
                 ],

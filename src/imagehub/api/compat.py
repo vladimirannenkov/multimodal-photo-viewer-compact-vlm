@@ -5,6 +5,7 @@ import threading
 import time
 import uuid
 from pathlib import Path
+from typing import Literal
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from PIL import Image, ImageOps, UnidentifiedImageError
@@ -38,7 +39,7 @@ def describe_image(im):
 
     with manager.gpu(user=True):
         manager.ensure("scene")
-        return florence.describe([im], get_settings().resolve_device(), tasks=["<MORE_DETAILED_CAPTION>"])[0]["caption"]
+        return florence.describe([im], get_settings().resolve_device(), tasks=["<DETAILED_CAPTION>"])[0]["caption"]
 
 
 def ask_image(im, question, model):
@@ -194,6 +195,27 @@ def evaluations():
 
 class ComputeRequest(BaseModel):
     cpu_only: bool
+
+
+class TranslationRequest(BaseModel):
+    provider: Literal["qwen", "yandex"]
+
+
+@router.get("/api/translation-settings")
+def get_translation_settings():
+    from .. import translation
+
+    return translation.settings()
+
+
+@router.put("/api/translation-settings")
+def set_translation_settings(body: TranslationRequest):
+    from .. import translation
+
+    if get_pipeline().state.get("stage") not in ("idle", "paused"):
+        raise HTTPException(409, "Дождитесь завершения текущей волны обработки и повторите")
+    translation.save_settings(body.provider)
+    return translation.settings()
 
 
 @router.get("/api/settings")

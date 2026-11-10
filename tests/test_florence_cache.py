@@ -40,7 +40,7 @@ def test_image_features_are_reused_per_batch_when_supported(monkeypatch, support
             return ids
 
         def post_process_generation(self, text, task, image_size):
-            return {task: text if task == "<MORE_DETAILED_CAPTION>" else {"labels": [], "bboxes": []}}
+            return {task: text if task == "<DETAILED_CAPTION>" else {"labels": [], "bboxes": []}}
 
     class Model:
         def __init__(self):
@@ -65,7 +65,7 @@ def test_image_features_are_reused_per_batch_when_supported(monkeypatch, support
     images = [Image.new("RGB", (2, 2)) for _ in range(3)]
     result = module.describe(images, "cpu")
     assert len(result) == 3
-    assert all(item["caption"] == "<MORE_DETAILED_CAPTION>" for item in result)
+    assert all(item["caption"] == "<DETAILED_CAPTION>" for item in result)
     assert model.encoded == (2 if supports_cache else 0)
     if supports_cache:
         assert len(set(model.cache_ids[:3])) == len(set(model.cache_ids[3:])) == 1

@@ -14,6 +14,7 @@ def main():
     ap.add_argument("--data-dir", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--publish-to-library", metavar="DATA_DIR", help="Register completed results for the library")
+    ap.add_argument("--resume", action="store_true", help="Keep completed images and process only unfinished or failed images")
     args = ap.parse_args()
     from imagehub.config import get_settings
 
@@ -44,7 +45,15 @@ def main():
     scan_start = time.perf_counter()
     scanner.scan_folder(folder_id, deep=True)
     scan_seconds = time.perf_counter() - scan_start
-    ids = [r["id"] for r in db.q("SELECT id FROM images WHERE folder_id=? ORDER BY id", (folder_id,))]
+    rows = db.q("SELECT id, status, error FROM images WHERE folder_id=? ORDER BY id", (folder_id,))
+    ids = [r["id"] for r in rows if not args.resume or r["status"] != "done" or r["error"] is not None]
+    previously_processed = len(rows) - len(ids)
+    if not ids:
+        print(json.dumps({"status": "no-pending-images", "images": len(rows), "processed": previously_processed}))  # noqa: T201
+        scanner.shutdown_pool()
+        if not rows:
+            raise SystemExit(1)
+        return
     pipe = Pipeline()
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -73,8 +82,10 @@ def main():
                 "platform": platform.platform(),
                 "llm_model": pipe.s.llm_model,
                 "ocr_model": pipe.s.ocr_model or "local GLM-OCR",
-                "images": len(ids),
-                "processed": counts["total"],
+                "images": len(rows),
+                "processed": previously_processed + min(start_idx + WAVE, len(ids)),
+                "previously_processed": previously_processed,
+                "processed_this_run": min(start_idx + WAVE, len(ids)),
                 "images_with_errors": counts["errors"],
                 "scan_seconds": scan_seconds,
                 "elapsed_seconds": time.perf_counter() - start,

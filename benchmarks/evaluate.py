@@ -139,7 +139,7 @@ def main():
             im = image(r)
             start = time.perf_counter()
             if args.kind == "caption":
-                caption = florence.describe([im], args.device, tasks=["<MORE_DETAILED_CAPTION>"])[0]["caption"]
+                caption = florence.describe([im], args.device, tasks=["<DETAILED_CAPTION>"])[0]["caption"]
                 encoder = siglip.get(args.device)
                 vec = encoder.text([caption] + r["caption"])
                 similarities = vec[1:] @ vec[0]

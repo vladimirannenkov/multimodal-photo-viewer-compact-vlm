@@ -114,6 +114,10 @@ TR_SHOTS = [
 
 def translate_ru(texts, device="cuda", batch=16, max_new=260):
     """Перевод описаний и тегов на русский (Qwen3-VL-2B). Для поиска на любом из двух языков."""
+    from .. import translation
+
+    if translation.settings()["provider"] == "yandex":
+        return translation.yandex(texts)
     out = [""] * len(texts)
     order = sorted(range(len(texts)), key=lambda i: len(texts[i]))
     for s in range(0, len(order), batch):

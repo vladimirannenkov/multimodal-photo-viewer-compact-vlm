@@ -9,6 +9,7 @@ import threading
 import time
 import traceback
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import nullcontext
 from typing import Any
 
 from . import db, people, profiling
@@ -141,6 +142,7 @@ class Pipeline:
         )
         if not rows:
             return False
+        from . import translation
         from .ml import manager, textfix
 
         self.state.update(stage="translate", total=len(rows), done=0)
@@ -152,8 +154,10 @@ class Pipeline:
             if tg:
                 texts.append(", ".join(tg))
                 slots.append((r["id"], "t"))
-        with manager.gpu():
-            manager.ensure("vqa")
+        local_llm = translation.settings()["provider"] == "qwen"
+        with manager.gpu() if local_llm else nullcontext():
+            if local_llm:
+                manager.ensure("vqa")
             tr = textfix.translate_ru(texts, device=self.device)
         res = {}
         for (i, k), t in zip(slots, tr):
@@ -362,6 +366,7 @@ class Pipeline:
 
     def st_translate(self, items):
         """Русский перевод описания и тегов: поиск работает на русском и английском."""
+        from . import translation
         from .ml import manager, textfix
 
         todo = [it for it in items if it["res"].get("scene")]
@@ -378,9 +383,11 @@ class Pipeline:
                 texts.append(", ".join(it["res"]["tags"]))
                 slots.append((it, "t"))
         res = {}
+        local_llm = translation.settings()["provider"] == "qwen"
         for k in range(0, len(texts), 16):
-            with manager.gpu():
-                manager.ensure("vqa")
+            with manager.gpu() if local_llm else nullcontext():
+                if local_llm:
+                    manager.ensure("vqa")
                 tr = textfix.translate_ru(texts[k : k + 16], device=self.device)
             for (it, kind), r in zip(slots[k : k + 16], tr):
                 res.setdefault(it["id"], {})[kind] = r
