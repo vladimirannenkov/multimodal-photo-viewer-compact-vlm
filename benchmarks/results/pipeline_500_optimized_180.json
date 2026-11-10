@@ -1,0 +1,247 @@
+{
+  "summary": {
+    "kind": "pipeline-profile",
+    "status": "completed",
+    "device": "cuda",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "llm_model": "qwen3-vl:2b-instruct",
+    "ocr_model": "glm-ocr",
+    "images": 500,
+    "processed": 500,
+    "previously_processed": 320,
+    "processed_this_run": 180,
+    "images_with_errors": 0,
+    "scan_seconds": 0.011610999994445592,
+    "elapsed_seconds": 1331.9483588999865
+  },
+  "profile": {
+    "image.decode": {
+      "calls": 180,
+      "errors": 0,
+      "seconds": 0.4600698999420274,
+      "max_observed_rss_bytes": 555016192,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 2323644416,
+      "max_rss_increase_bytes": 2400256,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 0.375
+    },
+    "image.preprocess": {
+      "calls": 180,
+      "errors": 0,
+      "seconds": 0.07112660010170657,
+      "max_observed_rss_bytes": 555016192,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 2323644416,
+      "max_rss_increase_bytes": 2068480,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 0.15625
+    },
+    "SigLIP.images": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 1.393165500005125,
+      "max_observed_rss_bytes": 1763508224,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 2436890624,
+      "max_rss_increase_bytes": 534016000,
+      "max_cuda_allocated_increase_bytes": 9568256,
+      "cpu_seconds": 15.75
+    },
+    "SigLIP.text": {
+      "calls": 2,
+      "errors": 0,
+      "seconds": 0.024651400002767332,
+      "max_observed_rss_bytes": 1776660480,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 889192448,
+      "max_rss_increase_bytes": 12750848,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 0.0625
+    },
+    "stage.embed": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 8.404047799966065,
+      "max_observed_rss_bytes": 1776836608,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 2436890624,
+      "max_rss_increase_bytes": 1221820416,
+      "max_cuda_allocated_increase_bytes": 760039936,
+      "cpu_seconds": 45.859375
+    },
+    "PP-OCR.detect": {
+      "calls": 180,
+      "errors": 0,
+      "seconds": 203.78733839976485,
+      "max_observed_rss_bytes": 2061893632,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 2436890624,
+      "max_rss_increase_bytes": 198262784,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 2675.3593749999964
+    },
+    "stage.textdet": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 104.48970790003659,
+      "max_observed_rss_bytes": 1891561472,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 2436890624,
+      "max_rss_increase_bytes": 114724864,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 1370.8437499999982
+    },
+    "Florence-2.describe": {
+      "calls": 23,
+      "errors": 0,
+      "seconds": 485.714907600006,
+      "max_observed_rss_bytes": 3908014080,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6006243328,
+      "max_rss_increase_bytes": 3890982912,
+      "max_cuda_allocated_increase_bytes": 1553813504,
+      "cpu_seconds": 852.203125
+    },
+    "stage.scene": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 492.7666662999691,
+      "max_observed_rss_bytes": 3910635520,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6006243328,
+      "max_rss_increase_bytes": 2165563392,
+      "max_cuda_allocated_increase_bytes": 1553813504,
+      "cpu_seconds": 913.765625
+    },
+    "DocLayout.detect": {
+      "calls": 17,
+      "errors": 0,
+      "seconds": 27.564204499984044,
+      "max_observed_rss_bytes": 160358400,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 150417408,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 160.6875
+    },
+    "VLM.generate:api:glm-ocr": {
+      "calls": 9,
+      "errors": 0,
+      "seconds": 20.271835900028236,
+      "max_observed_rss_bytes": 187711488,
+      "max_observed_cuda_allocated_bytes": 760039936,
+      "max_observed_cuda_reserved_bytes": 773849088,
+      "max_rss_increase_bytes": 27443200,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 22.109375,
+      "ollama_max_observed_size_bytes": 1983266159,
+      "ollama_max_observed_size_vram_bytes": 1983266159
+    },
+    "stage.ocr": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 56.34742449995247,
+      "max_observed_rss_bytes": 3910656000,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6006243328,
+      "max_rss_increase_bytes": 32768,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 190.390625
+    },
+    "InsightFace.detect": {
+      "calls": 174,
+      "errors": 0,
+      "seconds": 559.4213225000422,
+      "max_observed_rss_bytes": 2755092480,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6004146176,
+      "max_rss_increase_bytes": 520507392,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 12623.906250000002
+    },
+    "stage.faces": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 567.3614136000397,
+      "max_observed_rss_bytes": 2755108864,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6004146176,
+      "max_rss_increase_bytes": 634122240,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 12794.312500000002
+    },
+    "stage.fix": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 0.0007979999791132286,
+      "max_observed_rss_bytes": 2755125248,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6004146176,
+      "max_rss_increase_bytes": 45056,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 0.0
+    },
+    "translator.Yandex": {
+      "calls": 23,
+      "errors": 0,
+      "seconds": 82.83283570005733,
+      "max_observed_rss_bytes": 2763567104,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6004146176,
+      "max_rss_increase_bytes": 8028160,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 178.421875
+    },
+    "stage.translate": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 83.01627629999712,
+      "max_observed_rss_bytes": 2763591680,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6004146176,
+      "max_rss_increase_bytes": 8458240,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 179.078125
+    },
+    "stage.chart": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 0.0010778000141726807,
+      "max_observed_rss_bytes": 2763599872,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6004146176,
+      "max_rss_increase_bytes": 12288,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 0.0
+    },
+    "textembed.passages": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 8.224381300009554,
+      "max_observed_rss_bytes": 2857521152,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6004146176,
+      "max_rss_increase_bytes": 1228685312,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 64.8125
+    },
+    "stage.textemb": {
+      "calls": 12,
+      "errors": 0,
+      "seconds": 8.258369200004381,
+      "max_observed_rss_bytes": 2857582592,
+      "max_observed_cuda_allocated_bytes": 2313853440,
+      "max_observed_cuda_reserved_bytes": 6004146176,
+      "max_rss_increase_bytes": 1228734464,
+      "max_cuda_allocated_increase_bytes": 0,
+      "cpu_seconds": 64.9375
+    }
+  },
+  "memory": {
+    "rss_bytes": 21876736,
+    "cuda_allocated_bytes": 2313853440,
+    "cuda_reserved_bytes": 2323644416
+  },
+  "errors": []
+}
