@@ -8,6 +8,7 @@ import gc
 import sys
 
 from .. import llm
+from ..profiling import tracked
 
 _CACHE = {}  # путь -> (модель, процессор); держим до двух моделей
 
@@ -48,6 +49,7 @@ def _shrink(im, max_side):
     return im
 
 
+@tracked("VLM.generate")
 def generate(
     path,
     images,

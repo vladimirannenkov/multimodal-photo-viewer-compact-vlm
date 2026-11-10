@@ -76,6 +76,14 @@ def _query_vec(sg, text):
     return v / (np.linalg.norm(v) + 1e-9)
 
 
+def image_text_search(text: str, limit: int = 20):
+    """Nearest image embeddings in the shared SigLIP text-image space."""
+    from .ml import siglip
+
+    scores = _score("img", _query_vec(siglip.get("cpu"), text), None)
+    return sorted(scores.items(), key=lambda pair: -pair[1])[:limit]
+
+
 def search(text: str = "", image_vec=None, text_weight: float = 0.5, filters: dict | None = None, limit: int = 200, device="cpu"):
     """-> [(image_id, score)] по убыванию. text и/или image_vec (эмбеддинг SigLIP2 картинки-запроса)."""
     from .ml import siglip, textembed

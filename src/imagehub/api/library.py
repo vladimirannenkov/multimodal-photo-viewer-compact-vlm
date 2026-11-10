@@ -249,8 +249,10 @@ def queue_action(action: str):
     p = get_pipeline()
     if action == "pause":
         p.paused = True
+        get_settings().data_dir.joinpath("pipeline-paused.flag").write_text("paused\n", encoding="utf-8")
     elif action == "resume":
         p.paused = False
+        get_settings().data_dir.joinpath("pipeline-paused.flag").unlink(missing_ok=True)
         p.kick()
     else:
         raise HTTPException(400)

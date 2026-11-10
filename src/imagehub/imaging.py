@@ -32,11 +32,22 @@ def file_hash(path, chunk=1 << 20) -> str:
 
 def open_rgb(path, frame=0, max_side=None) -> Image.Image:
     """Открывает кадр изображения как RGB с учётом EXIF-ориентации. Прозрачность кладётся на белый фон."""
-    src = Image.open(path)
+    from .profiling import measure
+
+    with measure("image.decode"):
+        src = Image.open(path)
+        src.load()
     try:
         src.seek(frame)
     except EOFError:
         src.seek(0)
+    with measure("image.preprocess"):
+        im = _preprocess(src, max_side)
+    src.close()
+    return im
+
+
+def _preprocess(src, max_side):
     im: Image.Image = ImageOps.exif_transpose(src)
     if im.mode in ("RGBA", "LA", "P"):
         im = im.convert("RGBA")

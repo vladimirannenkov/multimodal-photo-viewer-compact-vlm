@@ -22,9 +22,12 @@ dependencies = [
     "watchdog",
     "markdown-it-py",
     "pyyaml",
+    "psutil>=5.9",
+    "pyarrow>=17",
 ]
 
 [project.optional-dependencies]
+ui = ["gradio>=5,<7"]
 # Локальные нейросети, которых нет в Ollama: SigLIP2, Florence-2, макет страницы, детектор текста, лица, эмбеддинги.
 # Torch ставится для CPU (см. [tool.uv.sources]), видеокарта не нужна.
 ml = [
@@ -57,6 +60,7 @@ dev = [
 
 [project.scripts]
 imagehub = "imagehub.cli:main"
+vqa = "imagehub.vqa_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

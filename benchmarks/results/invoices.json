@@ -1,0 +1,46 @@
+{
+  "summary": {
+    "dataset": [
+      "mychen76/invoices-and-receipts_ocr_v1",
+      "default",
+      "test"
+    ],
+    "offset": 0,
+    "requested": 2,
+    "completed": 2,
+    "errors": 0,
+    "elapsed_seconds": 162.94,
+    "date_found": {
+      "matched": 2,
+      "eligible": 2,
+      "recall": 1.0
+    },
+    "total_found": {
+      "matched": 2,
+      "eligible": 2,
+      "recall": 1.0
+    }
+  },
+  "records": [
+    {
+      "row_idx": 0,
+      "id": "425",
+      "ocr": "## Invoice no: 97159829\n\nDate of issue:\n\n## Seller:\n\nBradley-Andrade 9879 Elizabeth Common Lake Jonathan, RI 12335\n\nTax Id: 985-73-8194 IBAN: GB81LZWO32519172531418\n\n## ITEMS\n\n09/18/2015\n\n## Client:\n\nCastro PLC Unit 9678 Box 9664 DPO AP 69387\n\nTax Id: 994-72-1270\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | 12\" Marble Lapis Inlay Chess Table Top With 2\" Pieces & 15\" Wooden Stand W537 | 2,00 | each | 444,60 | 889,20 | 10% | 978,12 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 889,20 | 88,92 | 978,12 |\n| Total |  | $889,20 | $88,92 | $978,12 |",
+      "expected_date": "09/18/2015",
+      "expected_total": "$ 978,12",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 50.02
+    },
+    {
+      "row_idx": 1,
+      "id": "426",
+      "ocr": "## Invoice no: 13194726\n\nDate of issue:\n\n## Seller:\n\nHopkins and Sons 62283 Flores Tunnel North Luis, IA 69983\n\nTax Id: 952-73-7223 IBAN: GB31LZXS20242755934691\n\n## ITEMS\n\n05/29/2021\n\n## Client:\n\nSims PLC USS Kramer FPO AA 81651\n\nTax Id: 995-88-9495\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | Beach Lunch Lounge Striped Shirt Dress Large Navy Blue White Long Sleeve Causal | 1,00 | each | 16,99 | 16,99 | 10% | 18,69 |\n| 2. | Jams World Hawaiian Dress Rayon sz.L | 5,00 | each | 65,00 | 325,00 | 10% | 357,50 |\n| 3. | LuLaRoe Nicole Dress Size Large 26 | 2,00 | each | 1,99 | 3,98 | 10% | 4,38 |\n| 4. | Johnny Was Medium Linen Wrap Dress Dessert Rose Embroiderd Bohemian | 2,00 | each | 89,99 | 179,98 | 10% | 197,98 |\n| 5. | Eileen Fisher Women's Long Sleeve Fleece Lined Front Pockets Dress XS Gray | 2,00 | each | 15,99 | 31,98 | 10% | 35,18 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 581,93 | 58,19 | 640,12 |\n| Total |  | $581,93 | $58,19 | $640,12 |",
+      "expected_date": "05/29/2021",
+      "expected_total": "$ 640,12",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 17.64
+    }
+  ]
+}

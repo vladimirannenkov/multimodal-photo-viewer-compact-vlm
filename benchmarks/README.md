@@ -1,0 +1,31 @@
+# Проверка по датасетам
+
+Сценарий вызывает реальные адаптеры ImageHub, а не моки. Требуются зависимости `imagehub[ml]`, CUDA (или `--device cpu`), веса ImageHub, интернет и доступ к Hugging Face Dataset Viewer. Датасеты не сохраняются в репозитории. Например, в подготовленном окружении `model_lab`:
+
+```powershell
+$env:PYTHONPATH='src'
+$env:IMAGEHUB_OCR_MODEL=''
+model_lab\.venv\Scripts\python.exe benchmarks\evaluate.py caption --count 5 --offset 0 --out benchmarks\results\flickr30k.json
+model_lab\.venv\Scripts\python.exe benchmarks\evaluate.py ocr --count 5 --offset 0 --out benchmarks\results\invoices.json
+```
+
+Flickr30k: конфигурация Viewer `TEST`, split `test` содержит все исходные train/val/test, поэтому истинный исходный split каждой картинки сохраняется отдельно; нельзя считать произвольный диапазон стандартной тестовой выборкой. Florence генерирует подробную подпись, SigLIP2 кодирует её и пять эталонов; приводится средний косинус и средний максимум по пяти. Это согласованность текстов, а не точность фактов; поскольку SigLIP2 используется и самим приложением, возможна систематическая благоприятная для него оценка. Описание генерируется одной задачей Florence без детекции объектов, т.е. оценивается этап описания, а не весь конвейер.
+
+Invoices: split `test`, эталонные дата и общая сумма берутся из `parsed_data`, для разбора строковой структуры применяется `ast.literal_eval`. Распознаётся страница через `docparse.parse_pages` с локальным GLM-OCR и макетом страницы, без коррекции текста и этапа классификации изображения. Regex извлекает встречающиеся в OCR даты и суммы; проверяется наличие эталонного значения в тексте, а не корректное связывание с полем. Поэтому совпадение суммы в позиции товара также засчитывается; неоднозначные даты интерпретируются как MM/DD и DD/MM. Для каждой метрики приведены числитель и знаменатель доступных эталонов. Это recall присутствия, не полноценная точность извлечения полей. В записях сохраняются текст, эталон, ошибки и время, первая запись включает холодную загрузку моделей. Небольшая последовательная выборка — только smoke test, статистические выводы невозможны.
+
+Число записей 1–100 за запуск, смещение задаётся явно. Ошибки отдельных примеров сохраняются, процесс завершается с кодом 1. Полученные результаты нельзя выдавать за тест полного пайплайна или стандартного тестового набора Flickr30k. Для профилирования 500 изображений нужен отдельный прогон полного пайплайна с реальным сервером моделей и раздельными замерами декодирования и предобработки: эти стадии текущие `timings` по отдельности не измеряют.
+
+## Загрузка исходных файлов без Dataset Viewer
+
+Для воспроизведения текущих запусков используются зафиксированные версии: [оригинальные аннотации nlphuji/flickr30k](https://huggingface.co/datasets/nlphuji/flickr30k/resolve/2b239befc81b6e3f035ce6bd52f5f4d60f5625f7/flickr_annotations_30k.csv), [первый Parquet-фрагмент зеркала lmms-lab-encoder/flickr30k](https://huggingface.co/datasets/lmms-lab-encoder/flickr30k/resolve/0d6d9049be2e08261be315e731e0d8054c1d1c03/data/test-00000-of-00009.parquet) и [тестовый Parquet invoices](https://huggingface.co/datasets/mychen76/invoices-and-receipts_ocr_v1/resolve/83835c87346de32ac9223bdce5264e69ef3366ad/data/test-00000-of-00001-af2d92d1cee28514.parquet). `benchmarks/prepare_flickr_test.py` соединяет фрагмент с оригинальными аннотациями по имени файла, выбирает `split=test` и использует оригинальные пять подписей. Изображения не включены в репозиторий. Во фрагменте 120 таких примеров; это не весь стандартный test split.
+
+```powershell
+model_lab\.venv\Scripts\python.exe benchmarks\prepare_flickr_test.py data\downloads\flickr30k.parquet data\downloads\flickr_annotations_30k.csv data\downloads\flickr_test_subset.parquet
+$env:PYTHONPATH='src'; $env:HF_HUB_OFFLINE='1'; $env:PYTHONUTF8='1'
+model_lab\.venv\Scripts\python.exe benchmarks\evaluate.py caption --count 100 --parquet data\downloads\flickr_test_subset.parquet --dataset-id "nlphuji/flickr30k test, mirror shard 0" --out data\evaluations\flickr_test.json
+model_lab\.venv\Scripts\python.exe benchmarks\evaluate.py ocr --count 10 --parquet data\downloads\invoices-test.parquet --dataset-id "mychen76/invoices-and-receipts_ocr_v1 test" --out data\evaluations\invoices.json
+```
+
+OCR дополнительно выдаёт `date_correct` и `total_correct`: регулярные выражения ищут дату возле метки даты и последнее десятичное число в строке с `total`, затем сравнивают с эталоном. На неоднозначных датах допускаются оба порядка дня и месяца. Для полей с отсутствующим эталоном знаменатель исключает пример. Порогов качества в постановке нет.
+
+GitHub Actions запускает быстрые тесты кода с моками и проверки метрик. Запуск этих исследований на каждом push на стандартном CPU runner нецелесообразен из-за загрузки гигабайт весов, отсутствия GPU, времени OCR и зависимости от внешнего сервера моделей; результаты реальных прогонов документируются отдельно. При наличии выделенного self-hosted GPU runner их можно запускать вручную, предварительно управляя весами, сервером и доступом к датасетам.

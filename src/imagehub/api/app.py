@@ -13,7 +13,7 @@ from .. import db, scanner, search, watcher
 from ..config import get_settings
 from ..logs import configure as configure_logs
 from ..pipeline import get_pipeline
-from . import chat, faces, library, meta, tools
+from . import chat, compat, faces, library, meta, tools
 
 STATIC = Path(__file__).resolve().parent.parent / "web" / "static"
 
@@ -40,6 +40,9 @@ async def lifespan(app: FastAPI):
     threading.Thread(target=boot, daemon=True).start()
     yield
     pipe.stop()
+    from .. import cpu_server
+
+    cpu_server.stop()
     watcher.stop()
     scanner.shutdown_pool()
 
@@ -48,7 +51,7 @@ def create_app() -> FastAPI:
     s = get_settings()
     configure_logs(s.log_level, s.log_json)
     app = FastAPI(title="ImageHub", version="0.1.0", lifespan=lifespan)
-    for m in (library, meta, faces, chat, tools):
+    for m in (library, meta, faces, chat, tools, compat):
         app.include_router(m.router)
     app.mount("/static", StaticFiles(directory=STATIC), name="static")
 
@@ -57,7 +60,12 @@ def create_app() -> FastAPI:
         """Живость сервиса; deep=true дополнительно проверяет сервер моделей."""
         out: dict[str, Any] = {
             "status": "ok",
-            "llm": {"base_url": s.llm_base_url, "model": s.llm_model, "ocr_model": s.ocr_model or None},
+            "llm": {
+                "base_url": "http://127.0.0.1:11435/v1" if s.cpu_only() else s.llm_base_url,
+                "model": s.llm_model,
+                "ocr_model": s.ocr_model or None,
+            },
+            "cpu_only": s.cpu_only(),
         }
         if deep:
             from .. import llm
@@ -71,6 +79,14 @@ def create_app() -> FastAPI:
     @app.get("/", include_in_schema=False)
     def index():
         return FileResponse(STATIC / "index.html", headers={"Cache-Control": "no-cache"})
+
+    @app.get("/evaluations", include_in_schema=False)
+    def evaluations_page():
+        return FileResponse(STATIC / "evaluations.html", headers={"Cache-Control": "no-cache"})
+
+    @app.get("/settings", include_in_schema=False)
+    def settings_page():
+        return FileResponse(STATIC / "settings.html", headers={"Cache-Control": "no-cache"})
 
     @app.get("/themes", include_in_schema=False)
     def themes():

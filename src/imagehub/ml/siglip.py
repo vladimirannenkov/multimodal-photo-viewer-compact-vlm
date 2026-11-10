@@ -7,6 +7,7 @@ import numpy as np
 import torch
 from transformers import AutoModel, AutoProcessor
 
+from ..profiling import tracked
 from .weights import WEIGHTS
 
 KINDS = {  # тип -> промпты (берётся максимум по промптам)
@@ -64,12 +65,16 @@ class Siglip:
         self._labels = None
 
     @torch.no_grad()
+    @tracked("SigLIP.text")
     def text(self, texts):
-        tin = self.proc(text=list(texts), padding="max_length", max_length=64, return_tensors="pt").to(self.device)
+        tin = self.proc(text=list(texts), padding="max_length", max_length=64, truncation=True, return_tensors="pt").to(
+            self.device
+        )
         f = _feat(self.model.get_text_features(**tin)).float()
         return (f / f.norm(dim=-1, keepdim=True)).cpu().numpy()
 
     @torch.no_grad()
+    @tracked("SigLIP.images")
     def images(self, imgs, batch=16):
         out = []
         for i in range(0, len(imgs), batch):

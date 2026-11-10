@@ -56,7 +56,12 @@ class Settings(BaseSettings):
     def derived_dir(self) -> Path:
         return self.data_dir / "derived"  # копии после обрезки, склейки, аннотаций
 
+    def cpu_only(self) -> bool:
+        return (self.data_dir / "cpu-only.flag").exists()
+
     def resolve_device(self) -> str:
+        if self.cpu_only():
+            return "cpu"
         if self.device != "auto":
             return self.device
         try:

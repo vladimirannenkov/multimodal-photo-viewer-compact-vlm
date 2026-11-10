@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 
 from ..config import get_settings
+from ..profiling import tracked
 
 _APP = {}
 
@@ -21,6 +22,7 @@ def _app(device):
     return _APP[device]
 
 
+@tracked("InsightFace.detect")
 def detect(img: Image.Image, device="cpu", min_score=0.5):
     """-> [{box: [x1,y1,x2,y2], score, emb}] в пикселях изображения."""
     faces = _app(device).get(np.array(img)[:, :, ::-1])

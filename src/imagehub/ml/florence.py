@@ -5,6 +5,7 @@ import gc
 import torch
 from transformers import AutoProcessor, Florence2ForConditionalGeneration
 
+from ..profiling import tracked
 from .weights import WEIGHTS
 
 TASKS = ["<MORE_DETAILED_CAPTION>", "<OD>", "<DENSE_REGION_CAPTION>"]
@@ -31,6 +32,7 @@ def free():
         torch.cuda.empty_cache()
 
 
+@tracked("Florence-2.describe")
 def describe(imgs, device, tasks=TASKS):
     """-> по изображению: caption, objects [{label, box}], regions [{label, box}] (рамки в пикселях исходного изображения)."""
     model, proc, dt = _load(device)

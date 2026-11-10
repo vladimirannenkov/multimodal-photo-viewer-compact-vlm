@@ -1,0 +1,1653 @@
+{
+  "summary": {
+    "dataset": "nlphuji/flickr30k test 2b239be; lmms-lab-encoder shard 0 0d6d904",
+    "offset": 0,
+    "requested": 100,
+    "completed": 100,
+    "errors": 0,
+    "elapsed_seconds": 487.05,
+    "mean_cosine": 0.6398001399636268,
+    "mean_max_cosine": 0.7065518045425415
+  },
+  "records": [
+    {
+      "row_idx": 0,
+      "filename": "1007129816.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man wearing an orange crocheted hat with a label on it. The hat has a red and white label with the word \"Budweiser\" written in bold letters. The man is wearing a gray t-shirt and black glasses. He is looking to the side with a slight smile on his face. The background is blurred, but it appears to be an indoor space with other people in the background.",
+      "references": [
+        "The man with pierced ears is wearing glasses and an orange hat.",
+        "A man with glasses is wearing a beer can crocheted hat.",
+        "A man with gauges and glasses is wearing a Blitz hat.",
+        "A man in an orange hat starring at something.",
+        "A man wears an orange hat and glasses."
+      ],
+      "cosine_mean": 0.7217091917991638,
+      "cosine_max": 0.7865646481513977,
+      "seconds": 16.97
+    },
+    {
+      "row_idx": 1,
+      "filename": "1009434119.jpg",
+      "original_split": "test",
+      "caption": "The image shows a Boston Terrier dog running on a grassy lawn. The dog is black and white with a green collar around its neck. It appears to be in mid-stride, with its front legs stretched out and its tail wagging. The grass is green and well-maintained, and there is a white picket fence in the background. The sky is blue and there are trees and a house visible in the distance.",
+      "references": [
+        "A black and white dog is running in a grassy garden surrounded by a white fence.",
+        "A Boston Terrier is running on lush green grass in front of a white fence.",
+        "A black and white dog is running through the grass.",
+        "A dog runs on the green grass near a wooden fence.",
+        "A Boston terrier is running in the grass."
+      ],
+      "cosine_mean": 0.6638014912605286,
+      "cosine_max": 0.81495600938797,
+      "seconds": 3.26
+    },
+    {
+      "row_idx": 2,
+      "filename": "101362133.jpg",
+      "original_split": "test",
+      "caption": "The image shows two people performing a martial arts move on a red and blue mat. The person in the foreground is wearing a white karate uniform with the name \"J.K. Lee\" written on it. He is holding a wooden stick in his right hand and is in the middle of a kick, with his left leg extended behind him and his right leg bent at the knee. The other person is standing behind him, with their arms stretched out in front of them. They appear to be in the process of executing the move. The background shows a tiled floor and a few other people in the background.",
+      "references": [
+        "A young female student performing a downward kick to break a board held by her Karate instructor.",
+        "Girl about to kick a piece of wood in half while karate instructor holds it",
+        "A girl kicking a stick that a man is holding in tae kwon do class.",
+        "A girl in karate uniform breaking a stick with a front kick.",
+        "A girl breaking boards by using karate."
+      ],
+      "cosine_mean": 0.6213077306747437,
+      "cosine_max": 0.655236005783081,
+      "seconds": 4.01
+    },
+    {
+      "row_idx": 3,
+      "filename": "102617084.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of five people standing on a snow-covered slope. They are all wearing winter gear, including helmets, goggles, and jackets. The person in the center is wearing a red jacket and a white helmet, while the others are wearing black jackets and helmets. Behind them, there are trees and snowmobiles parked on the side of the slope. The sky is overcast and the ground is covered in a thick layer of snow.",
+      "references": [
+        "Five snowmobile riders all wearing helmets and goggles line up in a snowy clearing in a forest in front of their snowmobiles; they are all wearing black snow pants and from left to right they are wearing a black coat, white coat, red coat, blue coat, and black coat.",
+        "Five people wearing winter jackets and helmets stand in the snow, with snowmobiles in the background.",
+        "Five people wearing winter clothing, helmets, and ski goggles stand outside in the snow.",
+        "A group of snowmobile riders gather in the snow.",
+        "Group gathered to go snowmobiling."
+      ],
+      "cosine_mean": 0.7464532852172852,
+      "cosine_max": 0.821681022644043,
+      "seconds": 3.24
+    },
+    {
+      "row_idx": 4,
+      "filename": "10287332.jpg",
+      "original_split": "test",
+      "caption": "The image shows three men working on the roof of a house. They are on a ladder and appear to be in the process of installing or repairing the roof. The roof is covered with a red shingled roof and there is a white gutter running along the edge. The sky is blue and there are trees in the background. The men are wearing casual clothes and are focused on their task. One of them is wearing an orange shirt and the other two are wearing blue shirts. They seem to be working together to complete the task.",
+      "references": [
+        "Two men sitting on the roof of a house while another one stands on a ladder.",
+        "Two men on a rooftop while another man stands atop a ladder watching them",
+        "Three men, one on a ladder, work on a roof.",
+        "People are fixing the roof of a house.",
+        "Three men are working on a roof."
+      ],
+      "cosine_mean": 0.7583739161491394,
+      "cosine_max": 0.7981151342391968,
+      "seconds": 5.02
+    },
+    {
+      "row_idx": 5,
+      "filename": "1039637574.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of people standing on a stone platform in a park. There are nine men in the group, all dressed in formal attire, including black suits and white hats. The man on the left is holding a camera and appears to be taking a photo of the group. In the center of the image, there is a young girl wearing a white wedding dress and holding a bouquet of flowers. She is standing in front of a large stone pillar with intricate carvings on it. Behind her, there are trees and people sitting on benches. The sky is blue and the overall atmosphere is peaceful and serene.",
+      "references": [
+        "A bride in a light pink dress poses for a picture with male relatives and is being photographed by a man in a cream shirt with white pants.",
+        "A man in light colored clothing photographs a group of men wearing dark suits and hats standing around a woman dressed in a strapless gown.",
+        "A photographer takes a picture of a group of one girl in a pink dress and 10 boys in suits and hats.",
+        "A man photographs a woman in a pink dress and a throng of men in suits.",
+        "Man taking a photograph of a well dressed group of teens."
+      ],
+      "cosine_mean": 0.5619212985038757,
+      "cosine_max": 0.6234837770462036,
+      "seconds": 5.04
+    },
+    {
+      "row_idx": 6,
+      "filename": "1043819504.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of people standing in front of an igloo-like structure made of ice and snow. The igloo is located in a snowy area with trees in the background. The people are wearing winter clothes, including jackets, hats, and backpacks, and some are wearing snowshoes. They are gathered around the igloo, looking at it intently. One person is standing in the doorway, and another person is holding a snowboard. It appears that they are about to embark on a snowboarding adventure.",
+      "references": [
+        "A group of 11 people in winter wear such as beanies, skiing jackets, gloves and backpacks are standing in snow paddles outside a house made of ice blocks while a person in front of the door seems to be leading them.",
+        "A group of people wearing snowshoes, and dressed for winter hiking, is standing in front of a building that looks like it's made of blocks of ice.",
+        "The people are quietly listening while the story of the ice cabin was explained to them.",
+        "A group of people standing in front of an igloo.",
+        "Several students waiting outside an igloo."
+      ],
+      "cosine_mean": 0.68816077709198,
+      "cosine_max": 0.7711021900177002,
+      "seconds": 4.63
+    },
+    {
+      "row_idx": 7,
+      "filename": "1043910339.jpg",
+      "original_split": "test",
+      "caption": "The image shows a baseball game in progress. The batter is wearing a red jersey and a red helmet, and is in the process of swinging at a pitch. He is in mid-air, with his arms stretched out to the sides and his body slightly bent forward. The catcher is crouched behind home plate, ready to catch the ball. The umpire is standing behind the catcher, watching the action unfold. In the background, there are other players on the field, some wearing purple jerseys, and a fence surrounding the field. The field is covered in grass and there are trees in the distance.",
+      "references": [
+        "A baseball player in red leaps into the air to avoid a player in blue, who is shortly behind him as he catches the ball, while other blue team members look on in the background.",
+        "A boy in a red uniform is attempting to avoid getting out at home plate, while the catcher in the blue uniform is attempting to catch him.",
+        "A baseball player coming into home plate with knee held high and the catcher right in front of him waiting for the ball.",
+        "A baseball player attempting to score a run before the catcher tags the player out.",
+        "A baseball catcher trying to tag a base runner in a baseball game."
+      ],
+      "cosine_mean": 0.670932412147522,
+      "cosine_max": 0.7397699952125549,
+      "seconds": 4.76
+    },
+    {
+      "row_idx": 8,
+      "filename": "1044798682.jpg",
+      "original_split": "test",
+      "caption": "The image shows a construction worker on a scaffolding platform on the side of a building. The scaffolding is made of metal and is blue in color. The worker is wearing a white t-shirt, blue jeans, and a hard hat. He is standing on the platform and appears to be working on a large piece of wood. The building has a brick wall on the left side and the sky is visible in the background.",
+      "references": [
+        "A man wearing a hat and a white shirt is cleaning windows.",
+        "A man in a white shirt stands high up on scaffolding",
+        "A man stands on boards on top of a huge ladder.",
+        "Man works on top of scaffolding.",
+        "A guy works on a building."
+      ],
+      "cosine_mean": 0.6491169929504395,
+      "cosine_max": 0.721192479133606,
+      "seconds": 3.49
+    },
+    {
+      "row_idx": 9,
+      "filename": "1071201387.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man sitting on a bench on a sidewalk. He is wearing a yellow vest and a red cap, and is holding a yellow sign with a bicycle symbol on it. Next to him, there is a young woman sitting on the bench, wearing a black tank top and white shorts. She is looking at the man with a concerned expression on her face. There is a red shopping cart next to the bench and a blue tablecloth on the table. In the background, there are buildings and a no parking sign.",
+      "references": [
+        "A man wearing a reflective vest sits on the sidewalk and holds up pamphlets with bicycles on the cover.",
+        "Man in bright yellow vest displays bicycle safety information on street.",
+        "A man and woman talking are interrupted and a man covers his face.",
+        "A man in a vest is sitting in a chair and holding magazines.",
+        "A construction worker holds a sign about bicycling."
+      ],
+      "cosine_mean": 0.5153070688247681,
+      "cosine_max": 0.6213587522506714,
+      "seconds": 4.67
+    },
+    {
+      "row_idx": 10,
+      "filename": "107969134.jpg",
+      "original_split": "test",
+      "caption": "The image shows a woman holding a baby in her arms. The woman is smiling and looking at the camera. The baby is wearing a blue and white striped shirt and is looking directly at the viewer with a curious expression. The background shows a row of houses with balconies and a tree in front of them. The sky is blue and the weather appears to be sunny.",
+      "references": [
+        "A mother decides to take her child on a piggyback ride outside their apartment complex.",
+        "A baby boy in a blue and white striped shirt is sitting on his mother's shoulders.",
+        "A mother and her young song enjoying a beautiful day outside.",
+        "A young woman is giving a baby a ride on her shoulders.",
+        "A woman gives a small child a piggyback ride."
+      ],
+      "cosine_mean": 0.6236443519592285,
+      "cosine_max": 0.7035017609596252,
+      "seconds": 2.83
+    },
+    {
+      "row_idx": 11,
+      "filename": "1080230428.jpg",
+      "original_split": "test",
+      "caption": "The image shows a beach volleyball match in progress. There are three players in the foreground, two of them are jumping up to hit the ball over the net. The player on the left is wearing red shorts and is in the process of hitting the ball, while the player in the middle is wearing black shorts. In the background, there are several spectators watching the match. The beach is sandy and there are banners and advertisements on the fence surrounding the court. The sky is blue and the weather appears to be sunny and warm.",
+      "references": [
+        "A male volleyball player in red trunks tries to block the shot of the opposing player during a professional volleyball game.",
+        "Men playing volleyball, with one player missing the ball but hands still in the air.",
+        "A group of spectators watch a men's sand volleyball game.",
+        "Volleyball players compete on a sunny day at the beach.",
+        "Men playing volleyball in the sand."
+      ],
+      "cosine_mean": 0.7098739147186279,
+      "cosine_max": 0.7823798060417175,
+      "seconds": 5.41
+    },
+    {
+      "row_idx": 12,
+      "filename": "1082250005.jpg",
+      "original_split": "test",
+      "caption": "The image shows a woman standing in front of a counter in a restaurant. She is wearing a pink apron and a yellow baseball cap. She has a big smile on her face and is holding a large bowl of food in her hands. Behind her, there is a blackboard with a menu written on it. The menu is written in white chalk and lists different types of food items such as salads, sandwiches, and desserts. There is also a microwave oven and a coffee machine on the counter. The restaurant appears to be well-stocked with various items for sale.",
+      "references": [
+        "A woman wearing a pink shirt and red apron stands in her restaurant holding food and surrounded by bagged breads, a microwave and the chalkboard menu up on the wall.",
+        "Woman wearing a yellow hat, pink shirt, and red apron is holding food in a kitchen.",
+        "Employee in pink shirt smiles for camera inside a restaurant kitchen.",
+        "A woman holding a bowl of food in a kitchen.",
+        "Women in store happily holding some food."
+      ],
+      "cosine_mean": 0.6019521951675415,
+      "cosine_max": 0.6783649325370789,
+      "seconds": 4.41
+    },
+    {
+      "row_idx": 13,
+      "filename": "1089059626.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man sitting at a table in a living room. He is wearing a striped polo shirt and glasses. He appears to be focused on his work, as he is holding a small object in his hands. On the table in front of him, there is a silver vase and a blue napkin. The room is decorated with a clock and a picture frame on the wall. There is a window with curtains in the background.",
+      "references": [
+        "An Asian man in spectacles and a t-shirt preparing some food.",
+        "A man working diligently while sitting at a table.",
+        "Man sitting using tool at a table in his home.",
+        "Indian man whittles in his own home.",
+        "A man is sharpening a knife."
+      ],
+      "cosine_mean": 0.5967503786087036,
+      "cosine_max": 0.7012920379638672,
+      "seconds": 4.19
+    },
+    {
+      "row_idx": 14,
+      "filename": "109260218.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of four people standing inside a cave. They are all wearing yellow helmets and are standing on a large rock formation. The cave appears to be dark and rocky, with small stalactites and stalagmites scattered throughout. The light from the ceiling is shining through the cave, creating a bright light that illuminates the scene. The people are looking up at the light and appear to be enjoying the view.",
+      "references": [
+        "Spelunkers pose inside a rock cavern while bathed in sunlight from the surface.",
+        "Shaft of light in a cave shows three spelunkers",
+        "Three rock climbers are posing on big rocks.",
+        "People stand inside a rock dome.",
+        "Three people sit in a cave."
+      ],
+      "cosine_mean": 0.5126133561134338,
+      "cosine_max": 0.6004624366760254,
+      "seconds": 3.92
+    },
+    {
+      "row_idx": 15,
+      "filename": "109656696.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young girl, probably around 4-5 years old, standing on a wooden balance beam in a gymnasium. She is wearing a blue dress with white polka dots and a pink flower on the front. The girl has brown hair tied up in a ponytail and is looking down at the beam with a curious expression on her face. In the background, there are other children and adults in the gym, as well as a basketball hoop and other equipment. The floor is covered in blue mats and there is a blue mat on the left side of the image.",
+      "references": [
+        "A girl in a polka dotted blue jean dress walks barefoot on a balance beam.",
+        "A girl in a jean dress is walking along a raised balance beam.",
+        "The little girl is walking a beam in gymnastics class.",
+        "A little girl balances on a gymnastics beam.",
+        "A little girl is walking on a balance beam."
+      ],
+      "cosine_mean": 0.6703227758407593,
+      "cosine_max": 0.6961268186569214,
+      "seconds": 5.72
+    },
+    {
+      "row_idx": 16,
+      "filename": "1104087374.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young man and a young woman sitting in shallow water at a beach. The woman is wearing a red and white striped shirt, black shorts, and sunglasses. She is sitting on the left side of the image, with her legs crossed and her arms stretched out to the sides. The man is shirtless and wearing black shorts and sunglasses, and he is sitting next to her. They are both smiling and appear to be enjoying themselves. In the background, there is a sandy beach with a bottle of water on the ground. The water is muddy and there are small rocks scattered around.",
+      "references": [
+        "A couple is sitting on the sand with their feet in the water, and they are shaking hands.",
+        "A man and woman wearing sunglasses sit halfway in the water.",
+        "A boy and a girl holding hands while sitting on a shore.",
+        "A couple with sunglasses are laying on the beach.",
+        "A blond holding hands with a guy in the sand."
+      ],
+      "cosine_mean": 0.6658753156661987,
+      "cosine_max": 0.7085257768630981,
+      "seconds": 5.23
+    },
+    {
+      "row_idx": 17,
+      "filename": "110671448.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of people standing in front of a store called \"Chiller\". The store appears to be a convenience store, as there is a sign above the counter that reads \"CHILLER\". The people in the foreground are wearing casual clothing and appear to be engaged in conversation.\n\nIn the background, there are shelves stocked with various items such as baskets, figurines, and snacks. On the right side of the image, there is another counter with a table and chairs. The overall atmosphere of the store seems to be casual and relaxed.",
+      "references": [
+        "A woman standing with 3 other people in a store with two tables, some shelves with coffee and tea for sale, and a refrigerated drink case.",
+        "A woman in a gray sweater and black baseball cap is standing in line at a shop.",
+        "A woman in a hat waits to be served at a store.",
+        "Young people are standing in the store.",
+        "A woman in a cap at a coffee shop."
+      ],
+      "cosine_mean": 0.6564683318138123,
+      "cosine_max": 0.8476699590682983,
+      "seconds": 4.27
+    },
+    {
+      "row_idx": 18,
+      "filename": "111497985.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman rock climbing on a steep cliff. She is wearing a striped shirt, blue shorts, and a gray beanie. The woman is holding onto a rope and appears to be in the process of making her way up the cliff. In the background, there is a beautiful landscape of green fields, trees, and houses. The sky is blue and the overall mood of the image is peaceful and serene.",
+      "references": [
+        "The person has a striped shirt on and is holding on to a rope on a mountain.",
+        "A kid rock climbing against the backdrop of a green valley",
+        "The person in the striped shirt is mountain climbing.",
+        "A woman in a striped shirt climbs up a mountain.",
+        "A young man climbs a rocky hill."
+      ],
+      "cosine_mean": 0.7009351849555969,
+      "cosine_max": 0.756507158279419,
+      "seconds": 3.92
+    },
+    {
+      "row_idx": 19,
+      "filename": "1131056918.jpg",
+      "original_split": "test",
+      "caption": "The image shows a busy street scene in a European city. The street is lined with shops and restaurants, and there are people walking on the sidewalk. On the left side of the image, there is a restaurant with a green awning and a sign that reads \"Restaurant Taverne\". On the right side, there are two shops with red and white striped awnings. In front of one of the shops, there appears to be a store with a large display of handbags and other items for sale.\n\nIn the center of the street, two people are sitting on a bench, one of them is wearing a hat and the other is holding a cane. They appear to be engaged in conversation. There are also a few people standing around the bench, looking at the items on display. The sky is blue and the overall atmosphere is lively and bustling.",
+      "references": [
+        "Two young attractive women in front of a store drop coins for street performers.",
+        "Two women enjoy the entertainment of street performers.",
+        "Two men pretend to be statutes while women look on.",
+        "Two young women stop and watch street performers.",
+        "Pedestrians interact with street artists."
+      ],
+      "cosine_mean": 0.7178962230682373,
+      "cosine_max": 0.772136926651001,
+      "seconds": 7.64
+    },
+    {
+      "row_idx": 20,
+      "filename": "1144865997.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of people standing in a line in front of a building with a tall white tower. The building appears to be a church or a similar structure with a sloping roof and arched windows. The people are of different ages and ethnicities, and they are all wearing casual clothes. Some of them are holding hands, while others are looking at something in the distance. The sky is blue and the grass is green, suggesting that the photo was taken on a sunny day.",
+      "references": [
+        "A group of people standing on the lawn in front of a building.",
+        "Many people in blue jeans stand in front of a white church.",
+        "A large group of people stand outside of a church.",
+        "Family members standing outside a home.",
+        "People standing outside of a building."
+      ],
+      "cosine_mean": 0.7086230516433716,
+      "cosine_max": 0.778283953666687,
+      "seconds": 4.39
+    },
+    {
+      "row_idx": 21,
+      "filename": "1153704539.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young girl playing a trumpet on a grassy field. She is wearing a blue t-shirt, black shorts, and a pink baseball cap. She has long brown hair and is holding the trumpet with both hands. Behind her, there are other young girls playing drums and a man playing a bass drum. The girl in the foreground is walking towards the drum, while the other girls are following closely behind her. The background shows a clear blue sky and green grass.",
+      "references": [
+        "A young girl wearing a blue shirt marching in a band playing a trumpet",
+        "Girl wearing blue shirt and black shorts plays trumped outside.",
+        "A teenager plays her trumpet on the field at a game.",
+        "A girl playing trumpet in a marching band.",
+        "Girl playing the trumpet in a marching band"
+      ],
+      "cosine_mean": 0.6178350448608398,
+      "cosine_max": 0.6879692077636719,
+      "seconds": 4.55
+    },
+    {
+      "row_idx": 22,
+      "filename": "1159381599.jpg",
+      "original_split": "test",
+      "caption": "The image shows a person performing a handstand on a trampoline. The person is wearing a brown sweatshirt with a white logo on it and blue pants. They are upside down, with their arms stretched out to the sides and their legs bent at the knees. In the background, there is a body of water with a power line tower visible in the distance. The sky is blue and the ground is covered in sand.",
+      "references": [
+        "Person in a brown sweatshirt does a flip in midair over a trampoline with a river and electrical lines in the background.",
+        "A young adult is doing a back flip on a trampoline near a lake.",
+        "A woman is doing flips on a trampoline in front of a lake.",
+        "A woman does a somersault on a trampoline on the beach.",
+        "Trampolines are a fun way to exercise."
+      ],
+      "cosine_mean": 0.6044588685035706,
+      "cosine_max": 0.6482547521591187,
+      "seconds": 3.61
+    },
+    {
+      "row_idx": 23,
+      "filename": "1167908324.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man playing a video game in a dimly lit room. He is standing in front of three slot machines, each with a colorful screen. The man is wearing a white t-shirt and appears to be focused on the game. Above the man, there is a neon sign that reads \"Dos Equus XX\" in red and yellow letters. The room has a concrete wall and a blue curtain on the left side.",
+      "references": [
+        "A man standing in a bar with a neon beer sign hanging on the wall",
+        "A man stands next to three video game machines and a beer sign.",
+        "A man stands next to a bank of computer gambling machines.",
+        "A man is standing by a group of video games in a bar.",
+        "A man stands next to three video machines."
+      ],
+      "cosine_mean": 0.6014242172241211,
+      "cosine_max": 0.7212578058242798,
+      "seconds": 4.04
+    },
+    {
+      "row_idx": 24,
+      "filename": "1181708011.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman wearing a green tank top and black pants, holding a black power drill. She is standing in front of a metal table with various tools and equipment on it. Behind her, there are several people, including a man in a red shirt and a woman in a black jacket, who are also holding cameras. They appear to be at an outdoor event or gathering. The background shows a building with large windows and a tree.",
+      "references": [
+        "A woman in a green tank top looking at a drill while a crowd looks on.",
+        "A woman using a power drill in front of a group of people.",
+        "A woman uses a drill while another man takes her picture.",
+        "A woman, in a teal tank top, holding a power drill.",
+        "Spectators about to watch a woman use a drill."
+      ],
+      "cosine_mean": 0.6901135444641113,
+      "cosine_max": 0.7781577110290527,
+      "seconds": 4.21
+    },
+    {
+      "row_idx": 25,
+      "filename": "118865844.jpg",
+      "original_split": "test",
+      "caption": "The image shows a woman in a pink shirt and yellow apron cleaning a wooden table with a pink sponge. She is bending over the table and using the sponge to scrub the surface of the table. The table is covered with a colorful tablecloth with a pattern of birds and flowers. In the background, there is a wooden bench and a bookshelf with various items on it. The woman appears to be focused on her task.",
+      "references": [
+        "A woman wearing a pink sweater and eyeglasses is wiping a wooden table with a pink sponge.",
+        "A woman in a pink sweater and an apron, cleaning a table with a sponge.",
+        "A lady with blond-hair and glasses works hard to clean up her table.",
+        "A woman in a pink sweater cleaning a dining table.",
+        "A woman in a pink shirt cleaning a wooden table."
+      ],
+      "cosine_mean": 0.7048013806343079,
+      "cosine_max": 0.7863756418228149,
+      "seconds": 4.42
+    },
+    {
+      "row_idx": 26,
+      "filename": "121178216.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man standing on a scaffolding platform in the middle of a tree. He is wearing a black jacket and pants and is holding a chainsaw in his right hand. The scaffolding is made of metal bars and is attached to a yellow crane. The tree is bare and has no leaves. In the background, there is a building with white walls and balconies. The sky is overcast and the overall mood of the image is gloomy.",
+      "references": [
+        "A man on a utility lift is standing in the tree branches.",
+        "This man bravely cuts down trees on the job.",
+        "A man in black pants cutting bushes.",
+        "Man on crane cutting tree branches.",
+        "A man cutting branches of trees."
+      ],
+      "cosine_mean": 0.6542679071426392,
+      "cosine_max": 0.7063316106796265,
+      "seconds": 4.83
+    },
+    {
+      "row_idx": 27,
+      "filename": "12252043.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of four young children gathered around a barbecue grill at night. The grill is set up on a grassy area with a table in the background. On the grill, there are several pieces of meat cooking on it. The children are holding white plates and chopsticks, and one of them is wearing a baseball cap. The girl is standing next to the grill and smiling at the camera. The boy on the left is leaning over the grill with his mouth open, as if he is about to take a bite out of the meat. The other two children are standing behind him, also smiling and looking at the grill. There is a lantern on the right side of the image, and the background is dark, suggesting that it is nighttime.",
+      "references": [
+        "Four young Asian boys hold bowls and chopsticks as they stand around a barbecue.",
+        "Group of Asian boys wait for meat to cook over barbecue.",
+        "Four young boys are standing around a grill.",
+        "Four young teens having fun at a cookout.",
+        "A group of asians smiling and eating."
+      ],
+      "cosine_mean": 0.6211680769920349,
+      "cosine_max": 0.6587224006652832,
+      "seconds": 6.47
+    },
+    {
+      "row_idx": 28,
+      "filename": "1229536824.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of three people performing a traditional Native American dance in a church. The person on the left is wearing a black and red outfit with intricate patterns and designs, and a large headdress with feathers and beads. He is standing on a stage with a microphone in front of him, while the person in the middle is kneeling on the floor, playing a musical instrument. On the right side of the image, there is another person wearing a red and black outfit, also playing a drum. The background shows a wooden altar and a white wall.",
+      "references": [
+        "Native Americans are dressed up in native clothing and are participating in an activity together.",
+        "Three people are dressed in costumes and playing musical instruments.",
+        "Women, wearing traditional clothing, are reenacting native life.",
+        "A tribal performance of dance and song of three individuals.",
+        "The indian's are performing a sacred dance."
+      ],
+      "cosine_mean": 0.5913597941398621,
+      "cosine_max": 0.6212262511253357,
+      "seconds": 5.88
+    },
+    {
+      "row_idx": 29,
+      "filename": "123314995.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man in a red t-shirt and black pants in a martial arts gym. He is standing behind another man who is lying on the ground, with his head in his hands. The man in the red shirt is flexing his bicep, showing off his muscles. He appears to be in the middle of a sparring exercise. The background shows a brick wall and various martial arts equipment.",
+      "references": [
+        "A man holding another man by the back of the head about to punch him in the face.",
+        "A man in red shirt displays his fighting technique on another man in gray shirt.",
+        "One man holds another man's head down and prepares to punch him in the face.",
+        "A man stands in striking position while holding his opponent's head.",
+        "A strong man is hitting to a person."
+      ],
+      "cosine_mean": 0.5068667531013489,
+      "cosine_max": 0.5851680636405945,
+      "seconds": 4.66
+    },
+    {
+      "row_idx": 30,
+      "filename": "1250181412.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of mountain bikers riding on a dirt trail in a forest. The trail is surrounded by tall bamboo trees and shrubs, and the ground is covered in fallen leaves and twigs. The riders are wearing helmets and protective gear, suggesting that they are on a mountain bike ride. The sky is visible through the trees, and it appears to be a sunny day. The overall mood of the image is peaceful and serene.",
+      "references": [
+        "Six people ride mountain bikes through a jungle environment.",
+        "Men, surrounded by nature, are riding mountain bikes.",
+        "There are six men mountain biking in a forest terrain.",
+        "Six People riding bikes on a trail in the forest.",
+        "A group of people is bike riding in the woods."
+      ],
+      "cosine_mean": 0.7473031878471375,
+      "cosine_max": 0.7854276895523071,
+      "seconds": 3.81
+    },
+    {
+      "row_idx": 31,
+      "filename": "1253095131.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of people walking on a busy street. There are two young women sitting on a concrete bench, one wearing a blue dress and the other wearing a green and white striped shirt. The woman in the blue dress is holding a piece of paper and appears to be looking up at the sky with a smile on her face. The man in the purple shirt is walking behind her, and there are other people walking in the background. The street is lined with trees and there is a building in the distance. The overall mood of the image is lively and bustling.",
+      "references": [
+        "Two blond women sit outside as people walk by wearing casual clothing and some wearing bookbags.",
+        "Two females in a sitting down in a highly populated area.",
+        "2 blond girls are sitting on a ledge in a crowded plaza.",
+        "A large number of people walk or rest near a fountain.",
+        "Two women have a seat in a busy metropolitan area."
+      ],
+      "cosine_mean": 0.47938546538352966,
+      "cosine_max": 0.6098507046699524,
+      "seconds": 5.64
+    },
+    {
+      "row_idx": 32,
+      "filename": "1255504166.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young boy swimming in the ocean at sunset. The sky is a beautiful orange and pink color, with the sun setting on the horizon and casting a warm glow over the water. The boy is in the center of the image, with his arms outstretched and his head tilted back, as if he is enjoying the water splashing around him. He is wearing a swimsuit and appears to be in the middle of a wave. In the background, there are mountains silhouetted against the sky. The water is calm and still, reflecting the colors of the sky and the surrounding landscape.",
+      "references": [
+        "A small child in water with a splash encircling him while the white clouds float over the mountains.",
+        "A little boy is playing in the water with a beautiful sunset and mountains in the background.",
+        "A young boy plays in the water with the mountains in the background.",
+        "A child is splashing in the water",
+        "A boy playing in a lake"
+      ],
+      "cosine_mean": 0.637291669845581,
+      "cosine_max": 0.7661236524581909,
+      "seconds": 5.88
+    },
+    {
+      "row_idx": 33,
+      "filename": "1258913059.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of three people sitting at a wooden picnic table under a red and white striped umbrella. The umbrella has the words \"London Pride\" written on it in white letters. The people are engaged in conversation and appear to be enjoying each other's company. There are two white chairs and a black umbrella on the right side of the image. The background shows a white building with red and blue stripes and flowers hanging from the windows. The sky is blue and the weather appears to be sunny.",
+      "references": [
+        "Three people sit at an outdoor table in front of a building painted like the Union Jack.",
+        "Three people sit at a picnic table outside of a building painted like a union jack.",
+        "Three people are sitting at an outside picnic bench with an umbrella.",
+        "A couple of people sit outdoors at a table with an umbrella and talk.",
+        "Three people sit at an outdoor cafe."
+      ],
+      "cosine_mean": 0.5919331312179565,
+      "cosine_max": 0.652323842048645,
+      "seconds": 4.82
+    },
+    {
+      "row_idx": 34,
+      "filename": "1281282435.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of four young men standing on a wooden pier near the ocean. The pier is located on a beach with a sandy shore and the ocean in the background. The sky is overcast and the water is choppy with small waves. There are a few people in the water, some of whom are swimming and some are diving into the water. One of the men is standing on the edge of the pier, while the others are standing around him. There is a sign on the pier that reads \"Welcome to the beach\" and there is a bird flying in the distance. The men are all wearing swim trunks and appear to be enjoying themselves.",
+      "references": [
+        "Some young men looking over the edge of a bridge on a sunny day.",
+        "The boys are having fun jumping off the bridge into the water.",
+        "3 boys are standing on a pier in their bathing suits.",
+        "A man is sitting on a wooden guard rail at a beach.",
+        "Boys look over a bridge on to a lake."
+      ],
+      "cosine_mean": 0.6664007902145386,
+      "cosine_max": 0.6941092014312744,
+      "seconds": 6.22
+    },
+    {
+      "row_idx": 35,
+      "filename": "1287704027.jpg",
+      "original_split": "test",
+      "caption": "The image shows a fish market with a variety of fresh produce on display. There are three people in the image, two men and a woman, standing behind a counter with blue trays of fish. The trays are filled with different types of fish, including fish, shrimp, and other seafood. The man on the left is wearing a white apron and a cap, and the man in the middle is wearing an apron. The woman on the right is holding a green shopping bag and appears to be sorting through the fish. In the background, there are other vendors selling their wares. The market is bustling with activity, and there are signs and advertisements on the walls.",
+      "references": [
+        "A woman wearing a short-sleeved striped shirt and carrying a green shopping bag examines fish in an open air market while a vendor in a white apron over a gray t-shirt hands her an empty plastic bag.",
+        "An employee is handing a woman a bag while she is browsing through fish on ice at a street market.",
+        "A woman at a fish market is looking at the fish that are frozen.",
+        "The woman is at marketplace buying fish from an Arabic person.",
+        "A lady in a striped shirt is shopping at a fish market."
+      ],
+      "cosine_mean": 0.6551541090011597,
+      "cosine_max": 0.7732974290847778,
+      "seconds": 7.38
+    },
+    {
+      "row_idx": 36,
+      "filename": "1295476404.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman playing a harp. She is sitting on a bench and is holding the strings of the harp with both hands. The harp is made of wood and has a curved shape with a black label on the right side. The woman is wearing a white t-shirt and a red skirt. She has long dark hair and is looking down at the strings with a focused expression on her face. The background is blurred, but it appears to be an outdoor setting with other people in the background.",
+      "references": [
+        "A female harp player peers through the middle of her instrument while performing.",
+        "A lady with dark hair is playing a harp.",
+        "A pretty woman plays a harpsichord.",
+        "A smiling woman playing the harp.",
+        "A woman playing a harp."
+      ],
+      "cosine_mean": 0.7503904104232788,
+      "cosine_max": 0.7919286489486694,
+      "seconds": 5.49
+    },
+    {
+      "row_idx": 37,
+      "filename": "129860826.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man in a police uniform standing in front of a brick building. He is wearing a beige uniform with a badge on the left side of his chest and a hat with a gold emblem on it. He has a pair of glasses on and is looking directly at the camera with a serious expression on his face. Behind him, there is a metal railing and a brick wall with yellow flowers. The building in the background appears to be a modern structure with glass windows.",
+      "references": [
+        "A security officer with a tiny face and big glasses leans on a metal gate looking into the camera.",
+        "Outside a building, a uniformed security guard looks at the camera from behind a fence.",
+        "A customs officer leaning on a bike rack outside of an office building.",
+        "An officer squints directly at the camera as he leans on a metal bar.",
+        "Park Ranger looking very stern today"
+      ],
+      "cosine_mean": 0.4893249571323395,
+      "cosine_max": 0.6124563217163086,
+      "seconds": 5.14
+    },
+    {
+      "row_idx": 38,
+      "filename": "130063845.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman standing in a kitchen, holding a large pizza in her hands. She is wearing a black t-shirt with the logo of \"Lee Griffiths\" on it. The pizza appears to be freshly baked and has a golden crust. The woman is smiling and looking down at the pizza with a content expression on her face. The kitchen has white cabinets and a sink in the background. There is a plant in the corner of the room and a bulletin board on the wall.",
+      "references": [
+        "A girl wearing a black t-shirt is holding a small pizza in a kitchen setting.",
+        "Woman who just took pizza out of the oven and can't wait to eat it.",
+        "Latin woman shows off homemade pizza in kitchen.",
+        "A young woman is ready to eat the pizza.",
+        "The young lady is looking at the pizza."
+      ],
+      "cosine_mean": 0.6387871503829956,
+      "cosine_max": 0.6933068633079529,
+      "seconds": 5.43
+    },
+    {
+      "row_idx": 39,
+      "filename": "1313869424.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man standing on a rocky shore near the ocean. He is holding a fishing rod and appears to be casting his line into the water. The sky is clear and blue, and the ocean is visible in the background. On the right side of the image, there is a tall metal pole with a white lamp on top. The man is wearing blue shorts and is standing on the edge of the pier.",
+      "references": [
+        "A shirtless man is fishing, standing on large rocks that rest next to a boardwalk with a tall lamp post in the forefront.",
+        "A shirtless man in shorts is fishing while standing on some rocks.",
+        "A shirtless man in jean shorts fishing off the rocks.",
+        "A solitary fisherman stands along a riverbank.",
+        "A man with no shirt fishing."
+      ],
+      "cosine_mean": 0.6731678247451782,
+      "cosine_max": 0.7297531366348267,
+      "seconds": 4.58
+    },
+    {
+      "row_idx": 40,
+      "filename": "1313961775.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young girl floating in a body of water. She is wearing a bright orange life jacket and pink shorts. The girl is lying on her back with her arms stretched out to the sides and her legs slightly bent at the knees. She appears to be relaxed and enjoying the water. The water is a dark green color and there are small ripples visible on the surface. The background is blurred, but it seems to be a sunny day.",
+      "references": [
+        "A young girl floats on her back in water and peers over her life jacket.",
+        "A young girl wearing a bulky red life jacket floating in a lake.",
+        "The little girl is wearing a floating device in the water.",
+        "A girl wearing a life vest floats in water.",
+        "A girl floating wearing a life vest."
+      ],
+      "cosine_mean": 0.6864399909973145,
+      "cosine_max": 0.7190894484519958,
+      "seconds": 4.34
+    },
+    {
+      "row_idx": 41,
+      "filename": "133010954.jpg",
+      "original_split": "test",
+      "caption": "The image shows two men standing on a cobblestone street. The man on the left is wearing a navy blue uniform with a white hat and sunglasses. He is holding a piece of paper in his left hand and is gesturing with his right hand as if he is explaining something to the other man. In the background, there is a large tanker truck and a building with columns. The sky is blue and the weather appears to be sunny.",
+      "references": [
+        "A man in a military-type uniform is standing in the street listening to another man who has a piece of paper in his hands.",
+        "A man in uniform and a man in a blue shirt are standing in front of a truck.",
+        "A man in a blue shirt gesticulates as he speaks to a uniformed official.",
+        "A man in dressy clothes instructed a captain near a large truck.",
+        "We have to go there to look into the machine."
+      ],
+      "cosine_mean": 0.49375635385513306,
+      "cosine_max": 0.6128337383270264,
+      "seconds": 4.58
+    },
+    {
+      "row_idx": 42,
+      "filename": "1332208215.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man and a woman sitting on a subway train. The man is on the left side of the image, wearing a blue t-shirt and glasses, and is holding a black bag in his left hand. He appears to be deep in thought, with a serious expression on his face. The woman is sitting next to him, looking off to the side. She is wearing a white top and black pants, and has long brown hair. There are other passengers visible in the background, but they are not clearly visible. The train has a blue carpeted floor and metal poles.",
+      "references": [
+        "A man in glasses and an Asian woman are seated across from each other in a subway train.",
+        "Two men and one woman are sitting in a subway train.",
+        "Several people sit on a train.",
+        "People sit inside a train.",
+        "People on a subway."
+      ],
+      "cosine_mean": 0.6928378343582153,
+      "cosine_max": 0.7750319838523865,
+      "seconds": 5.94
+    },
+    {
+      "row_idx": 43,
+      "filename": "1333888922.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young girl sitting on a swing in a forest. She is wearing yellow crocs and has her legs up in the air with her hands resting on the swing. The swing is made of metal chains and there are trees in the background. The sun is shining through the trees, creating a warm glow on the ground. The girl appears to be enjoying the swing and the peaceful atmosphere of the forest.",
+      "references": [
+        "A brown-haired child in green shoes swings on a swing in a park near the woods.",
+        "The sun breaks through the trees as a child rides a swing.",
+        "A child wearing Crocs sits on a swing in a wooded area.",
+        "A kid swings with his feet up in the air in a forest.",
+        "A child swings and the sunshine shines down on her."
+      ],
+      "cosine_mean": 0.6669038534164429,
+      "cosine_max": 0.7100299000740051,
+      "seconds": 4.48
+    },
+    {
+      "row_idx": 44,
+      "filename": "1341077576.jpg",
+      "original_split": "test",
+      "caption": "The image shows a white brick building with a red roof and a blue sign that reads \"Bolik Hikki\". The building has a red door with wooden shutters and a small window on the left side. In front of the door, there is a man wearing a red t-shirt, blue jeans, and a baseball cap, walking towards the entrance of the building. On the right side of the image, there are two bicycles parked on the ground. A brown dog is standing next to the entrance, looking up at the man. The sky is blue and there are a few clouds in the background.",
+      "references": [
+        "A man in a red shirt and blue pants is going into a building while a dog watches him.",
+        "A man walking into a building while a dog looks at him.",
+        "A man walks into a maroon building as a dog looks on.",
+        "A man in a red shirt entering an establishment.",
+        "A man walking into s foreign building."
+      ],
+      "cosine_mean": 0.4746027886867523,
+      "cosine_max": 0.5139244198799133,
+      "seconds": 5.86
+    },
+    {
+      "row_idx": 45,
+      "filename": "1351500610.jpg",
+      "original_split": "test",
+      "caption": "The image shows two young men on a sandy beach. They are in mid-air, with their arms stretched out wide and their legs bent at the knees. The man on the left is wearing blue shorts and appears to be in the middle of a jump. He has a big smile on his face and is looking towards the right side of the image. In the background, there are other people on the beach, some sitting and some standing, and a rocky cliff on the right. The sky is blue and the ocean can be seen in the distance.",
+      "references": [
+        "Two male friends in swimming trunks jump on the beach while people in the background lay in the sand.",
+        "Two middle-aged men are jumping for joy on a beautiful beach surrounded by rocks.",
+        "Two men wearing swim trunks jump in the air at a moderately populated beach.",
+        "Two men wearing swimming trunks jump in the air while on the beach.",
+        "Two men jumping excitedly at a rocky beach."
+      ],
+      "cosine_mean": 0.6262462735176086,
+      "cosine_max": 0.6518704295158386,
+      "seconds": 5.35
+    },
+    {
+      "row_idx": 46,
+      "filename": "136581487.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young child, probably around 2-3 years old, in a kitchen. The child is standing in front of a large glass bowl filled with a mixture of brown granola. A person's hand is visible on the left side of the image, holding a white spoon and scooping out the granola from the bowl. The background shows a kitchen countertop with various kitchen items and a window with curtains.",
+      "references": [
+        "A toddler grasping the handle of a tool to stir food in a bowl along with another person whose arms are seen holding the bowl and tool.",
+        "A naked baby makes a face while helping someone stir food",
+        "A toddler is cooking with another person.",
+        "Toddler is helping to stir ingredients.",
+        "A toddler mixes some food in a bowel."
+      ],
+      "cosine_mean": 0.6358965039253235,
+      "cosine_max": 0.6927859783172607,
+      "seconds": 5.46
+    },
+    {
+      "row_idx": 47,
+      "filename": "136693281.jpg",
+      "original_split": "test",
+      "caption": "The image shows a father and two young children in a backyard. The father is kneeling on the grass and the children are planting a tree. The tree is a small shrub with green leaves and is in the center of the image. The child on the left is holding a shovel and appears to be digging a hole in the ground. The boy on the right is kneeling next to the tree and is helping the father with the planting. The background shows a brick wall and a house with a garden in front of it. There are also some colorful flowers and plants in the garden.",
+      "references": [
+        "A father and daughter holding a young tree upright, ready to be planted, as the son stands to their side wielding a shovel.",
+        "A father-figure and two children outside their home doing yard work such as using a hoe on the grass and planting a tree.",
+        "A man and a little girl in a grassy area are planting a tree while a little boy off to the side is holding a hoe.",
+        "Two small children with older man plating a tree.",
+        "A man and two children are planting a tree."
+      ],
+      "cosine_mean": 0.7032880783081055,
+      "cosine_max": 0.7570398449897766,
+      "seconds": 5.74
+    },
+    {
+      "row_idx": 48,
+      "filename": "1368082221.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young man standing in a kitchen, holding a frying pan with a wooden spatula in his hand. He is wearing a black hoodie and appears to be in the process of cooking something in the pan. The kitchen has a brick wall and a white cabinet with various kitchen utensils and ingredients on it. On the right side of the image, there is a blackboard with the words \"Missing it's mate\" written on it, and on the left side, there are several pots and pans on the countertop. The man is smiling and looking at the camera.",
+      "references": [
+        "A man wearing a black sweater cooks food in a pan while standing in a cluttered kitchen.",
+        "A man is cooking on a stove in a kitchen, using wooden utensil.",
+        "A man in a black hoodie is preparing food.",
+        "A man preparing food in his kitchen.",
+        "A man cooking food on the stove."
+      ],
+      "cosine_mean": 0.642216682434082,
+      "cosine_max": 0.698265016078949,
+      "seconds": 6.6
+    },
+    {
+      "row_idx": 49,
+      "filename": "139245992.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man standing on a sandy beach with the ocean in the background. He is wearing a beige sweater and blue jeans and is throwing a red ball towards the sky. The sky is cloudy and the ocean is visible in the distance. There are a few people walking on the beach and the man appears to be in the middle of throwing the ball.",
+      "references": [
+        "An older gentleman, dressed in jeans and a long-sleeved shirt, tosses a small red ball on the beach.",
+        "An elderly man tossing a red rubber ball on the beach.",
+        "A man in jeans at the beach playing with a red ball.",
+        "Man on the beach is throwing a red ball.",
+        "A man plays with a ball at the beach."
+      ],
+      "cosine_mean": 0.6165738105773926,
+      "cosine_max": 0.6936466097831726,
+      "seconds": 4.3
+    },
+    {
+      "row_idx": 50,
+      "filename": "1395410911.jpg",
+      "original_split": "test",
+      "caption": "The image shows a busy street scene in a Japanese city. There are several shops on the right side of the image, with a variety of items for sale. The shops are decorated with colorful lights and signs, and there are several people walking on the sidewalk. On the left side, there is a bicycle parked on the street. In the foreground, a man is walking past a blue pedestrian crossing sign. He is wearing a gray t-shirt and carrying a black bag. The street is lined with buildings, and the sky is visible in the background.",
+      "references": [
+        "Many people are walking along a sidewalk with a variety of little shops.",
+        "A man with a backpack stopping and looking at the display in the store.",
+        "Many people are walking along the sidewalk in an Asian marketplace.",
+        "People walking down sidewalk next to a line of stores.",
+        "People are walking by stores and window shopping."
+      ],
+      "cosine_mean": 0.7609952688217163,
+      "cosine_max": 0.8119392395019531,
+      "seconds": 6.72
+    },
+    {
+      "row_idx": 51,
+      "filename": "1396064003.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man performing a wakeboard trick in the air. He is wearing a white t-shirt, black shorts, and a black helmet with a visor. The man is holding onto a white wakeboard with both hands and is in mid-air, with his body twisted and his arms extended above his head. The wakeboard is attached to a red rope. The background shows a body of water and a cloudy sky. The image appears to be taken from a low angle, looking up at the man.",
+      "references": [
+        "A wakeboarder performs a flip while being towed at high speed.",
+        "An upside down man doing a flip on a waterski board",
+        "A person did a side flip while water boarding.",
+        "A man hangs upside in the air over the water.",
+        "A person upside down on a water board."
+      ],
+      "cosine_mean": 0.7130454778671265,
+      "cosine_max": 0.7795532941818237,
+      "seconds": 6.01
+    },
+    {
+      "row_idx": 52,
+      "filename": "1397344877.jpg",
+      "original_split": "test",
+      "caption": "The image shows a large crowd of people gathered on a busy street. The crowd is made up of people of different ages, genders, and ethnicities. Many of the people are wearing hats and sunglasses, and some are holding signs and banners. The street is lined with buildings and there are several vehicles visible in the background. The sky is overcast and the overall mood of the image is chaotic and energetic.",
+      "references": [
+        "Four police officers are swallowed up by the large crowd of people on the street.",
+        "A large crowd of people walking while being controlled by officers among them.",
+        "A large crowd of people are walking down the street.",
+        "A large group of people fill a street.",
+        "A large crowd of people are walking."
+      ],
+      "cosine_mean": 0.8440533876419067,
+      "cosine_max": 0.8724993467330933,
+      "seconds": 5.19
+    },
+    {
+      "row_idx": 53,
+      "filename": "1404832008.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man water skiing in a lake. He is holding onto a black rope with both hands and is suspended above the water. The man is shirtless and appears to be in mid-air, with his arms stretched out to the sides. The water is splashing around him as he skis. In the background, there are trees and a grassy area with a few people watching the skier. The sky is blue and the overall mood of the image is joyful and adventurous.",
+      "references": [
+        "A man wearing bathing trunks is parasailing in the water.",
+        "A man on a zip line being propelled through the water.",
+        "A man in a harness being dragged across the water",
+        "A man on a tag line going into the water.",
+        "A man in a harness lands in the water."
+      ],
+      "cosine_mean": 0.7022827863693237,
+      "cosine_max": 0.7198644876480103,
+      "seconds": 4.9
+    },
+    {
+      "row_idx": 54,
+      "filename": "1408554531.jpg",
+      "original_split": "test",
+      "caption": "The image shows a woman walking on the sidewalk in front of a bus. She is wearing a black top, blue jeans, and black flats. She has a beige handbag on her shoulder and is holding a blue and white shopping bag in her left hand. The woman is walking past the bus with her right hand in her pocket. The bus has a red and white sign that reads \"HUGO\" and there is a tree trunk on the right side of the image. The background is blurred, but it appears to be a city street.",
+      "references": [
+        "A woman's lower body can be seen as she wears blue jeans and walks in front of a large sign depicting another woman wearing a black top and sunglasses.",
+        "A woman wearing rolled up jeans and a black shirt is walking past a bus carrying a shopping bag.",
+        "A woman whose head is not visible walks in front of a bus with an advertisement on its side.",
+        "A woman wearing rolled up jeans passing bus a pass whose ad appears to be checking her out.",
+        "A woman in jeans walks by a bus with an ad depicting a woman peering over her sunglasses."
+      ],
+      "cosine_mean": 0.6574022173881531,
+      "cosine_max": 0.7326668500900269,
+      "seconds": 3.97
+    },
+    {
+      "row_idx": 55,
+      "filename": "14133592.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young man sitting on a grassy field with a red and white soccer ball in the air. He is wearing a pink t-shirt, blue jeans, and black shoes. He has a can of soda in his hand and is looking up at the ball with a smile on his face. In the background, there are trees and other people playing soccer. The sky is blue with white clouds.",
+      "references": [
+        "A young man wearing blue jeans and a t-shirt sits in the grass, with a ball in the air.",
+        "A man in a red shirt is sitting on the grass, and a ball is flying towards him.",
+        "A man in a pink shirt is sitting in the grass and a ball is in the air.",
+        "A man is laying down in the grass at a beautiful park.",
+        "A man sitting in the grass as a ball flies by."
+      ],
+      "cosine_mean": 0.6698001027107239,
+      "cosine_max": 0.7654052376747131,
+      "seconds": 2.25
+    },
+    {
+      "row_idx": 56,
+      "filename": "1414911626.jpg",
+      "original_split": "test",
+      "caption": "The image shows a beach with a red car parked on the shore. The car has a blue and white striped roof and a red stripe on the side. It appears to be a police car with a siren on top. The beach is covered in small rocks and pebbles, and there are several seagulls scattered around. In the background, there is a body of water with waves crashing onto the shore and a few buildings and windmills in the distance. The sky is overcast and the overall mood of the image is gloomy.",
+      "references": [
+        "Red white and blue SUV patrolling the beach and shoreline on a cloudy day while seagulls walk in the sand.",
+        "A red, white, and blue security vehicle is driving down a rocky beach toward some birds on a cloudy day.",
+        "A truck driving along a beach near a flock of seagulls.",
+        "Orange SUV drive by the shore.",
+        "A car parked at the beach."
+      ],
+      "cosine_mean": 0.6017171740531921,
+      "cosine_max": 0.6917536854743958,
+      "seconds": 2.79
+    },
+    {
+      "row_idx": 57,
+      "filename": "1417882092.jpg",
+      "original_split": "test",
+      "caption": "The image shows two young men standing side by side, facing each other. The man on the left is wearing a black baseball cap with a white logo on it and a black jacket with white stripes. He has a serious expression on his face and is looking off to the side. The boy on the right is also wearing a long-sleeved black t-shirt with a graphic design on it. In the background, there is a carnival ride with colorful lights and decorations. The image appears to be taken at an outdoor event or festival.",
+      "references": [
+        "Two young men dressed in black stand next to each other looking at something.",
+        "Two guys standing side by side.",
+        "Two men are watching something.",
+        "Two men wearing black in a city",
+        "Two male spectators"
+      ],
+      "cosine_mean": 0.6906370520591736,
+      "cosine_max": 0.7499373555183411,
+      "seconds": 2.91
+    },
+    {
+      "row_idx": 58,
+      "filename": "1433088025.jpg",
+      "original_split": "test",
+      "caption": "The image shows two men standing on a stage with their arms raised above their heads. They are both shirtless and appear to be in the middle of a performance. The man on the left is wearing yellow pants and is holding a microphone in his hand. He is smiling and looking towards the audience. The woman on the right is wearing black shorts and is also smiling. Behind them, there is a crowd of people, some of whom are standing and some are sitting on the ground. The background shows trees and buildings, suggesting that the performance is taking place outdoors.",
+      "references": [
+        "A crowd is watching 2 shirtless men, one in yellow pants and one in black shorts perfom.",
+        "A man in yellow pants and wearing no shirt is being watched by many people.",
+        "There is a man with yellow pants and a man with black pants.",
+        "The man in the yellow pants is raising his arms.",
+        "A muscular man in yellow pants."
+      ],
+      "cosine_mean": 0.6933956742286682,
+      "cosine_max": 0.7420998811721802,
+      "seconds": 3.17
+    },
+    {
+      "row_idx": 59,
+      "filename": "14559446.jpg",
+      "original_split": "test",
+      "caption": "The image shows two men walking on a hill overlooking the ocean at sunset. The sky is a beautiful orange and yellow color, with the sun setting on the horizon and casting a warm glow over the water. The men are silhouetted against the sky, and they are holding walking sticks in their hands. On the right side of the image, there is a large tree with its branches reaching up towards the sky. The hill is covered in greenery, and the ocean can be seen in the background. The image conveys a sense of peacefulness and serenity.",
+      "references": [
+        "Two men wearing hats and holding canes are standing silhouetted against a large body of water with sunlight reflecting off the water and a tree to the side.",
+        "Two men wearing hats and using walking sticks are walking near a body of water during sundown.",
+        "Two men stand beneath a tree as they watch the sunset over the ocean.",
+        "Two mature hikers take a break and admire the sunset over the lake.",
+        "Two men playing golf near water while the sun is setting."
+      ],
+      "cosine_mean": 0.6136886477470398,
+      "cosine_max": 0.6778141856193542,
+      "seconds": 3.12
+    },
+    {
+      "row_idx": 60,
+      "filename": "1459582913.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of young people standing on top of each other in a park. They are wearing blue and white t-shirts and black shorts. The group is standing on a grassy area with trees and a road in the background. There are several people sitting on chairs in front of the group, some of them are holding up their hands in the air, while others are standing on the ground. In the foreground, there is a woman with a backpack and a dog. It appears that the group is participating in a sports event or competition.",
+      "references": [
+        "Three people dressed in blue, white and black leotards are being held up by the hands of a set of two people each on the ground dressed in the same outfit as people look on.",
+        "A group of male and female cheerleaders create three formations.",
+        "Nine cheerleaders perform acrobatics behind a row of chairs.",
+        "A cheerleading team doing a routine on chairs.",
+        "Male cheerleading squad performs at a park."
+      ],
+      "cosine_mean": 0.47451668977737427,
+      "cosine_max": 0.5884000062942505,
+      "seconds": 6.95
+    },
+    {
+      "row_idx": 61,
+      "filename": "1463072715.jpg",
+      "original_split": "test",
+      "caption": "The image shows two young children, a boy and a girl, sitting at a table with a wooden board game in front of them. The boy is holding his head with his hand and appears to be deep in thought, while the girl is looking at the board with a concerned expression. There are other people in the background, some sitting at tables and some standing, and a woman in a blue dress is standing behind them. On the table, there are plates, cups, and other items. It appears that the children are playing a game of checkers or checkers.",
+      "references": [
+        "A young boy is looking at a checkers board with one fist leaning against his head as a partially visible adult sits across the table from him, in a room full of people sitting in chairs around tables.",
+        "A boy is playing checkers with an adult shown off-screen while a girl looks on.",
+        "Children are contemplating their next move in a game of checkers.",
+        "The children are playing a game of checkers.",
+        "Children playing checkers."
+      ],
+      "cosine_mean": 0.6566113233566284,
+      "cosine_max": 0.6967048645019531,
+      "seconds": 6.99
+    },
+    {
+      "row_idx": 62,
+      "filename": "146906547.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of people walking on a beach with palm trees and mountains in the background. The sky is overcast and the ground is wet, suggesting that it has recently rained. In the foreground, there is a young girl wearing a pink helmet and rollerblading on the beach. She is holding a skateboard and appears to be in the middle of a skateboarding session. On the right side of the image, there are several people walking and riding bicycles. The people in the image appear to be of different ages and genders.",
+      "references": [
+        "In foreground, a woman in pink jeans is helping a child in a heart t-shirt to skate, while cyclists and others walk in background with palm trees.",
+        "In front of palm trees, figures ride bicycles while a couple walk and a child wears rollerskates near an older person.",
+        "People happily walking along a street with palm trees in the background.",
+        "Small child is rollerskating while bicyclists ride around a track.",
+        "A crowd of people out for some fun in public park."
+      ],
+      "cosine_mean": 0.6368205547332764,
+      "cosine_max": 0.7151181697845459,
+      "seconds": 6.26
+    },
+    {
+      "row_idx": 63,
+      "filename": "1489286545.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man sitting on a wooden bench with his dog on his lap. The man is bald and wearing a black jacket. He is facing away from the camera and the dog is looking towards the horizon. The sky is a beautiful orange and pink color, indicating that it is either sunrise or sunset. In the background, there is a body of water and a mountain range. The overall mood of the image is peaceful and serene.",
+      "references": [
+        "A man sits on a bench holding his dog and looking at the water.",
+        "A man holding a dog sitting on a bench overlooking a lake.",
+        "A man and a dog sit on a bench near a body of water.",
+        "A man and his dog watch the sunset from a bench.",
+        "A man holds his dog near a pond."
+      ],
+      "cosine_mean": 0.6321425437927246,
+      "cosine_max": 0.6925076246261597,
+      "seconds": 4.66
+    },
+    {
+      "row_idx": 64,
+      "filename": "150411291.jpg",
+      "original_split": "test",
+      "caption": "The image shows two children playing on a sandy beach. The child on the left is wearing a red jacket and black pants and is digging in the sand with a shovel. The other child, wearing a maroon jacket and yellow rain boots, is standing next to a blue and yellow playground structure with a red slide. In the background, there is a body of water and a clear blue sky. The children appear to be having fun and enjoying themselves.",
+      "references": [
+        "Two boys wearing red jackets are digging shovels into the dirt, the smaller boy in the yellow boots has a mohawk.",
+        "A man in a red jacket and a child with a mohawk dig with shovels at a park near the beach.",
+        "A boy and his younger brother playing together at the playground.",
+        "Two people dig with shovels at a playground by the ocean.",
+        "Two children playing in the sand."
+      ],
+      "cosine_mean": 0.6024378538131714,
+      "cosine_max": 0.6607873439788818,
+      "seconds": 4.71
+    },
+    {
+      "row_idx": 65,
+      "filename": "151970521.jpg",
+      "original_split": "test",
+      "caption": "The image shows a woman sitting on a wooden bench on a busy street. She is wearing a blue dress and carrying a black handbag. She has a pair of crutches on her legs and appears to be looking down at her phone. Behind her, there are two men walking on the sidewalk and a white limousine parked on the side of the street. The street is lined with buildings and there are trees and shops on both sides. The sky is blue and the overall atmosphere is busy and bustling.",
+      "references": [
+        "Woman dressed in blue sitting on a bench with a cane next to her looking through her purse with a stretch limo behind her with a man and a woman walking in opposite directions from one another.",
+        "A woman in blue looks in a black leather bag while sitting on a bench during a sunny afternoon while people and limousines passed behind her.",
+        "An old woman is sitting on a bench, while behind her a limo pulls up and two people in white are walking by.",
+        "Decorated limo passing by elderly woman waiting on park bench in Chinese street.",
+        "A woman in a blue shirt is looking in her change purse."
+      ],
+      "cosine_mean": 0.5966799855232239,
+      "cosine_max": 0.679413378238678,
+      "seconds": 5.83
+    },
+    {
+      "row_idx": 66,
+      "filename": "1526325728.jpg",
+      "original_split": "test",
+      "caption": "The image shows a dog on a sandy beach. The dog appears to be a Weimaraner, with a light brown coat and a black collar around its neck. It is running towards the right side of the image, with its front legs stretched out and its tail wagging. In its mouth, it is open and its tongue is sticking out, as if it is panting or panting. The beach is covered in small rocks and debris, and there is a body of water visible in the background.",
+      "references": [
+        "Light brown dog running towards something at the beach.",
+        "The large gray colored dog is jumping on the beach.",
+        "A gray colored dog walks in wet sand at a beach.",
+        "The brown dog is standing on the sandy beach.",
+        "A gray dog plays in the sand at the ocean."
+      ],
+      "cosine_mean": 0.6701265573501587,
+      "cosine_max": 0.7309581637382507,
+      "seconds": 6.17
+    },
+    {
+      "row_idx": 67,
+      "filename": "155210731.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman sitting in front of a table covered in colorful fabrics and accessories. She is wearing a traditional Japanese kimono with a white blouse and a black jacket. She has a red flower in her hair and is smiling at the camera. Behind her, there is a pink tarpaulin sheet and a wooden shelf with various items on it. On the left side of the image, there are several woven baskets filled with different types of fabric and accessories, including hats, scarves, and bags. The woman appears to be at a market or market stall.",
+      "references": [
+        "An Asian woman wearing a Asian dress sitting among a group of cloths, with a woven basket on her lap.",
+        "A woman is sitting with a basket of cloth, surrounded by cloth.",
+        "An Asian woman selling silk scarfs, bags, and wallets.",
+        "A young oriental woman sitting amongst her belongings.",
+        "An Asian woman is selling colorful fabrics."
+      ],
+      "cosine_mean": 0.6536411046981812,
+      "cosine_max": 0.70182204246521,
+      "seconds": 7.39
+    },
+    {
+      "row_idx": 68,
+      "filename": "157910841.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young man standing in front of a barbecue grill. He is wearing a blue t-shirt with a logo on it and beige pants. He has a cigarette in his mouth and is giving a thumbs up with his right hand. The grill is made of metal and has a handle on the side. There are several pieces of meat cooking on the grill, which appears to be chicken or chicken wings. The background is dark and there is a wooden fence and some plants in the background.",
+      "references": [
+        "A man in a blue and white t-shirt is grilling outdoors.",
+        "A man gives the thumbs up as he grills chicken.",
+        "A man in a blue shirt barbecues meat outside.",
+        "A man is grilling out in his backyard.",
+        "A man stands at a barbecues."
+      ],
+      "cosine_mean": 0.6028891801834106,
+      "cosine_max": 0.6883502006530762,
+      "seconds": 8.56
+    },
+    {
+      "row_idx": 69,
+      "filename": "1579198375.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman singing into a microphone on a stage. She is wearing a black t-shirt and has long dark hair. The stage is lit with red and blue lights, creating a dramatic atmosphere. In the background, there is a person playing a white electric guitar. The woman appears to be in the middle of a performance, with her mouth open and her eyes closed as she sings.",
+      "references": [
+        "Woman singing with a microphone next to a person playing guitar.",
+        "A woman sings into a microphone by a guy playing a guitar.",
+        "A woman sings in a club with a guitarist behind her.",
+        "A female performer singing with her band.",
+        "A band performs in a dimly lit setting."
+      ],
+      "cosine_mean": 0.6274451017379761,
+      "cosine_max": 0.6783751249313354,
+      "seconds": 6.64
+    },
+    {
+      "row_idx": 70,
+      "filename": "1579206585.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman playing an electric guitar on a stage. She is wearing a black t-shirt with a pink graphic on it and has shoulder-length dark hair. The stage is lit with colorful lights and there is a microphone on the left side of the image. In the background, there are various musical instruments and equipment, including a keyboard and a drum set. The woman appears to be in the middle of a performance, as she is strumming the strings of the guitar.",
+      "references": [
+        "A girl is playing an electric guitar in front of an amplifier.",
+        "Guitar player performs at a nightclub red guitar.",
+        "A woman playing guitar in red and blue light",
+        "A girl plays her guitar on a dark stage.",
+        "A woman is playing guitar on stage"
+      ],
+      "cosine_mean": 0.6547573208808899,
+      "cosine_max": 0.7022951245307922,
+      "seconds": 6.47
+    },
+    {
+      "row_idx": 71,
+      "filename": "157955034.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman sitting on a green and beige striped lounge chair. She is wearing a green robe and has long curly hair. Her legs are crossed and she is resting her hands on her knees. She appears to be deep in thought or upset. The background is a concrete floor with small pebbles scattered around. The overall mood of the image is somber and contemplative.",
+      "references": [
+        "A woman in a green dress sitting in a broken green and yellow chair.",
+        "A child sitting on a lawn chair looking up at the camera",
+        "A girl with brown hair sitting on a lawn chair.",
+        "A young girl outside on a rainy day.",
+        "A woman sitting on a lawn chair."
+      ],
+      "cosine_mean": 0.5563371181488037,
+      "cosine_max": 0.6439051032066345,
+      "seconds": 5.28
+    },
+    {
+      "row_idx": 72,
+      "filename": "160792599.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of five people standing on a sandy beach, looking out at the ocean. They are all wearing casual clothes and appear to be enjoying the view. The ocean is a beautiful turquoise color with small waves crashing onto the shore. The sky is clear and blue, and the horizon line is visible in the distance. The people are standing close together, with one person holding a camera, suggesting that they are taking a photo or video of the scene.",
+      "references": [
+        "Three men and two women stand facing the ocean from the shore on a sunny day.",
+        "A group of people stand in the sand looking out at the water.",
+        "Five people standing in front of a body of water.",
+        "Two ladies and three men looking at the ocean.",
+        "Five people look out toward the ocean."
+      ],
+      "cosine_mean": 0.7218714356422424,
+      "cosine_max": 0.7334479093551636,
+      "seconds": 5.29
+    },
+    {
+      "row_idx": 73,
+      "filename": "16151663.jpg",
+      "original_split": "test",
+      "caption": "The image shows two young women playing music on a sidewalk. The woman on the left is holding a blue acoustic guitar and appears to be singing into a microphone. She is wearing a beige jacket, blue jeans, and white sneakers. The girl on the right is playing a violin and is standing in front of a music stand with a sheet of music on it. In the background, there are people sitting at tables and chairs outside a restaurant or cafe. The sidewalk is lined with trees and there is a building visible in the distance.",
+      "references": [
+        "A girl is playing the violin in the street while her band mate on the guitar is talking on her cellphone with a confused look.",
+        "A female performer with a violin plays on a street while a woman with a blue guitar looks on.",
+        "Two ladies play the violin and the guitar on the street to entertain the passer byes.",
+        "Two women on the street, one is playing the guitar and the other is playing violin.",
+        "2 women are standing in a street playing a blue guitar and a violin."
+      ],
+      "cosine_mean": 0.7276609539985657,
+      "cosine_max": 0.7830032110214233,
+      "seconds": 6.3
+    },
+    {
+      "row_idx": 74,
+      "filename": "16437914.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young girl in a swimming pool. She is wearing a colorful swimsuit and a pair of pink and yellow goggles on her head. The girl is standing in the water with her arms stretched out to the sides and her head tilted slightly to the side. She appears to be looking directly at the camera with a serious expression on her face. The pool has blue water and there is a stone wall in the background.",
+      "references": [
+        "A young girl with goggles strapped to her forehead enjoys the cool pool water.",
+        "A dark-skinned girl with goggles and black hair in water.",
+        "A young girl with goggles is floating in the pool.",
+        "A young girl swimming in a pool.",
+        "A young girl swimming in a pool"
+      ],
+      "cosine_mean": 0.7032338380813599,
+      "cosine_max": 0.7369585633277893,
+      "seconds": 4.97
+    },
+    {
+      "row_idx": 75,
+      "filename": "16495609.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of children and adults gathered in a park or outdoor area. There are six children in the foreground, three boys and three girls, all of whom are holding onto a rope. The boy in the middle is wearing a striped shirt with a blue and white logo on it, while the boy on the left is wearing an orange t-shirt with the word \"Fantastic\" written on it. The girl on the far left is holding onto the rope with both hands, and the boy next to him is holding the other boy's hand. Behind them, there is a man wearing a green shirt and a black hat, who appears to be a coach or instructor. The children are looking at the rope and seem to be engaged in a tug-of-war activity. In the background, there are other people and trees, suggesting that the activity is taking place outdoors.",
+      "references": [
+        "Some children are playing tug-of-war with a rope while an adult assists.",
+        "Several children are outdoors getting ready to play tug-of-war.",
+        "Children participate in a game of tug-of-war.",
+        "Elementary school students play tug-of-war.",
+        "A group of children are playing Tug-of-War."
+      ],
+      "cosine_mean": 0.6986511945724487,
+      "cosine_max": 0.7912288308143616,
+      "seconds": 9.62
+    },
+    {
+      "row_idx": 76,
+      "filename": "164969525.jpg",
+      "original_split": "test",
+      "caption": "The image shows two young women in a subway station. The woman on the left is wearing a white t-shirt, a blue skirt, and red shoes. She is standing on one leg with her arms stretched out to the sides and her head tilted back, as if she is dancing or performing a dance move. On the right side of the image, there is a man wearing a black shirt, blue jeans, and yellow shoes. He is bending over to pick up a yellow shoe from the ground. In the background, there are posters on the wall and a trash can.",
+      "references": [
+        "Three people dancing acrobatically in a subway station, with one girl in a skirt doing a cartwheel over another person bending over.",
+        "A person is cartwheeling over another person while a third person runs behind them.",
+        "Three teenagers in a subway playing around.",
+        "Four people in the subway are having fun.",
+        "Three people dancing in the subway."
+      ],
+      "cosine_mean": 0.5627351999282837,
+      "cosine_max": 0.6141512393951416,
+      "seconds": 5.91
+    },
+    {
+      "row_idx": 77,
+      "filename": "1659358141.jpg",
+      "original_split": "test",
+      "caption": "The image shows a Weimaraner dog walking on a grassy field. The dog is a light brown color and is wearing a purple collar with a silver chain around its neck. Its mouth is open and its tongue is sticking out, as if it is panting or panting. The grass is green and there are fallen leaves scattered around the dog. The background is blurred, but it appears to be a sunny day.",
+      "references": [
+        "A brown dog walks in the grass with its tongue hanging out.",
+        "A gray dog walks in the green grass, tongue hanging out.",
+        "A brown dog is panting hard on grass during a sunny day.",
+        "A tan dog jogging with his tongue hanging out",
+        "A dog running with tongue hanging out."
+      ],
+      "cosine_mean": 0.5481312274932861,
+      "cosine_max": 0.6013844013214111,
+      "seconds": 4.69
+    },
+    {
+      "row_idx": 78,
+      "filename": "16626851.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of three people sitting on a grassy lawn in front of a house. The house is a two-story building with a sloping roof and a brick wall. The sky is blue and the grass is green, indicating that it is a sunny day. The people are sitting close together and appear to be engaged in conversation. One person is holding a camera, while the other two are looking at their phones. There are trees and bushes in the background, suggesting that the photo was taken in a garden or backyard. The overall mood of the image is peaceful and relaxed.",
+      "references": [
+        "Two men sitting in front of a building and a field of grass in front of them.",
+        "A group of people are sitting on the grass outside of a rustic building.",
+        "People sitting in the grass outside a building, taking a break.",
+        "Two people sit on a grassy lawn in front of a building.",
+        "People sitting outside a house enjoying wine."
+      ],
+      "cosine_mean": 0.7296267151832581,
+      "cosine_max": 0.800798237323761,
+      "seconds": 6.7
+    },
+    {
+      "row_idx": 79,
+      "filename": "166283675.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of four people walking on a sidewalk in front of a store. The store appears to be a seafood restaurant, as there is a sign that reads \"Powder Oysters, Steam Clams, Paella, and Mussels\". The people in the image are of different ages and genders, and they are walking in different directions.\n\nThe woman on the left is wearing a white tank top, blue jeans, and black flip-flops. She has long red hair and is carrying a black purse. Next to her, there is another woman wearing an orange tank top and blue jeans. She is walking with her back to the camera, and the woman in the middle is wearing purple shorts and a white baseball cap. On the right side of the image, there are two men, one wearing a blue baseball cap and the other wearing a gray hoodie and black shorts with colorful polka dots. They are both carrying bags and appear to be engaged in conversation.",
+      "references": [
+        "Several people, including a shirtless man and a woman in purple shorts which say \"P.I.N.K.\" on the back, are walking through a crowded outdoor area.",
+        "Shirtless guy staring off in the distance while three woman are walking past a crowd sitting outside a cafe.",
+        "A shirtless man and three women walk outside near a street cafe.",
+        "Four people dressed for warm weather out on a street walking.",
+        "These people are walking in a crowd of people."
+      ],
+      "cosine_mean": 0.6279579401016235,
+      "cosine_max": 0.651728630065918,
+      "seconds": 9.15
+    },
+    {
+      "row_idx": 80,
+      "filename": "1664475761.jpg",
+      "original_split": "test",
+      "caption": "The image shows a busy street scene in an Indian city. There are two men standing next to a bicycle on the side of the road. The man on the left is wearing a yellow shirt and is holding a bunch of coconuts in his hand. He appears to be sorting through the cocons. The other man is standing behind the bicycle, wearing a white shirt and blue jeans. There is a pile of cocons on the ground next to the bicycle. In the background, there are shops and buildings with blue signs. The sky is overcast and the overall mood of the image is gloomy.",
+      "references": [
+        "Two boys try to attach fruits to a bicycle on a dirt road.",
+        "Two young men getting ready to move fruit on their bike.",
+        "Two young men are loading fruit unto a bicycle.",
+        "Two young boys loading fruit onto a bicycle.",
+        "Two young boys putting fruit on the bike."
+      ],
+      "cosine_mean": 0.6625714302062988,
+      "cosine_max": 0.6843199729919434,
+      "seconds": 3.34
+    },
+    {
+      "row_idx": 81,
+      "filename": "1675332284.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man sitting on the floor in front of a metal door. He is wearing a black tank top and a black baseball cap. He has a pair of drumsticks in his hands and appears to be playing a drum. There are three green buckets next to him, one yellow and one white. The yellow bucket has a label on it that reads \"Don't miss out on the drum\". There is an orange cloth on the ground next to the buckets. In the background, there are other people walking around.",
+      "references": [
+        "An African American man with a black hat and black tank top plays the drums on some buckets for donations.",
+        "A man in a black t-shirt, cap and jeans is playing drums on an upside down yellow pail.",
+        "A muscular African-american man pan-handling using paint buckets as a musical instrument.",
+        "One man in a black muscle shirt is playing the drums on some overturned buckets.",
+        "A man is sitting on the street playing drums on buckets."
+      ],
+      "cosine_mean": 0.5758167505264282,
+      "cosine_max": 0.6321649551391602,
+      "seconds": 2.72
+    },
+    {
+      "row_idx": 82,
+      "filename": "1681253990.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman with curly hair, wearing a purple t-shirt, standing in front of a white wall with a drawing of a woman's face on it. She is holding a paintbrush in her right hand and appears to be in the process of drawing the face. The drawing is drawn in a square shape with a red line running through it. The woman's eyes are closed and her mouth is slightly open, as if she is in the middle of a conversation. The background is blurred, but it seems to be an outdoor setting with trees and greenery visible.",
+      "references": [
+        "A girl is outside painting a picture of a lady on the side of the wall using chalk",
+        "A woman drawing a portrait on a white wall with trees in the background.",
+        "A woman working on a painting of a young woman on a wall with tan skin.",
+        "A young female artists paints an image of a woman on a wall.",
+        "A woman is completing a picture of a young woman."
+      ],
+      "cosine_mean": 0.6139013767242432,
+      "cosine_max": 0.7041810154914856,
+      "seconds": 2.99
+    },
+    {
+      "row_idx": 83,
+      "filename": "1690926854.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of four female volleyball players from the United States team celebrating a point. They are wearing white jerseys with red shorts and white socks. The player in the center, number 12, is jumping up with her arms raised in the air, while the other three players are standing around her with their hands raised in celebration. In the background, there is a banner with the words \"Military World\" and an image of a cartoon character. The players appear to be in a gymnasium with an orange floor and a white wall.",
+      "references": [
+        "Two teammates from the USA team are jumping in the air to give high-fives while two teammates watch.",
+        "Two female members of team USA performing a jump high-five surrounded by two other female members.",
+        "Two volleyball girls team both jumping for a double high-five",
+        "A group of volleyball girls high-fiving each other in a gym.",
+        "Females, who are on team usa, jump in the air excitedly."
+      ],
+      "cosine_mean": 0.6042565107345581,
+      "cosine_max": 0.6631076335906982,
+      "seconds": 2.73
+    },
+    {
+      "row_idx": 84,
+      "filename": "17186135.jpg",
+      "original_split": "test",
+      "caption": "In this image, we can see a young man in a kitchen. He is wearing a white t-shirt and glasses and is standing in front of a stove with a large pot on it. The man is holding a wooden spoon and appears to be stirring something in the pot. There are several jars and a blender on the countertop next to the stove. The kitchen has wooden cabinets and a stainless steel range hood above the stovetop.",
+      "references": [
+        "A man with long hair pulled into a ponytail and thick framed black glasses stands at a stove stirring a pot of boiling water.",
+        "Man with a white T-shirt and black rimmed glasses cooking a pot of food on the stove.",
+        "Young white male preparing food on the stove top.",
+        "A man stirring a pot of liquid in this kitchen.",
+        "A man with glasses stirs a pot on the stove."
+      ],
+      "cosine_mean": 0.7092916965484619,
+      "cosine_max": 0.8016883134841919,
+      "seconds": 2.84
+    },
+    {
+      "row_idx": 85,
+      "filename": "172092464.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young man wakeboarding on a lake. He is wearing a red life jacket and blue shorts, and is holding onto a white rope that is attached to his waist. The man is standing on a white wakeboard and is gliding across the water, creating a wake behind him. In the background, there are trees and a house on the shore. The water is calm and there are a few boats visible in the distance.",
+      "references": [
+        "A young man is wakeboarding on a body of water.",
+        "The boy is wakeboarding on the lake.",
+        "A guy waterskiing behind a boat.",
+        "A man wakeboards on a lake.",
+        "Blond boy waterskiing."
+      ],
+      "cosine_mean": 0.7178377509117126,
+      "cosine_max": 0.750084400177002,
+      "seconds": 2.39
+    },
+    {
+      "row_idx": 86,
+      "filename": "1749702972.jpg",
+      "original_split": "test",
+      "caption": "The image shows a street scene in New York City. There are several people walking on the sidewalk, some of them carrying bags. In the center of the image, there is a food cart with a blue and yellow umbrella that reads \"Sabrett\". The cart is filled with various items such as bottles, condiments, and snacks. Behind the cart, there are tall buildings with a sign that says \"Minneapolis Theatre.\" The sky is blue and the weather appears to be sunny.",
+      "references": [
+        "Several people walking past a food cart on a city street.",
+        "A vendor on a busy street is selling food.",
+        "Picture of a hotdog vendor in the street.",
+        "A man is working a hotdog stand.",
+        "Hotdog stand on a busy street"
+      ],
+      "cosine_mean": 0.693060040473938,
+      "cosine_max": 0.7511691451072693,
+      "seconds": 2.71
+    },
+    {
+      "row_idx": 87,
+      "filename": "175556963.jpg",
+      "original_split": "test",
+      "caption": "The image shows a group of people sitting on a cobblestone street in a European city. They are gathered around a table with beer glasses on it, and some are sitting on chairs while others are standing. The street is lined with buildings on both sides, and there is a tree on the right side of the image. The people appear to be engaged in conversation and enjoying themselves. Some of them are wearing casual clothes, while others have casual clothing. The atmosphere seems to be lively and relaxed.",
+      "references": [
+        "A group of spectators sitting in lawn chairs in the street facing a building and drinking beer.",
+        "People sitting around in a semi circle all looking in the same direction.",
+        "A large group of people of various ages and genders sit outside together.",
+        "People sit in green chairs at tables in the street.",
+        "Some of the people in the crowd are having a drink"
+      ],
+      "cosine_mean": 0.6334855556488037,
+      "cosine_max": 0.7093266248703003,
+      "seconds": 2.44
+    },
+    {
+      "row_idx": 88,
+      "filename": "1798209205.jpg",
+      "original_split": "test",
+      "caption": "The image shows a woman sitting at a table in a restaurant. She is wearing a light blue blouse and has blonde hair. The table is covered with a white tablecloth and there are several wine glasses and a pitcher on it. The woman is pouring a dark red wine from a bottle into one of the glasses. There is a person's hand visible on the left side of the image, holding the bottle. The background is blurred, but it appears to be a dimly lit restaurant with a large window.",
+      "references": [
+        "A blond woman pours a glass of wine in a dim restaurant.",
+        "A woman in a restaurant pouring wine into a clear glass.",
+        "A blond-haired woman is pouring drinks at a bar.",
+        "A woman with a tag is pouring red wine in a glass",
+        "A lady in the kitchen is pouring wine."
+      ],
+      "cosine_mean": 0.6272982358932495,
+      "cosine_max": 0.6777201890945435,
+      "seconds": 2.61
+    },
+    {
+      "row_idx": 89,
+      "filename": "179828434.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young boy, probably around 4-5 years old, standing in front of a concrete wall. He is wearing a blue t-shirt with a graphic design on it and has curly brown hair. The boy is holding a toy crocodile in his hands and is smiling at the camera. The crocodile appears to be made of cardboard and has its mouth open, as if it is roaring or roaring. The background is blurred, but it seems to be an outdoor setting.",
+      "references": [
+        "A little boy is wearing a blue and white shirt while holding a toy animal that is either a crocodile or an alligator.",
+        "A small child wearing a blue and white t-shirt happily holding a yellow plastic alligator.",
+        "A little boy in a light blue shirt playing outside with a toy crocodile.",
+        "A young smiling child holds his toy alligator up to the camera.",
+        "A little boy holding a baby reptile."
+      ],
+      "cosine_mean": 0.525297224521637,
+      "cosine_max": 0.5734419822692871,
+      "seconds": 2.51
+    },
+    {
+      "row_idx": 90,
+      "filename": "1801663973.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young woman with red hair sitting on a large tree trunk in a park. She is wearing a black t-shirt, black pants, and black boots. She has a serious expression on her face and is looking at a man who is kneeling on the ground next to her. The man is holding a camera and appears to be taking a photo of the woman. The tree trunk is large and weathered, and there are fallen leaves scattered around the ground. In the background, there are trees and a blue pole.",
+      "references": [
+        "A large woman with long pink hair dressed in black is laying on a tree trunk talking to a man who is crouched down next to her.",
+        "A red-haired woman in black is posing for a man while resting on a tree.",
+        "A girl with bright red-hair and black clothes is posing on a tree trunk.",
+        "A girl laying on the tree with a boy kneeling before her.",
+        "A woman with pink hair dressed in black talks to a man."
+      ],
+      "cosine_mean": 0.6260895729064941,
+      "cosine_max": 0.7233057022094727,
+      "seconds": 2.68
+    },
+    {
+      "row_idx": 91,
+      "filename": "180209719.jpg",
+      "original_split": "test",
+      "caption": "The image shows a chef in a kitchen preparing food. He is wearing a red chef's hat and a white apron with a red ribbon around his neck. The chef is standing in front of a large grill with a large fire burning on it. The fire is bright orange and yellow, and it appears to be burning brightly. On the grill, there are various ingredients such as sliced vegetables, mushrooms, and other cooking utensils. In the background, there is a man sitting at a table with plates of food and a plant. The kitchen is dimly lit, and there are other chefs visible in the background.",
+      "references": [
+        "A sushi restaurant with a man cooking while in the background is a man and young boy sitting at a table.",
+        "The man in a Japanese cooking suit is preparing a meal for two people.",
+        "A teppanyaki chef prepares dinner for restaurant guests.",
+        "A man cooking at a restaurant in front of diners.",
+        "A chef cooking at a hibachi grill."
+      ],
+      "cosine_mean": 0.6156214475631714,
+      "cosine_max": 0.6812981367111206,
+      "seconds": 3.58
+    },
+    {
+      "row_idx": 92,
+      "filename": "1809758121.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young girl jumping in the air over a small pond. She is wearing a blue sweatshirt, jeans, and black rain boots. Her blonde hair is flying behind her as she jumps. The pond is surrounded by rocks and trees, and the water is still and reflects the trees and sky. The girl appears to be in mid-air, with her arms stretched out to the sides and her legs bent at the knees.",
+      "references": [
+        "A girl leaps through the air while running on the riverbank.",
+        "A little girl jumps from one rock to another in a creek.",
+        "A girl jumping from one rock to another in a creek.",
+        "A blond girl wearing blue jumping across a stream.",
+        "A girl hops across the river, from rock to rock."
+      ],
+      "cosine_mean": 0.7168728709220886,
+      "cosine_max": 0.7361959218978882,
+      "seconds": 2.94
+    },
+    {
+      "row_idx": 93,
+      "filename": "183647966.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man and a woman standing in front of a blue vending machine. The vending machine is located on a sidewalk and has a sign that reads \"Tickets\". The man is kneeling on the ground and appears to be working on the machine, while the woman is standing next to him, looking at him attentively. Both the man and the woman are wearing casual clothes and carrying shopping bags. The woman is wearing a black dress and the man is wearing blue jeans. They appear to be at a train station, as there are other people visible in the background.",
+      "references": [
+        "A man waring a polo shirt fixes a ticket machine while persons line up at an adjoining machine.",
+        "A woman dressed in black with shopping bags is waiting on the sidewalk.",
+        "A male worker with his tool box is kneeling next to two women.",
+        "A man working on a ticket machine as two women stand near.",
+        "A man working on a ticket box."
+      ],
+      "cosine_mean": 0.5147139430046082,
+      "cosine_max": 0.5963835716247559,
+      "seconds": 2.8
+    },
+    {
+      "row_idx": 94,
+      "filename": "185404966.jpg",
+      "original_split": "test",
+      "caption": "The image shows three people sitting on a couch in a room with a wooden wall in the background. On the left side of the image, there is a woman with curly hair, wearing a beige blazer and holding a remote control in her hand. She appears to be listening intently to the man in the middle who is raising his arm in the air with his right hand pointing upwards. The man on the right side is wearing a gray t-shirt and has a serious expression on his face. In the background, there are several posters and posters on the wall.",
+      "references": [
+        "An old man with arms outstretched sits against a wooden wall between a woman and another man.",
+        "Old man with black shirt throws hands up while sitting next to white woman and white man.",
+        "A gray-haired man is sitting down with his arm stretched out.",
+        "An older man is opening his arms wide and looking perplexed.",
+        "A man in a gray shirt holds his hands in the air."
+      ],
+      "cosine_mean": 0.4133620262145996,
+      "cosine_max": 0.566571831703186,
+      "seconds": 4.39
+    },
+    {
+      "row_idx": 95,
+      "filename": "18638572.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young boy in a martial arts class. He is wearing a white karate uniform with a red and black belt. The boy is in the middle of a kick, with his left leg extended upwards and his right leg bent at the knee. His right foot is extended upwards, and his left foot is bent at an angle. He appears to be in the process of executing a move. The background is blurred, but it seems to be a gymnasium with other people in the background.",
+      "references": [
+        "A young boy wearing a white tunic, white pants, and a yellow belt is standing on his left leg with his right leg extended in a karate pose.",
+        "One little boy working hard in his martial arts class.",
+        "A child in a white karate outfit practicing a move",
+        "A young boy practices martial arts.",
+        "A young child practicing karate."
+      ],
+      "cosine_mean": 0.7613494992256165,
+      "cosine_max": 0.7893474102020264,
+      "seconds": 3.78
+    },
+    {
+      "row_idx": 96,
+      "filename": "1874530310.jpg",
+      "original_split": "test",
+      "caption": "The image shows three men wearing high visibility vests working on a roof. They are standing in a field with dry grass and shrubs in the background. The roof appears to be made of terracotta tiles and there is a machine on the left side of the image. The men are bending down to pick up the tiles from the roof and appear to be inspecting them closely. One of the men is wearing a yellow jacket and blue pants, while the other two are wearing green vests. All three men are focused on the task at hand.",
+      "references": [
+        "Three construction workers are digging a whole next to a wall in a field.",
+        "Three men wearing safety vests and doing yard work in a field.",
+        "Three men in reflective vests doing yard work in a field.",
+        "Three men in same colored vests are in the outdoors.",
+        "Three men work behind a short wall."
+      ],
+      "cosine_mean": 0.5678383111953735,
+      "cosine_max": 0.6511951088905334,
+      "seconds": 3.3
+    },
+    {
+      "row_idx": 97,
+      "filename": "1881494074.jpg",
+      "original_split": "test",
+      "caption": "The image shows a man in a red jacket holding a baby in his arms. The baby is wearing a pink hat and is looking directly at the camera. The man is standing in front of a store with a sign that reads \"Shop\". A woman in a pink jacket is standing next to the baby, holding a camera and taking a picture of the baby. The background is blurred, but it appears to be a busy street with shops and people.",
+      "references": [
+        "A woman takes a picture of a baby wearing a pink hat while a man carries her.",
+        "A man is holding his baby while a woman takes a picture of the baby.",
+        "A baby with a pink hat, held by a man in red and a woman in pink.",
+        "A woman takes a photo of a baby being held by a man.",
+        "Woman is taking a picture of a baby in a pink hat."
+      ],
+      "cosine_mean": 0.6669743657112122,
+      "cosine_max": 0.7322241067886353,
+      "seconds": 3.22
+    },
+    {
+      "row_idx": 98,
+      "filename": "1916798494.jpg",
+      "original_split": "test",
+      "caption": "The image shows a large room with rows of orange desks and chairs arranged in a semi-circle. The desks are arranged in rows and the chairs are blue. The room has a tiled floor and white walls. There are several fans hanging from the ceiling and posters on the walls. In the center of the room, there is a large screen displaying a video game. A group of people are sitting at the desks and working on their computers. Some of the people are wearing headphones and appear to be engaged in the game. There is a person standing in the background, possibly a teacher or a student.",
+      "references": [
+        "A number of people are sitting in blue chairs in a room, looking at computer screens while wearing earphones.",
+        "A large group of kids in a room sitting on front of there computers with orange barriers separating them.",
+        "Many youth are gathered in a computer lab working at computers while wearing headphones.",
+        "Many people wearing headphones are sitting in blue chairs looking at computers.",
+        "A group of mostly asian children sitting at cubicles in blue chairs."
+      ],
+      "cosine_mean": 0.600346565246582,
+      "cosine_max": 0.6559903621673584,
+      "seconds": 3.61
+    },
+    {
+      "row_idx": 99,
+      "filename": "1921102799.jpg",
+      "original_split": "test",
+      "caption": "The image shows a young boy standing on a grassy field. He is wearing a green t-shirt, black shorts, and black socks with white stripes. His head is resting on his hands and his eyes are closed, as if he is deep in thought or frustrated. The background is blurred, but it appears to be a sunny day.",
+      "references": [
+        "A young boy, playing soccer, is wearing a green jersey and black shorts and has his face buried in his hands.",
+        "A young boy in a soccer uniform crying into his palms.",
+        "A kid is crying because he got hurt while playing.",
+        "A child expresses emotion on the soccer field.",
+        "A young soccer boy crying in the soccer field"
+      ],
+      "cosine_mean": 0.5805014967918396,
+      "cosine_max": 0.6353224515914917,
+      "seconds": 2.21
+    }
+  ],
+  "profile": {
+    "image.decode": {
+      "calls": 100,
+      "errors": 0,
+      "seconds": 0.3799130000115838,
+      "max_observed_rss_bytes": 2704203776,
+      "max_observed_cuda_allocated_bytes": 2316597760,
+      "max_observed_cuda_reserved_bytes": 2740977664
+    },
+    "image.preprocess": {
+      "calls": 100,
+      "errors": 0,
+      "seconds": 0.0289178999082651,
+      "max_observed_rss_bytes": 2704203776,
+      "max_observed_cuda_allocated_bytes": 2316597760,
+      "max_observed_cuda_reserved_bytes": 2740977664
+    },
+    "Florence-2.describe": {
+      "calls": 100,
+      "errors": 0,
+      "seconds": 479.1331965999998,
+      "max_observed_rss_bytes": 2704203776,
+      "max_observed_cuda_allocated_bytes": 2316597760,
+      "max_observed_cuda_reserved_bytes": 2740977664
+    },
+    "SigLIP.text": {
+      "calls": 100,
+      "errors": 0,
+      "seconds": 2.3334565999684855,
+      "max_observed_rss_bytes": 2704203776,
+      "max_observed_cuda_allocated_bytes": 2316597760,
+      "max_observed_cuda_reserved_bytes": 2740977664
+    }
+  },
+  "memory": {
+    "rss_bytes": 2704207872,
+    "cuda_allocated_bytes": 2316597760,
+    "cuda_reserved_bytes": 2740977664
+  }
+}

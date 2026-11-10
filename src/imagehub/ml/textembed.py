@@ -9,6 +9,7 @@ import numpy as np
 
 from .. import llm
 from ..config import get_settings
+from ..profiling import tracked
 from .weights import WEIGHTS
 
 _M = None
@@ -25,12 +26,14 @@ def _model():
         return _M
 
 
+@tracked("textembed.passages")
 def passages(texts):
     if get_settings().embed_model:
         return llm.embed(get_settings().embed_model, [t[:2000] for t in texts])
     return _model().encode(["passage: " + t[:2000] for t in texts], normalize_embeddings=True, batch_size=16).astype(np.float32)
 
 
+@tracked("textembed.query")
 def query(text):
     if get_settings().embed_model:
         return llm.embed(get_settings().embed_model, [text])[0]

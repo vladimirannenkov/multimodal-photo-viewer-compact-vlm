@@ -26,6 +26,10 @@ def build_parser() -> argparse.ArgumentParser:
     m = sub.add_parser("models", help="состояние локальных весов; --download скачивает их")
     m.add_argument("--download", action="store_true", help="скачать веса в каталог весов")
     m.add_argument("--only", default="", help="список id через запятую")
+    ui = sub.add_parser("gradio", help="запустить Gradio-интерфейс (extra ui)")
+    ui.add_argument("--host", default="127.0.0.1")
+    ui.add_argument("--port", type=int, default=7860)
+    ui.add_argument("--api-url", default="http://127.0.0.1:8765")
     sub.add_parser("check", help="проверить сервер моделей (Ollama и др.) и наличие нужных моделей")
     return ap
 
@@ -93,6 +97,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         for k, ok in models.status().items():
             _, what, gb = models.REGISTRY[k]
             _out(f"{'OK ' if ok else '-- '} {k:16} ~{gb:>5} ГБ  {what}")
+    elif a.cmd == "gradio":
+        from .gradio_ui import create_ui
+
+        create_ui(a.api_url).launch(server_name=a.host, server_port=a.port)
     elif a.cmd == "check":
         return cmd_check()
     return 0

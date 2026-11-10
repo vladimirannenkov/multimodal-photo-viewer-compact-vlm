@@ -11,7 +11,7 @@ import traceback
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any
 
-from . import db, people
+from . import db, people, profiling
 from .config import get_settings
 from .imaging import open_rgb
 
@@ -63,7 +63,7 @@ class Pipeline:
         self.thread = None
         self.stop_flag = threading.Event()
         self.wake = threading.Event()
-        self.paused = False
+        self.paused = (self.s.data_dir / "pipeline-paused.flag").exists()
         self.state: dict[str, Any] = {"stage": "idle", "done": 0, "total": 0, "current": None, "last_error": None, "sec": {}}
         self.listeners = []
 
@@ -175,6 +175,7 @@ class Pipeline:
     def run_wave(self, ids):
         from .ml import manager
 
+        baseline = profiling.snapshot()
         self.state.update(total=len(ids), done=0)
         db.exmany("UPDATE images SET status='processing' WHERE id=?", [(i,) for i in ids])
         items = []
@@ -202,7 +203,8 @@ class Pipeline:
             self.state["stage"] = name
             t0 = time.time()
             try:
-                fn(items)  # замок GPU берётся внутри стадий на каждую пачку, чтобы чат пользователя мог вклиниться
+                with profiling.measure(f"stage.{name}"):
+                    fn(items)  # замок GPU берётся внутри стадий на каждую пачку
             except Exception:
                 err = traceback.format_exc()
                 log.error("stage %s failed\n%s", name, err)
@@ -222,6 +224,15 @@ class Pipeline:
             it["img"] = None
         items.clear()
         manager.trim_memory()
+        try:
+            profiling.save_snapshot(
+                "application_pipeline",
+                {"images_in_wave": len(ids), "image_ids": ids, "status": "updated"},
+                per_event=True,
+                baseline=baseline,
+            )
+        except OSError:
+            log.exception("could not persist pipeline profile")
         for fn in self.listeners:
             try:
                 fn(ids)
@@ -298,7 +309,7 @@ class Pipeline:
             t0 = time.time()
             with manager.gpu():
                 manager.ensure("ocr")
-                out = docparse.parse_pages(imgs, hints=hints if any(hints) else None, fix=False)
+                out = docparse.parse_pages(imgs, hints=hints if any(hints) else None, fix=False, device=self.device)
             for it, o in zip(chunk, out):
                 o["blocks"] = [
                     dict(b, box=[round(v * it["k"]) for v in b["box"]])

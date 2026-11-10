@@ -34,10 +34,18 @@ def model_id(path: str) -> str:
     return str(path)[len(API_PREFIX) :]
 
 
+def effective_base_url() -> str:
+    if get_settings().cpu_only():
+        from . import cpu_server
+
+        return cpu_server.ensure()
+    return get_settings().llm_base_url
+
+
 def _http() -> httpx.Client:
     s = get_settings()
     return httpx.Client(
-        base_url=s.llm_base_url.rstrip("/"), timeout=s.llm_timeout, headers={"Authorization": f"Bearer {s.llm_api_key}"}
+        base_url=effective_base_url().rstrip("/"), timeout=s.llm_timeout, headers={"Authorization": f"Bearer {s.llm_api_key}"}
     )
 
 

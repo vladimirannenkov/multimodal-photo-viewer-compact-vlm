@@ -1,0 +1,195 @@
+{
+  "summary": {
+    "dataset": "mychen76/invoices-and-receipts_ocr_v1 default/test 83835c8",
+    "offset": 0,
+    "requested": 10,
+    "completed": 10,
+    "errors": 0,
+    "elapsed_seconds": 368.76,
+    "date_found": {
+      "matched": 10,
+      "eligible": 10,
+      "recall": 1.0
+    },
+    "total_found": {
+      "matched": 8,
+      "eligible": 10,
+      "recall": 0.8
+    },
+    "date_correct": {
+      "matched": 10,
+      "eligible": 10,
+      "accuracy": 1.0
+    },
+    "total_correct": {
+      "matched": 8,
+      "eligible": 10,
+      "accuracy": 0.8
+    }
+  },
+  "records": [
+    {
+      "row_idx": 0,
+      "id": "425",
+      "ocr": "## Invoice no: 97159829\n\nDate of issue:\n\n## Seller:\n\nBradley-Andrade 9879 Elizabeth Common Lake Jonathan, RI 12335\n\nTax Id: 985-73-8194 IBAN: GB81LZWO32519172531418\n\n## ITEMS\n\n09/18/2015\n\n## Client:\n\nCastro PLC Unit 9678 Box 9664 DPO AP 69387\n\nTax Id: 994-72-1270\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | 12\" Marble Lapis Inlay Chess Table Top With 2\" Pieces & 15\" Wooden Stand W537 | 2,00 | each | 444,60 | 889,20 | 10% | 978,12 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 889,20 | 88,92 | 978,12 |\n| Total |  | $889,20 | $88,92 | $978,12 |",
+      "expected_date": "09/18/2015",
+      "expected_total": "$ 978,12",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 24.71,
+      "predicted_date": "09/18/2015",
+      "predicted_total": "978,12",
+      "date_correct": true,
+      "total_correct": true
+    },
+    {
+      "row_idx": 1,
+      "id": "426",
+      "ocr": "## Invoice no: 13194726\n\nDate of issue:\n\n## Seller:\n\nHopkins and Sons 62283 Flores Tunnel North Luis, IA 69983\n\nTax Id: 952-73-7223 IBAN: GB31LZXS20242755934691\n\n## ITEMS\n\n05/29/2021\n\n## Client:\n\nSims PLC USS Kramer FPO AA 81651\n\nTax Id: 995-88-9495\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | Beach Lunch Lounge Striped Shirt Dress Large Navy Blue White Long Sleeve Causal | 1,00 | each | 16,99 | 16,99 | 10% | 18,69 |\n| 2. | Jams World Hawaiian Dress Rayon sz.L | 5,00 | each | 65,00 | 325,00 | 10% | 357,50 |\n| 3. | LuLaRoe Nicole Dress Size Large 26 | 2,00 | each | 1,99 | 3,98 | 10% | 4,38 |\n| 4. | Johnny Was Medium Linen Wrap Dress Dessert Rose Embroiderd Bohemian | 2,00 | each | 89,99 | 179,98 | 10% | 197,98 |\n| 5. | Eileen Fisher Women's Long Sleeve Fleece Lined Front Pockets Dress XS Gray | 2,00 | each | 15,99 | 31,98 | 10% | 35,18 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 581,93 | 58,19 | 640,12 |\n| Total |  | $581,93 | $58,19 | $640,12 |",
+      "expected_date": "05/29/2021",
+      "expected_total": "$ 640,12",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 34.16,
+      "predicted_date": "05/29/2021",
+      "predicted_total": "640,12",
+      "date_correct": true,
+      "total_correct": true
+    },
+    {
+      "row_idx": 2,
+      "id": "427",
+      "ocr": "## Invoice no: 62517865\n\nDate of issue:\n\n## Seller:\n\nTrujillo-Hunt 430 Mark Ferry Suite 495 Maxside, DC 65686\n\nTax Id: 992-71-8540 IBAN: GB73HCPH34959888432899\n\n## ITEMS\n\n06/02/2015\n\n## Client:\n\nLee and Sons 8552 Karen Islands East Roger, ID 40416\n\nTax Id: 929-86-0601\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | Care&Repair of Furniture | 2,00 | each | 4,25 | 8,50 | 10% | 9,35 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 8,50 | 0,85 | 9,35 |\n| Total |  | $8,50 | $0,85 | $9,35 |",
+      "expected_date": "06/02/2015",
+      "expected_total": "$9,35",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 9.88,
+      "predicted_date": "06/02/2015",
+      "predicted_total": "9,35",
+      "date_correct": true,
+      "total_correct": true
+    },
+    {
+      "row_idx": 3,
+      "id": "428",
+      "ocr": "## Invoice no: 56014042\n\nDate of issue:\n\n## Seller:\n\nNichols-Barajas 3882 Stacy Ville Apt. 488 Lake Kristinatown, ND 48049\n\nTax Id: 953-87-6813 IBAN: GB08KXQT19711661357354\n\n## ITEMS\n\n10/01/2014\n\n## Client:\n\nMckay PLC\n5542 Danielle Drive Suite 381\nWest Mason, ME 76671\n\nTax Id: 965-90-8517\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | Jordan Hydro 2(TD)-Child Size 10c | 2,00 | each | 5,75 | 11,50 | 10% | 12,65 |\n| 2. | Sketchers Energy Lights Boys Black Canvas Size 4 With Charging Cable | 4,00 | each | 12,00 | 48,00 | 10% | 52,80 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 59,50 | 5,95 | 65,45 |\n| Total |  | $59,50 | $5,95 | $65,45 |",
+      "expected_date": "10/01/2014",
+      "expected_total": "$65,45",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 36.79,
+      "predicted_date": "10/01/2014",
+      "predicted_total": "65,45",
+      "date_correct": true,
+      "total_correct": true
+    },
+    {
+      "row_idx": 4,
+      "id": "429",
+      "ocr": "## Invoice no: 16662010\n\nDate of issue:\n\n## Seller:\n\nSmith-Cook 174 Justin Causeway West Michaelmouth, ME 69894\n\nTax Id: 959-84-2124 IBAN: GB20BAKH22085364527355\n\n## ITEMS\n\n08/28/2016\n\n## Client:\n\nSnyder-Johnson 05173 Heather Mill Jenniferfort, WV 79662\n\nTax Id: 938-85-4960\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | Nintendo Gameboy Pocket Console Green with Box MGB-001 Japan Tested Working 59 | 1,00 | each | 65,00 | 65,00 | 10% | 71,50 |\n| 2. | New Sony Playstation 4 Slim 1TB 3 Game Bundle Console Sealed!!! | 3,00 | each | 399,99 | 1199,97 | 10% | 1319,97 |\n| 3. | Atari Flashback 4 Classic Game Console 75 built in games Space Invaders Asteroid | 4,00 | each | 8,50 | 34,00 | 10% | 37,40 |\n| 4. | Sony PlayStation 1 PS1 Console model scph-7501 | 4,00 | each | 14,99 | 59,96 | 10% | 65,96 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 205373 | 20537 | 225910 |\n| Total |  | $205373 | $20537 | $225910 |",
+      "expected_date": "08/28/2016",
+      "expected_total": "$2259,10",
+      "date_found": true,
+      "total_found": false,
+      "seconds": 64.77,
+      "predicted_date": "08/28/2016",
+      "predicted_total": null,
+      "date_correct": true,
+      "total_correct": false
+    },
+    {
+      "row_idx": 5,
+      "id": "430",
+      "ocr": "## Invoice no: 27543706\n\nDate of issue:\n\n## Seller:\n\nKaiser, Hays and Cook 460 Richard Forge Lake Maria, CA 86826\n\nTax Id: 980-78-9083 IBAN: GB82GOCR29918894344551\n\n## ITEMS\n\n07/20/2020\n\n## Client:\n\nHolland PLC 10833 Hill Courts Suite 606 Collinsland, CA 60385\n\nTax Id: 998-85-0115\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | Marble Beautiful White Coffee Table Top Malachite Inlay Art Home Decor H5372 | 5,00 | each | 271,01 | 1355,05 | 10% | 1490,55 |\n| 2. | 15\"x15\" White Decorative Coffee Table Top Lapis Lazuli Marquetry Patio Décor | 4,00 | each | 645,77 | 2583,08 | 10% | 2841,39 |\n| 3. | 16 Inches Marble Coffee Table Top Inlay with Multi Stone at Border Game Table | 1,00 | each | 280,50 | 280,50 | 10% | 308,55 |\n| 4. | 18\" Black Marble Coffee Table Top Mother of Pearl Inlay Furniture Decors H1883B | 3,00 | each | 377,65 | 1132,95 | 10% | 1246,24 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 4436,64 | 4436,46 | 48801,10 |\n| Total |  | $4436,64 | $4436,46 | $48801,10 |",
+      "expected_date": "07/20/2020",
+      "expected_total": "48 801,10",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 54.27,
+      "predicted_date": "07/20/2020",
+      "predicted_total": "48801,10",
+      "date_correct": true,
+      "total_correct": true
+    },
+    {
+      "row_idx": 6,
+      "id": "431",
+      "ocr": "## Invoice no: 26343874\n\nDate of issue:\n\n## Seller:\n\nSmith Ltd\n290 Jodi Gardens\nCharlesview, TN 10958\n\nTax Id: 916-97-6743\nIBAN: GB78TZMX55978564099007\n\n## ITEMS\n\n07/17/2013\n\n## Client:\n\nHerring-Floyd 8113 Hansen Cliff Apt. 826 Port Alice, ID 99663\n\nTax Id: 913-80-4636\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | Microsoft Xbox One X 1TB 4k Ultra HD Console black controller works great 1787 | 5,00 | each | 249,00 | 1245,00 | 10% | 1369,50 |\n| 2. | Cables 500gb,Sony PlayStation 4 PS4 CUH 1215A Jet Black Console w/ Controller | 5,00 | each | 100,00 | 500,00 | 10% | 550,00 |\n| 3. | PS2 Slim Console System SCPH-77000 PINK Playstation 2 Tested | 4,00 | each | 252,00 | 1008,00 | 10% | 1108,80 |\n| 4. | Nintendo Game Boy Micro Console - Black (OXYSFBB) | 2,00 | each | 130,00 | 260,00 | 10% | 286,00 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 317299 | 31730 | 349029 |\n| Total |  | $317299 | $31730 | $349029 |",
+      "expected_date": "07/17/2013",
+      "expected_total": "$3490,29",
+      "date_found": true,
+      "total_found": false,
+      "seconds": 55.65,
+      "predicted_date": "07/17/2013",
+      "predicted_total": null,
+      "date_correct": true,
+      "total_correct": false
+    },
+    {
+      "row_idx": 7,
+      "id": "432",
+      "ocr": "## Invoice no: 12222347\n\nDate of issue:\n\n## Seller:\n\nGregory, Patterson and Fischer 439 Hunter Land South Jameschester, MT 09091\n\nTax Id: 958-94-6606 IBAN: GB10YCPS61791374226282\n\n## ITEMS\n\n03/18/2017\n\n## Client:\n\nWilson PLC 667 Wu Ports Marshallmouth, AK 03373\n\nTax Id: 928-91-2431\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | Zara Yellow Shift Dress XS | 5,00 | each | 24,75 | 123,75 | 10% | 136,13 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 123,75 | 12,38 | 136,13 |\n| Total |  | $123,75 | $12,38 | $136,13 |",
+      "expected_date": "03/18/2017",
+      "expected_total": "$ 136,13",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 20.66,
+      "predicted_date": "03/18/2017",
+      "predicted_total": "136,13",
+      "date_correct": true,
+      "total_correct": true
+    },
+    {
+      "row_idx": 8,
+      "id": "433",
+      "ocr": "## Invoice no: 25698672\n\nDate of issue:\n\n## Seller:\n\nGordon, Alvarado and Jones 943 Sean Park Suite 284 North Derrick, OR 67536\n\nTax Id: 936-79-2794 IBAN: GB47JKAT88391563723291\n\n## ITEMS\n\n08/01/2015\n\n## Client:\n\nManning-Ho 92026 Michael Terrace Apt.138 West Michael, IL 42693\n\nTax Id: 960-85-1578\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | CCNA 200-301 50 GB AUG 2020 Cisco Video/Official Books/Exam Dumps/Licences | 5,00 | each | 1,99 | 9,95 | 10% | 10,94 |\n| 2. | Tales from the Buffalo Bills | 5,00 | each | 5,50 | 27,50 | 10% | 30,25 |\n| 3. | A boy who grew up eating nightmare It's Okay to Not Be Okay Picturebook | 4,00 | each | 19,50 | 78,00 | 10% | 85,80 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 115,45 | 11,55 | 127,00 |\n| Total |  | $115,45 | $11,55 | $127,00 |",
+      "expected_date": "08/01/2015",
+      "expected_total": "$ 127,00",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 41.12,
+      "predicted_date": "08/01/2015",
+      "predicted_total": "127,00",
+      "date_correct": true,
+      "total_correct": true
+    },
+    {
+      "row_idx": 9,
+      "id": "434",
+      "ocr": "## Invoice no: 24048799\n\nDate of issue:\n\n## Seller:\n\nRodriguez-Jackson 4804 Riley Row Suite 059 East Edwardtown, MN 91106\n\nTax Id: 983-85-8151\nIBAN: GB55GZIH60469560297692\n\n## ITEMS\n\n05/21/2014\n\n## Client:\n\nWilliams, Fletcher and Taylor 9371 Harvey Port Suite 901 South Tabitha, ID 50921\n\nTax Id: 932-73-0724\n\n| No. | Description | Qty | UM | Net price | Net worth | VAT [%] | Gross worth |\n|---|---|---|---|---|---|---|---|\n| 1. | Large Blue Long Sleeve Fit & Flare Dress Elastic Waist Crochet Detail Bohemian | 5,00 | each | 0.99 | 4,95 | 10% | 5,45 |\n\n## SUMMARY\n\n|  | VAT [%] | Net worth | VAT | Gross worth |\n|---|---|---|---|---|\n|  | 10% | 4,95 | 0,50 | 5,45 |\n| Total |  | $4,95 | $0,50 | $5,45 |",
+      "expected_date": "05/21/2014",
+      "expected_total": "$5,45",
+      "date_found": true,
+      "total_found": true,
+      "seconds": 25.91,
+      "predicted_date": "05/21/2014",
+      "predicted_total": "5,45",
+      "date_correct": true,
+      "total_correct": true
+    }
+  ],
+  "profile": {
+    "DocLayout.detect": {
+      "calls": 10,
+      "errors": 0,
+      "seconds": 33.66102150002553,
+      "max_observed_rss_bytes": 2244038656,
+      "max_observed_cuda_allocated_bytes": 2224400896,
+      "max_observed_cuda_reserved_bytes": 3045064704
+    },
+    "GLM-OCR (local)": {
+      "calls": 30,
+      "errors": 0,
+      "seconds": 334.01791209996736,
+      "max_observed_rss_bytes": 2248114176,
+      "max_observed_cuda_allocated_bytes": 2224400896,
+      "max_observed_cuda_reserved_bytes": 3045064704
+    }
+  },
+  "memory": {
+    "rss_bytes": 2240622592,
+    "cuda_allocated_bytes": 2224400896,
+    "cuda_reserved_bytes": 3045064704
+  }
+}

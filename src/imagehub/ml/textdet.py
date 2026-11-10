@@ -5,6 +5,7 @@ import onnxruntime as ort
 from PIL import Image
 from rapidocr_onnxruntime import RapidOCR
 
+from ..profiling import tracked
 from .weights import WEIGHTS
 
 DET_SIDE, SAMPLE_LINES = 960, 4
@@ -56,6 +57,7 @@ def _ocr(threads=6):
     return _OCR
 
 
+@tracked("PP-OCR.detect")
 def detect(img: Image.Image) -> dict:
     ocr = _ocr()
     small = img.copy()

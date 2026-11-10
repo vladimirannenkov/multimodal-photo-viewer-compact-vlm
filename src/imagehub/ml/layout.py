@@ -4,6 +4,7 @@ import numpy as np
 import onnxruntime as ort
 from PIL import Image
 
+from ..profiling import tracked
 from .weights import WEIGHTS
 
 MODEL = str(WEIGHTS / "doclayout_yolo" / "onnx" / "model.onnx")
@@ -35,6 +36,7 @@ def _session(threads=6):
     return _sess
 
 
+@tracked("DocLayout.detect")
 def detect(img: Image.Image, conf=0.25):
     """-> список {'cls', 'box': (x1,y1,x2,y2) в пикселях исходного изображения, 'score'}, отсортирован по порядку чтения."""
     w, h = img.size

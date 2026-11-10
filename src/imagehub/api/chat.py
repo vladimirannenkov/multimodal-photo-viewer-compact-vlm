@@ -7,7 +7,7 @@ import time
 from fastapi import APIRouter, Body, HTTPException
 from fastapi.responses import StreamingResponse
 
-from .. import db
+from .. import db, profiling
 from ..config import get_settings
 from ..ml import manager, vqa
 from .deps import image_row, pil_open
@@ -28,6 +28,7 @@ def clear(image_id: int):
 
 @router.post("/images/{image_id}/chat")
 def ask(image_id: int, body: dict = Body(...)):
+    baseline = profiling.snapshot()
     msg = (body.get("message") or "").strip()
     if not msg:
         raise HTTPException(400, "пустой вопрос")
@@ -44,6 +45,10 @@ def ask(image_id: int, body: dict = Body(...)):
         answer = vqa.ask(img, question, get_settings().resolve_device(), history=hist)
     db.ex("INSERT INTO chat(image_id, role, content, ts) VALUES(?,?,?,?)", (image_id, "user", msg, time.time()))
     db.ex("INSERT INTO chat(image_id, role, content, ts) VALUES(?,?,?,?)", (image_id, "assistant", answer, time.time()))
+    try:
+        profiling.save_snapshot("chat", {"images": 1, "image_id": image_id}, per_event=True, baseline=baseline)
+    except OSError:
+        pass
     return {"answer": answer, "sec": round(time.time() - t0, 1)}
 
 
@@ -71,13 +76,15 @@ def ask_stream(image_id: int, body: dict = Body(...)):
     q: queue.Queue = queue.Queue()
 
     def worker():
+        baseline = profiling.snapshot()
         parts = []
         try:
             with manager.gpu(user=True):
                 manager.ensure("vqa")
-                for chunk in vqa.ask_stream(img, msg + hint, get_settings().resolve_device(), history=hist):
-                    parts.append(chunk)
-                    q.put(chunk)
+                with profiling.measure("Qwen3-VL.stream"):
+                    for chunk in vqa.ask_stream(img, msg + hint, get_settings().resolve_device(), history=hist):
+                        parts.append(chunk)
+                        q.put(chunk)
         except Exception as e:
             q.put(f"[ошибка: {e}]")
         finally:
@@ -85,6 +92,10 @@ def ask_stream(image_id: int, body: dict = Body(...)):
             if ans:
                 db.ex("INSERT INTO chat(image_id, role, content, ts) VALUES(?,?,?,?)", (image_id, "user", msg, time.time()))
                 db.ex("INSERT INTO chat(image_id, role, content, ts) VALUES(?,?,?,?)", (image_id, "assistant", ans, time.time()))
+                try:
+                    profiling.save_snapshot("chat", {"images": 1, "image_id": image_id}, per_event=True, baseline=baseline)
+                except OSError:
+                    pass
             q.put(None)
 
     threading.Thread(target=worker, daemon=True).start()
