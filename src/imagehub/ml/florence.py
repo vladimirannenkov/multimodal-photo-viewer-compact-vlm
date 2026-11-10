@@ -3,6 +3,8 @@
 import gc
 
 import torch
+import transformers
+from packaging.version import Version
 from transformers import AutoProcessor, Florence2ForConditionalGeneration
 
 from ..profiling import tracked
@@ -37,11 +39,20 @@ def describe(imgs, device, tasks=TASKS):
     """-> по изображению: caption, objects [{label, box}], regions [{label, box}] (рамки в пикселях исходного изображения)."""
     model, proc, dt = _load(device)
     items = [{} for _ in imgs]
-    for task in tasks:
-        for i in range(0, len(imgs), BATCH):
-            chunk = imgs[i : i + BATCH]
+    # The image encoder is independent of the task prompt. Reuse its output for
+    # the three tasks when this Transformers version supports multimodal caches.
+    supports_cache = len(tasks) > 1 and Version(transformers.__version__) >= Version("5.19")
+    for i in range(0, len(imgs), BATCH):
+        chunk = imgs[i : i + BATCH]
+        features = None
+        for task in tasks:
             inp = proc(text=[task] * len(chunk), images=chunk, return_tensors="pt").to(device, dt)
-            with torch.no_grad():
+            with torch.inference_mode():
+                if supports_cache:
+                    pixels = inp.pop("pixel_values")
+                    if features is None:
+                        features = model.get_image_features(pixels)
+                    inp["mm_encoder_outputs"] = {"image": features}
                 ids = model.generate(**inp, max_new_tokens=512, num_beams=3, do_sample=False, use_cache=True)
             for j, (text, im) in enumerate(zip(proc.batch_decode(ids, skip_special_tokens=False), chunk)):
                 text = text.replace("<pad>", "")  # padding пакета не должен попадать в текст описания

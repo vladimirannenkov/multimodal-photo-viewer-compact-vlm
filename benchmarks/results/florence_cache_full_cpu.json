@@ -1,0 +1,13 @@
+{
+  "device": "cpu",
+  "images": 1,
+  "max_new_tokens": 512,
+  "threads": 2,
+  "original_seconds": 75.24989360000473,
+  "cached_seconds": 73.95813569999882,
+  "tokens_equal": {
+    "<MORE_DETAILED_CAPTION>": true,
+    "<OD>": true,
+    "<DENSE_REGION_CAPTION>": true
+  }
+}
